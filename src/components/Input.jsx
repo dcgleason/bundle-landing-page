@@ -206,6 +206,30 @@ const Input = (props) => {
 
 }
 
+const createUser = async () => {
+  try{
+    const resp =  await fetch("https://yay-api.herokuapp.com/user/createUser", { 
+      method: 'POST', 
+      headers: { 
+        'Content-type': 'application/json'
+       }, 
+      body: JSON.stringify({
+          owner: {
+            ownerName: ownerName,
+            ownerEmail: ownerEmail        
+          },
+          gift: {
+              recipient: name
+          }
+      }) 
+      }); 
+  }
+  catch{
+    console.error(error)
+  }
+}
+
+
 const postOrderMongoDB = async () => {
   try{
     const resp =  await fetch("https://yay-api.herokuapp.com/gift/insertOrder", { 
