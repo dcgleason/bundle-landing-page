@@ -8,6 +8,8 @@ export { default as Contributors } from './Contributors';
 export { default as AILandingPage } from './AILandingPage';
 export { default as Instructions } from './Instructions';
 export { default as FileUploader } from './FileUploader'
+export { default as Address } from './UploadDetails';
+
 
 
 
