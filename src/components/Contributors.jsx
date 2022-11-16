@@ -9,7 +9,7 @@ const [emails, setEmails] = useState([ { id: uuidv4(),  email: '', first: '', la
 const [email, setEmail] = useState('');
 const [first, setFirst] = useState('');
 const [last, setLast] = useState('');
-const [message, setMessage] = useState('');
+const [message, setMessage] = useState('Edit this for each person --> Hi [Contributor], I am putting together some notes of gratitude for [Recipient] from [his / her] friends and family, because [reason]. Would you be willing to contribute a few words about why you are gratitude for [recipient]? The link to contribute is below (in this email). There will be prompts to help guide you! Thank you, [Your name]');
 
 
 
@@ -148,7 +148,6 @@ const handleRemoveFields = id => {
                             <textarea
                             key={obj.id}
                             name="message"
-                            placeholder="Edit this for each person --> Hi [Contributor], I am putting together some notes of gratitude for [Recipient] from [his / her] friends and family, because [reason]. Would you be willing to contribute a few words about why you are gratitude for [recipient]? The link to contribute is below (in this email). There will be prompts to help guide you! Thank you, [Your name]"
                             rows={4}
                             required
                             onChange={e => handleChangeInput(obj.id, e)}

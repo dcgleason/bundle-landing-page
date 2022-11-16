@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
 import Papa from "papaparse";
+import React from "react";
 
-const Address = () => {
+export const Address = () => {
 
        // State to store parsed data
   const [parsedData, setParsedData] = useState([]);
@@ -164,6 +164,12 @@ const Address = () => {
       </div>
     </div>
 
+
+
+
+   
+
+
     <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:p-6">
       <div className="md:grid md:grid-cols-3 md:gap-6">
         <div className="md:col-span-1">
@@ -249,4 +255,5 @@ const Address = () => {
     );
 }
 
-export default Address
+
+export default Address;
