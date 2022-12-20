@@ -4,30 +4,24 @@ import axios from "axios";
 
 const Login = () => {
 
-
     const [id, setId ] = useState('')
-
-    const submitLogin = (e) => {
-
-        e.preventDefault();
-
-        fetch("https://dog.ceo/api/breeds/image/random")
-            .then((response) => response.json())
-            .then(data => console.log(data))
-            .catch(error => {
-                console.error('Error fetching data ' + error)
-            }
-
-    }
 
 //63658fba375bc87352c7454a
 
-    const handleInput= (e) =>{
+  const submitLogin= (e) =>{
+      e.preventDefault();
+       console.log('before the fetch');
 
-        setId(e.target.value)
-        console.log('id is --> ' + id)
-
+      fetch('https://catfact.ninja/fact')
+     .then((response) => response.json())
+       .then((data) => console.log("data" + JSON.stringify(data)))
     }
+
+    const handleInput = (e) => {
+      setId(e.target.value)
+      console.log('id is --> ' + id)
+    }
+
 
 
     return (

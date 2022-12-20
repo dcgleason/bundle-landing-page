@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { AILandingPage } from '@/components/index'
+import { AILandingPage } from './components/index'
 
 const Landing = () => {
 

@@ -12,4 +12,3 @@ export { default as Address } from "./UploadDetails"
 
 
 
-

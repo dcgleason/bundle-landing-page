@@ -1,4 +1,5 @@
 import Papa from "papaparse";
+import { useState } from "react";
 import React from "react";
 
 export const Address = () => {
@@ -164,6 +165,29 @@ export const Address = () => {
       </div>
     </div>
 
+    <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:p-6">
+      <div className="md:grid md:grid-cols-3 md:gap-6">
+        <div className="md:col-span-1">
+          <h3 className="text-lg font-medium leading-6 text-gray-900">Your message to your Bundle book contributors</h3>
+          <p className="mt-1 text-sm text-gray-500">This message will be included in our initial email to them</p>
+        </div>
+        <div className="mt-5 md:col-span-2 md:mt-0">
+          <div className="grid grid-cols-6 gap-6">
+            <div className="col-span-8 sm:col-span-8">
+              <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+                Message to contribuors (to be included in the emailt that gets sent to them)
+              </label>
+              <textarea
+                type="text"
+                row={8}
+                spellCheck='true'
+                className="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"
+              />
+            </div>      
+          </div>
+        </div>
+      </div>
+    </div>
 
 
 
@@ -235,6 +259,9 @@ export const Address = () => {
         </div>
       </div>
     </div>   
+
+
+
 
     <div className="flex justify-end">
       <button

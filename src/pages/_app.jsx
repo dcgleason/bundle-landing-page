@@ -1,5 +1,5 @@
 import 'focus-visible'
-import '@/styles/tailwind.css'
+import '../styles/tailwind.css'
 import Script from 'next/script'
 import Head from 'next/head';
 import React from 'react';
