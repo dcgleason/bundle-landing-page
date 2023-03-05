@@ -158,7 +158,7 @@ const userNavigation = [
 //   { name: 'Create account', href: '#' },
 ]
 const product = {
-  name: "Boost employee retention by instilling a felt sense of belonging in individuals.", // // give love, get love. //   "Love is not just an emotion, it's an action."
+  name: "Love is not just an emotion, it's an action.", // // give love, get love. //   "Love is not just an emotion, it's an action."
   price: '$65',
   description:
    '',
@@ -961,11 +961,11 @@ const options = {
               <div className="flex flex-col items-center pb-10 text-center">
               <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
       <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
-           Give a Bundl book with our app on the following occasions:
+           Show your loved one just how much they are loved:
       </h2>{" "}
-      {/* <p className="text-base text-gray-700 md:text-lg">
+      <p className="text-base text-gray-700 md:text-lg">
         Give a Bundl book with our app on the following occasions:
-      </p> */}
+      </p>
     </div>
                 {/* <h2 id="details-heading" className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                 Great times to give a Bundle book:
@@ -984,7 +984,7 @@ const options = {
                   <h3 className="mt-6 text-base font-medium text-gray-900">Birthdays</h3>
                   <p className="mt-3 text-base text-gray-500">Wish a team member a happy birthday from a larger group.</p>
                 </div>
-                {/* <div>
+                <div>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-24 w-auto text-[#f8ad9d]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path d="M12 14l9-5-9-5-9 5 9 5z" />
                     <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
@@ -992,7 +992,7 @@ const options = {
                   </svg>
                   <h3 className="mt-6 text-base font-medium text-gray-900">Graduations</h3>
                   <p className="mt-3 text-base text-gray-500">Congratulate someone on his or her accomplishments.</p>
-                </div> */}
+                </div>
                 <div>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-24 w-auto text-[#f8ad9d]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -1001,13 +1001,13 @@ const options = {
                   <p className="mt-3 text-base text-gray-500">Wish a team member a happy anniversary from the group.</p>
                 </div>
 
-                {/* <div>
+                <div>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-24 w-auto text-[#f8ad9d]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
               </svg>
                   <h3 className="mt-6 text-base font-medium text-gray-900">Weddings</h3>
                   <p className="mt-3 text-base text-gray-500">Give a the bride (or groom) a gift she or he can cherish for years to come.</p>
-                </div> */}
+                </div>
                 <div>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-24 w-auto text-[#f8ad9d]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 19v-8.93a2 2 0 01.89-1.664l7-4.666a2 2 0 012.22 0l7 4.666A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-1.14.76a2 2 0 01-2.22 0l-1.14-.76" />
