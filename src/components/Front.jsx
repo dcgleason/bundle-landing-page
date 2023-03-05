@@ -809,7 +809,7 @@ const options = {
 
 
                   <div className="mt-4 space-y-6">
-                    <p className="text-base text-gray-500">Bundl book <em>aka &rdquo;your secret weapon for boosting employee retention&rdquo;</em>: <em> noun;</em> a physical book of prompt-driven messages from your team members to an individual that encourages, congratulates, and makes that invidudal feel and know that they belong -- given for an event or an important employee milestone.</p> 
+                    <p className="text-base text-gray-500">Bundl book: <em> noun; a thoughtful give</em> a physical book of heartfelt, prompt-driven letters and pictures your recipient&apos;s friends and family meant to encourage, inspire, and remind the recipient of the love they have around them.  </p> 
                     {/* <b>Bundle book</b>,  <em>noun</em>: a physical book of written heartfelt messages of contragulations and support collected for an employee from <em>his or her</em> co-workers, given for a special occation */}
                   </div>
                   {/* <div className="mt-6 text-center">
