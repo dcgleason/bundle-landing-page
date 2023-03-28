@@ -158,7 +158,7 @@ const userNavigation = [
 //   { name: 'Create account', href: '#' },
 ]
 const product = {
-  name: "Gift for the man who has everything already.", // // give love, get love. //   "Love is not just an emotion, it's an action."
+  name: "The perfect gift for the man who has everything already.", // // give love, get love. //   "Love is not just an emotion, it's an action."
   price: '$65',
   description:
    '',
