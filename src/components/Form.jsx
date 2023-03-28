@@ -11,9 +11,9 @@ const HubspotContactForm = () => {
             if (window.hbspt) {
                 // @TS-ignore
                 window.hbspt.forms.create({
-                    region: 'na1',
-                    portalId: '22464839',
-                    formId: '6ef963b4-cdd9-49d2-aca9-5713f5303733',
+                    region: "na1",
+                    portalId: "22464839",
+                    formId: "6ef963b4-cdd9-49d2-aca9-5713f5303733",
                     target: '#hubspotForm'
                 })
             }
@@ -30,3 +30,4 @@ const HubspotContactForm = () => {
 }
 
 export default HubspotContactForm;
+
