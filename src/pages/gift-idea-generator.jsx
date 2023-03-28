@@ -1,5 +1,5 @@
 import { useState } from 'react'
-// import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { Switch } from '@headlessui/react'
 
 function classNames(...classes) {
@@ -37,7 +37,7 @@ export default function Example() {
         </svg>
       </div>
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Your gift details</h2>
+        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Gift generator questions</h2>
         <p className="mt-2 text-lg leading-8 text-gray-600">
           Aute magna irure deserunt veniam aliqua magna enim voluptate.
         </p>
@@ -60,7 +60,7 @@ export default function Example() {
           </div>
           <div>
             <label htmlFor="last-name" className="block text-sm font-semibold leading-6 text-gray-900">
-              What is this person&apos;s gender?
+             What is this person&apos;s relationship to you?
             </label>
             <div className="mt-2.5">
               <input
@@ -74,7 +74,7 @@ export default function Example() {
           </div>
           <div className="sm:col-span-2">
             <label htmlFor="company" className="block text-sm font-semibold leading-6 text-gray-900">
-              What is this person&apos;s age?
+              Gender:
             </label>
             <div className="mt-2.5">
               <input
@@ -88,7 +88,7 @@ export default function Example() {
           </div>
           <div className="sm:col-span-2">
             <label htmlFor="email" className="block text-sm font-semibold leading-6 text-gray-900">
-              What are the recipient&apos;s interests or hobbits?
+              How much are willing to spend?
             </label>
             <div className="mt-2.5">
               <input
@@ -102,12 +102,12 @@ export default function Example() {
           </div>
           <div className="sm:col-span-2">
             <label htmlFor="phone-number" className="block text-sm font-semibold leading-6 text-gray-900">
-              What is the maximum amount you are willing to spend?
+              What is the occasion for this gift?
             </label>
             <div className="relative mt-2.5">
               <div className="absolute inset-y-0 left-0 flex items-center">
                 <label htmlFor="country" className="sr-only">
-                 What the occasion for this gift?
+                  Country
                 </label>
                 <select
                   id="country"
@@ -134,7 +134,7 @@ export default function Example() {
           </div>
           <div className="sm:col-span-2">
             <label htmlFor="message" className="block text-sm font-semibold leading-6 text-gray-900">
-              Please give us any additional relevant information the recipient (what they do for work, more details around what they like to do in their free time, etc.)
+              Please provide any additional information that may help us find the perfect gift for this person (i.e. what does this person do for work? How old is this person? What are their interests / hobbies?)
             </label>
             <div className="mt-2.5">
               <textarea
