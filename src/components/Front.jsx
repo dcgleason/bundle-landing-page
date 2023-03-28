@@ -158,7 +158,7 @@ const userNavigation = [
 //   { name: 'Create account', href: '#' },
 ]
 const product = {
-  name: "Love is not just an emotion, it's an action.", // // give love, get love. //   "Love is not just an emotion, it's an action."
+  name: "Gift for the man who has everything already.", // // give love, get love. //   "Love is not just an emotion, it's an action."
   price: '$65',
   description:
    '',
@@ -306,20 +306,20 @@ const options = {
 
     <>
 
-      <Head>
-        <title>Home - Bundl</title>
-        <meta name="description" content="Bundl Book: a gift giving software that enables you to collect written messages for someone and gift them via a physical book." />
-      </Head>
-    <div>
+<Head>
+    <title>Birthday Gift for the man who has everything - Bundl</title>
+    <meta name="description" content="Looking for a unique birthday gift for the man who has everything? Try Bundl - it enables you to easily collect written messages for someone and gift them via a physical book." />
+  </Head>
+<div>
 
-        <Script id='google-inline' strategy='lazyOnload' src={`https://www.googletagmanager.com/gtag/js?id=G-Q7EKYQCWR0`}> </Script>
-        <Script id='google-analytics' strategy='lazyOnload'>{` window.dataLayer = window.dataLayer || [];
-      function gtag(){
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
+    <Script id='google-inline' strategy='lazyOnload' src={`https://www.googletagmanager.com/gtag/js?id=G-Q7EKYQCWR0`}> </Script>
+    <Script id='google-analytics' strategy='lazyOnload'>{` window.dataLayer = window.dataLayer || [];
+  function gtag(){
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
 
-      gtag('config', 'G-Q7EKYQCWR0');`}</Script>
+  gtag('config', 'G-Q7EKYQCWR0');`}</Script>
     
     </div><div className="bg-gray-100">
         {/* Mobile menu */}
