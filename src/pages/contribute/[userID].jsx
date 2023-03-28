@@ -107,9 +107,7 @@ const Messages = () => {
   }
 const submit = async (event) => {
       event.preventDefault();  
-if (!blob) {
-        return;
-      }
+
   
   if(file!==null){
   
