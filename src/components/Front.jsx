@@ -214,7 +214,7 @@ const reviews = {
       id: 1,
       rating: 5,
       content: `
-        <p>Bundl books have been amazing for my team. We have used Bundl books most recently to honor our school retirees and would love to partner with them in the future. Great customer support, too!</p>
+        <p>Great gift! We have used Bundl most recently to honor our school retirees...it went over really well.</p>
       `,
       author: 'Eliza Irwin',
       avatarSrc:
@@ -1123,7 +1123,7 @@ const options = {
                 <h3 className="sr-only">Recent reviews</h3>
 
                 <div className="flow-root">
-                  <div className="-my-12 divide-y divide-gray-200">
+                  {/* <div className="-my-12 divide-y divide-gray-200">
                     {reviews.featured.map((review) => (
                       <div key={review.id} className="py-12">
                         <div className="flex items-center">
@@ -1150,7 +1150,7 @@ const options = {
                           dangerouslySetInnerHTML={{ __html: review.content }} />
                       </div>
                     ))}
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
