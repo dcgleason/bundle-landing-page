@@ -307,7 +307,7 @@ const options = {
     <>
 
 <Head>
-    <title>Birthday Gift for the person who has everything - Bundl</title>
+    <title>Gift for the person who has everything - Bundl</title>
     <meta name="description" content="Bundl, a heartfelt gift for the person who already has everything." />
   </Head>
 <div>
