@@ -6,7 +6,7 @@ const Sitemap = () => {
 };
 
 export const getServerSideProps = async ({ res }) => {
-    const BASE_URL = 'http://givebundle.com';
+    const BASE_URL = 'http://www.givebundl.com';
 
     const sitemap = `
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
@@ -18,7 +18,7 @@ export const getServerSideProps = async ({ res }) => {
 
 
     <url>
-    <loc>https://www.givebundle.com/</loc>
+    <loc>https://www.givebundl.com/</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
     </url>
