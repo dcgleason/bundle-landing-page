@@ -38,7 +38,7 @@ const [apiResponse, setApiResponse] = useState('');
     };
   
     try {
-      const response = await axios.post('https://givebundl.com/openai/gift', formData, {
+      const response = await axios.post('https://yay-api.herokuapp.com//openai/gift', formData, {
         headers: {
           'Content-Type': 'application/json',        },
       });
