@@ -1,14 +1,123 @@
-import { useState } from 'react'
-import { Switch } from '@headlessui/react'
+import React, { useState, Fragment } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import axios from 'axios';
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function AIForm() {
   const [agreed, setAgreed] = useState(false)
 
+const [giftRecipient, setGiftRecipient] = useState('');
+const [relation, setRelation] = useState('');
+const [age, setAge] = useState('');
+const [gender, setGender] = useState('');
+const [interests, setInterests] = useState('');
+const [occasion, setOccasion] = useState('');
+const [budget, setBudget] = useState('');
+const [additionalInfo, setAdditionalInfo] = useState('');
+const [isModalOpen, setIsModalOpen] = useState(false);
+const [apiResponse, setApiResponse] = useState('');
+
+
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+  
+    const formData = {
+      giftRecipient: giftRecipient,
+      relation: relation,
+      age: age,
+      gender: gender,
+      interests: interests,
+      occasion: occasion,
+      budget: budget,
+      additionalInfo: additionalInfo,
+    };
+  
+    try {
+      const response = await axios.post('http://localhost:3001/openai/gift', formData, {
+        headers: {
+          'Content-Type': 'application/json',        },
+      });
+  
+      setApiResponse(response.data);
+      setIsModalOpen(true);
+      console.log('api response:' + response.data)
+      console.log('response:' + response.data)
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
   return (
+    <>
+    <Transition show={isModalOpen} as={React.Fragment}>
+  <Dialog
+    as="div"
+    className="fixed inset-0 z-10 overflow-y-auto"
+    onClose={() => setIsModalOpen(false)}
+  >
+    <div className="min-h-screen px-4 text-center">
+      <Transition.Child
+        as={React.Fragment}
+        enter="ease-out duration-300"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="ease-in duration-200"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+      >
+        <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75" />
+      </Transition.Child>
+
+      {/* This element is to trick the browser into centering the modal contents. */}
+      <span
+        className="inline-block h-screen align-middle"
+        aria-hidden="true"
+      >
+        &#8203;
+      </span>
+
+      <Transition.Child
+        as={React.Fragment}
+        enter="ease-out duration-300"
+        enterFrom="opacity-0 scale-95"
+        enterTo="opacity-100 scale-100"
+        leave="ease-in duration-200"
+        leaveFrom="opacity-100 scale-100"
+        leaveTo="opacity-0 scale-95"
+      >
+        <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle bg-white rounded-lg shadow-xl">
+          <Dialog.Title
+            as="h3"
+            className="text-lg font-medium leading-6 text-gray-900"
+          >
+            A gift idea: 
+          </Dialog.Title>
+          <div className="mt-2">
+            <p className="text-sm text-gray-500">
+              {/* Replace this with your OpenAI API answer */}
+            {apiResponse}
+            </p>
+          </div>
+
+          <div className="mt-4">
+            <button
+              type="button"
+              className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-red-400 border border-transparent rounded-md hover:bg-red-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
+              onClick={() => setIsModalOpen(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </Transition.Child>
+    </div>
+  </Dialog>
+</Transition>
     <div className="isolate bg-white py-24 px-6 sm:py-32 lg:px-8">
       <div className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]">
         <svg
@@ -36,9 +145,9 @@ export default function Example() {
         </svg>
       </div>
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Gift generator questions</h2>
+        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">AI gift generator</h2>
         <p className="mt-2 text-lg leading-8 text-gray-600">
-          Aute magna irure deserunt veniam aliqua magna enim voluptate.
+          Let AI generate some great gift ideas for you
         </p>
       </div>
       <form action="#" method="POST" className="mx-auto mt-16 max-w-xl sm:mt-20">
@@ -53,6 +162,8 @@ export default function Example() {
                 name="first-name"
                 id="first-name"
                 autoComplete="given-name"
+                value={giftRecipient}
+                onChange={(e) => setGiftRecipient(e.target.value)}
                 className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -67,6 +178,8 @@ export default function Example() {
                 name="last-name"
                 id="last-name"
                 autoComplete="family-name"
+                value={relation}
+                onChange={(e) => setRelation(e.target.value)}
                 className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -81,6 +194,8 @@ export default function Example() {
                 name="first-name"
                 id="first-name"
                 autoComplete="given-name"
+                value={age}
+                onChange={(e) => setAge(e.target.value)}
                 className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -95,6 +210,8 @@ export default function Example() {
                 name="last-name"
                 id="last-name"
                 autoComplete="family-name"
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
                 className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -109,6 +226,8 @@ export default function Example() {
                 name="company"
                 id="company"
                 autoComplete="organization"
+                value={interests}
+                onChange={(e) => setInterests(e.target.value)}
                 className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -123,6 +242,8 @@ export default function Example() {
                 name="email"
                 id="email"
                 autoComplete="email"
+                value={occasion}
+                onChange={(e) => setOccasion(e.target.value)}
                 className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -146,7 +267,8 @@ export default function Example() {
                 type="tel"
                 name="phone-number"
                 id="phone-number"
-                autoComplete="tel"
+                value={budget}
+                onChange={(e) => setBudget(e.target.value)}
                 className="block w-full rounded-md border-0 py-2 px-3.5 pl-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -160,49 +282,26 @@ export default function Example() {
                 name="message"
                 id="message"
                 rows={4}
+                value={additionalInfo}
+                onChange={(e) => setAdditionalInfo(e.target.value)}
                 className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 defaultValue={''}
               />
             </div>
           </div>
-          <Switch.Group as="div" className="flex gap-x-4 sm:col-span-2">
-            <div className="flex h-6 items-center">
-              <Switch
-                checked={agreed}
-                onChange={setAgreed}
-                className={classNames(
-                  agreed ? 'bg-indigo-600' : 'bg-gray-200',
-                  'flex w-8 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-                )}
-              >
-                <span className="sr-only">Agree to policies</span>
-                <span
-                  aria-hidden="true"
-                  className={classNames(
-                    agreed ? 'translate-x-3.5' : 'translate-x-0',
-                    'h-4 w-4 transform rounded-full bg-white shadow-sm ring-1 ring-gray-900/5 transition duration-200 ease-in-out'
-                  )}
-                />
-              </Switch>
-            </div>
-            <Switch.Label className="text-sm leading-6 text-gray-600">
-              By selecting this, you agree to our{' '}
-              <a href="#" className="font-semibold text-indigo-600">
-                privacy&nbsp;policy
-              </a>
-              .
-            </Switch.Label>
-          </Switch.Group>
+        
         </div>
         <div className="mt-10">
           <button
             type="submit"
-            className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Lets talk
+            onClick={handleSubmit}
+            className="block w-full rounded-md bg-[#8B0000] px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-[#4A9A4C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#4A9A4C]"
+            >
+            Generate awesome gift ideas
           </button>
         </div>
       </form>
     </div>
+    </>
   )
 }
