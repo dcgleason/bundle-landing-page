@@ -281,7 +281,7 @@ const [apiResponse, setApiResponse] = useState('');
           </div>
           <div className="sm:col-span-2">
             <label htmlFor="message" className="block text-sm font-semibold leading-6 text-gray-900">
-              Please elaborate on any additional information that may help us   the perfect gift for this person. 
+              Please elaborate on any additional information that may help identify the perfect gift for this person. 
             </label>
             <div className="mt-2.5">
               <textarea
