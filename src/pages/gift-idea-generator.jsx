@@ -295,7 +295,7 @@ const [apiResponse, setApiResponse] = useState('');
           <button
             type="submit"
             onClick={handleSubmit}
-            className="block w-full rounded-md bg-[#8B0000] px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-[#4A9A4C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#4A9A4C]"
+            className="block w-full rounded-md bg-[#8B0000] px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-[#f55249] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f55249]"
             >
             Generate awesome gift ideas
           </button>
