@@ -260,9 +260,9 @@ const [apiResponse, setApiResponse] = useState('');
             </label>
             <div className="relative mt-2.5">
               <div className="absolute inset-y-0 left-0 flex items-center">
-                <label htmlFor="country" className="sr-only">
+                {/* <label htmlFor="country" className="sr-only">
                   Country
-                </label>
+                </label> */}
             
                 {/* <ChevronDownIcon
                   className="pointer-events-none absolute top-0 right-3 h-full w-5 text-gray-400"
