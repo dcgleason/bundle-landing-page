@@ -42,11 +42,11 @@ const [apiResponse, setApiResponse] = useState('');
         headers: {
           'Content-Type': 'application/json',        },
       });
-  
-      setApiResponse(response.data);
-      setIsModalOpen(true);
       console.log('api response:' + response.data)
       console.log('response:' + response.data)
+      setApiResponse(response.data);
+      setIsModalOpen(true);
+ 
     } catch (error) {
       console.error('Error:', error);
     }
