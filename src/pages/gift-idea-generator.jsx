@@ -37,14 +37,25 @@ const [apiResponse, setApiResponse] = useState('');
       additionalInfo: additionalInfo,
     };
 
-      const response = await axios.post('https://yay-api.herokuapp.com/openai/gift', formData, {
-        headers: {
-          'Content-Type': 'application/json',        },
-      });
-      console.log('api response:' + response.data)
-      console.log('response:' + response.data)
-      setApiResponse(response.data);
-      setIsModalOpen(true);
+     
+  try {
+    const response = await fetch('https://yay-api.herokuapp.com/openai/gift', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const responseData = await response.json();
+
+    console.log('api response:' + responseData);
+    console.log('response:' + responseData);
+    setApiResponse(responseData);
+    setIsModalOpen(true);
+  } catch (error) {
+    console.error('Error:', error);
+  }
   }
 
   return (
@@ -229,7 +240,7 @@ const [apiResponse, setApiResponse] = useState('');
           </div>
           <div className="sm:col-span-2">
             <label htmlFor="email" className="block text-sm font-semibold leading-6 text-gray-900">
-              What is the occasion is this git for?
+              What is the occasion is this gift for?
             </label>
             <div className="mt-2.5">
               <input
@@ -270,7 +281,7 @@ const [apiResponse, setApiResponse] = useState('');
           </div>
           <div className="sm:col-span-2">
             <label htmlFor="message" className="block text-sm font-semibold leading-6 text-gray-900">
-              Please ellaborate on any additional information that may help us find the perfect gift for this person. 
+              Please elaborate on any additional information that may help us   the perfect gift for this person. 
             </label>
             <div className="mt-2.5">
               <textarea
@@ -292,7 +303,7 @@ const [apiResponse, setApiResponse] = useState('');
             onClick={handleSubmit}
             className="block w-full rounded-md bg-[#8B0000] px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-[#f55249] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f55249]"
             >
-            Generate awesome gift ideas
+            Generate an awesome gift idea
           </button>
         </div>
       </form>
