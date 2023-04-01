@@ -49,9 +49,9 @@ const [apiResponse, setApiResponse] = useState('');
 
     const responseData = await response.json();
 
-    console.log('api response:' + responseData);
-    console.log('response:' + responseData);
-    setApiResponse(responseData);
+    console.log('api response:' + responseData.messsage);
+    console.log('response:' + responseData.message);
+    setApiResponse(responseData.message);
     setIsModalOpen(true);
   } catch (error) {
     console.error('Error:', error);
