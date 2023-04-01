@@ -36,8 +36,7 @@ const [apiResponse, setApiResponse] = useState('');
       budget: budget,
       additionalInfo: additionalInfo,
     };
-  
-    try {
+
       const response = await axios.post('https://yay-api.herokuapp.com/openai/gift', formData, {
         headers: {
           'Content-Type': 'application/json',        },
@@ -46,10 +45,6 @@ const [apiResponse, setApiResponse] = useState('');
       console.log('response:' + response.data)
       setApiResponse(response.data);
       setIsModalOpen(true);
- 
-    } catch (error) {
-      console.error('Error:', error);
-    }
   }
 
   return (
