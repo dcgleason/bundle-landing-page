@@ -783,7 +783,7 @@ const options = {
                   </h2>
 
                   <div className="flex items-center">
-                    {/* <p className="text-lg text-gray-900 sm:text-xl">{product.price}</p> */}
+                    <p className="text-lg text-gray-900 sm:text-xl">{product.price}</p>
 
                     <div className="ml-4 pl-4 border-l border-gray-300">
                       <h2 className="sr-only">Reviews</h2>
