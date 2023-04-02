@@ -397,7 +397,7 @@ const handleClick = () => {
             Pre-Order your Bundl book
           </h1>
           <div className="text-m pt-2 pb-2 text-center font-small text-gray-800">
-            A Bundl conseirge will collect all necessary information (shipping address, Bundl Book contributor email addressses, etc.) in a subsequent email to you and will continue via email to coordinate the creation of your Bundl book gift. 
+            A Bundl conseirge will collect all necessary information (shipping address, Bundl Book contributor email addressses, etc.) in a subsequent email to you and will continue to coordinate the creation of your Bundl book gift. 
          </div>
           <h2 className="text-xl pt-3 pb-3 text-center underline font-medium text-gray-800">
             Your Information
