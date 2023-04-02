@@ -154,8 +154,8 @@ const navigation = {
   ],
 }
 const userNavigation = [
-//   { name: 'Sign in', href: '#' },
-//   { name: 'Create account', href: '#' },
+  { name: 'AI Gift Idea Generator', href: 'https://givebundl.com/gift-idea-generator' },
+  // { name: 'Create account', href: '#' },
 ]
 const product = {
   name: "The perfect gift for the person who already has everything.", // // give love, get love. //   "Love is not just an emotion, it's an action."
