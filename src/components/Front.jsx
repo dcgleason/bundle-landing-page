@@ -154,7 +154,7 @@ const navigation = {
   ],
 }
 const userNavigation = [
-  { name: 'AI Gift Idea Generator', href: 'https://givebundl.com/gift-idea-generator' },
+ // { name: 'AI Gift Idea Generator', href: 'https://givebundl.com/gift-idea-generator' },
   // { name: 'Create account', href: '#' },
 ]
 const product = {
