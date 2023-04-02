@@ -913,50 +913,21 @@ const options = {
           </div>
 
 <div className="max-w-2xl mx-auto px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
-            {/* Details section */}
-            {/* <section aria-labelledby="details-heading">
-              <div className="flex flex-col items-center text-center">
-                <h2 id="details-heading" className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                  How your Bundles books are put together:
-                </h2>
-                <p className="mt-3 max-w-3xl text-lg text-gray-600">
-                  (Each book takes two weeks, start to finish)
-                </p>
-              </div>
-
-              <div className="mt-16 grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:gap-x-8">
-                <div>
-                  <div className="w-8/12 aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
-                    <Image
-                      src="https://cdn1.iconfinder.com/data/icons/aami-flat-emails/64/email-41-512.png"
-                      alt="Drawstring top with elastic loop closure and textured interior padding."
-                      className="w-full h-full object-center object-cover"
-                      width='500'
-                      height='500' />
-                  </div>
-                  <p className="mt-8 text-base text-gray-500">
-                    1. You provide the email addresses of the people you want to contribute to the Bundle book you are creating for an employee you want to recognize (contributors are often co-workers, managers, of the Bundle book recipient). Our software it collects responses for your Bundle book from the Bundle contributors. Contributors have five days to contribute.
-                  </p>
-                </div>
-                <div>
-                  <div className="w-8/12 aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
-                    <Image
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Closed_Book_Icon.svg/1024px-Closed_Book_Icon.svg.png"
-                      alt=""
-                      className="w-full h-full object-center object-cover"
-                      width='500'
-                      height='500' />
-                  </div>
-                  <p className="mt-8 text-base text-gray-500">
-                    2. After responses are collected for your Bundle book, they are compiled and published into a physically-bound (and pretty) book - sent to you within eight to ten business days. The completed book is then yours to give to your lucky recipient.
-                  </p>
-                </div>
-              </div>
-            </section>  commented-out! */ }
+            {/* Instructions section */}
 
             <Instructions/>
 
-            {/* Policies section */}
+            {/* Picture section */}
+
+           
+            <div className="lg:col-span-12 mt-16 relative">
+              <div className="w-full h-auto">
+                <Image src="https://upload.wikimedia.org/wikipedia/commons/6/66/Bundlbook.jpg" alt="Your image description" layout="fill" objectFit="cover" />
+              </div>
+              <h3 className="text-xl font-bold text-center mt-4">Make custom to your custom</h3>
+            </div>
+
+            {/* add picture here that is large enough for it to be the only picture in this section and look good and have there be a h3 below it */}
 
   </div>
 
