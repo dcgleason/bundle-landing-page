@@ -53,7 +53,7 @@ const Input = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [ownerEmail, setOwnerEmail] = useState('');
   const [ownerName, setOwnerName] = useState('');
-  const [startDate, setStartDate] = useState(twoWeekDate);
+  const [startDate, setStartDate] = useState(new Date());
 
   const stripe = useStripe();
   const elements = useElements();
