@@ -923,13 +923,13 @@ const options = {
       <section aria-labelledby="reviews-heading" className="bg-white">
         <div className="max-w-2xl mx-auto py-24 px-4 sm:px-6 lg:max-w-7xl lg:py-32 lg:px-8 lg:grid lg:grid-cols-12 lg:gap-x-8">
           <div className="lg:col-span-12 flex flex-col items-center">
-            <h2 className="text-3xl font-bold text-center mt-4 mb-6">Truly a timeless gift</h2>
+            <h2 className="text-3xl font-bold text-center mt-4 mb-6">Gift this special moment..</h2>
             <div className="flex justify-center mt-8">
               <div>
                 <Image src="https://upload.wikimedia.org/wikipedia/commons/6/66/Bundlbook.jpg" className="" alt="Your image description" height="600" width="800" objectFit="cover" />
               </div>
             </div>
-            <h2 className="text-2xl font-bold text-center mt-8">...that has been <em>cherished</em> already by many.</h2>
+            <h2 className="text-2xl font-bold text-center mt-8">...that that you&apos;ll cherish and want to relive for years to come.</h2>
           </div>
         </div>
       </section>
