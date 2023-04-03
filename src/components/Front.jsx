@@ -158,7 +158,7 @@ const userNavigation = [
   // { name: 'Create account', href: '#' },
 ]
 const product = {
-  name: "Create Heartfelt Keepsakes for Any Occasion", // // give love, get love. //   "Love is not just an emotion, it's an action."
+  name: "Create a heartfelt keepsakes for any occasion", // // give love, get love. //   "Love is not just an emotion, it's an action."
   price: '$49',
   description:
    '',
