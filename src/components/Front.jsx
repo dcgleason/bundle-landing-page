@@ -158,7 +158,7 @@ const userNavigation = [
   // { name: 'Create account', href: '#' },
 ]
 const product = {
-  name: "The perfect gift to show you care.", // // give love, get love. //   "Love is not just an emotion, it's an action."
+  name: "Create Heartfelt Keepsakes for Any Occasion", // // give love, get love. //   "Love is not just an emotion, it's an action."
   price: '$49',
   description:
    '',
@@ -305,8 +305,8 @@ const options = {
     <>
 
 <Head>
-    <title>Gift for the person who has everything - Bundl</title>
-    <meta name="description" content="Bundl, a heartfelt gift for the person who already has everything." />
+    <title>Bundl - The Perfect Keepsake for Life&apos;s Special Moments</title>
+    <meta name="description" content="Bundl - The Perfect Keepsake for Life's Special Moments" />
   </Head>
 <div>
 
