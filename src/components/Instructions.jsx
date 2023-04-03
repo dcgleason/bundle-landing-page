@@ -47,7 +47,7 @@ const Instructions = () => {
                   Order a Bundl book:
                 </p>{" "}
                 <p className="text-gray-700">
-                  From within the app, upload the email addresses of the family and friends of the person you are giving your Bundl book to. You&apos;ll also write a brief message that will be sent out to all of your Bundl book contributors. 
+                  A conseirge collects email addresses of the family and friends of the person you are giving your Bundl book to. You&apos;ll also write a brief message that will be sent out to all of your Bundl book contributors. 
                 </p>
               </div>
             </div>{" "}
@@ -84,7 +84,7 @@ const Instructions = () => {
               <div className="pt-1 pb-8">
                 <p className="text-gray-900 mb-2 text-lg font-bold">Collect the love:</p>{" "}
                 <p className="text-gray-700">
-                 The app reaches out with your message to your Bundl book contributors and collects loving and supportive letters (from your promopts) and memorable pictures from them over 1-2 weeks. 
+                 We reach out with your message to your Bundl book contributors and collects loving and supportive letters (from your promopts) and memorable pictures from them over 1-2 weeks. 
                   
                 </p>
               </div>
