@@ -234,8 +234,6 @@ const footerNavigation = {
   company: [
     { name: 'Who we are', href: '#' },
     { name: 'Sustainability', href: '#' },
-    { name: 'Press', href: '#' },
-    { name: 'Careers', href: '#' },
     { name: 'Terms & Conditions', href: '#' },
     { name: 'Privacy', href: '#' },
   ],
@@ -912,138 +910,28 @@ const options = {
             </div>
           </div>
 
-<div className="max-w-2xl mx-auto px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
+    <div className="max-w-2xl mx-auto px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
             {/* Instructions section */}
 
             <Instructions/>
 
-            {/* Picture section */}
+       {/* Picture section */}
 
-           
-            <div className="lg:col-span-12 mt-16 relative">
-              <div className="w-full h-auto">
-                <Image src="https://upload.wikimedia.org/wikipedia/commons/6/66/Bundlbook.jpg" alt="Your image description" layout="fill" objectFit="cover" />
-              </div>
-              <h3 className="text-xl font-bold text-center mt-4">Make custom to your custom</h3>
-            </div>
+        {/* add picture here that is large enough for it to be the only picture in this section and look good and have there be a h3 below it */}
+      </div>
 
-            {/* add picture here that is large enough for it to be the only picture in this section and look good and have there be a h3 below it */}
-
-  </div>
-
-          <section aria-labelledby="reviews-heading" className="bg-white">
-            <div className="max-w-2xl mx-auto py-24 px-4 sm:px-6 lg:max-w-7xl lg:py-32 lg:px-8 lg:grid lg:grid-cols-12 lg:gap-x-8">
-              <div className="lg:col-span-4">
-                <h2 id="reviews-heading" className="text-2xl font-extrabold tracking-tight text-gray-900">
-                  Customer Reviews
-                </h2>
-
-                <div className="mt-3 flex items-center">
-                  <div>
-                    <div className="flex items-center">
-                      {[0, 1, 2, 3, 4].map((rating) => (
-                        <StarIcon
-                          key={rating}
-                          className={classNames(
-                            reviews.average > rating ? 'text-yellow-400' : 'text-gray-300',
-                            'flex-shrink-0 h-5 w-5'
-                          )}
-                          aria-hidden="true" />
-                      ))}
-                    </div>
-                    <p className="sr-only">{reviews.average} out of 5 stars</p>
-                  </div>
-                  <p className="ml-2 text-sm text-gray-900">Based on {reviews.totalCount} reviews</p>
-                </div>
-
-                <div className="mt-6">
-                  <h3 className="sr-only">Review data</h3>
-
-                  <dl className="space-y-3">
-                    {reviews.counts.map((count) => (
-                      <div key={count.rating} className="flex items-center text-sm">
-                        <dt className="flex-1 flex items-center">
-                          <p className="w-3 font-medium text-gray-900">
-                            {count.rating}
-                            <span className="sr-only"> star reviews</span>
-                          </p>
-                          <div aria-hidden="true" className="ml-1 flex-1 flex items-center">
-                            <StarIcon
-                              className={classNames(
-                                count.count > 0 ? 'text-yellow-400' : 'text-gray-300',
-                                'flex-shrink-0 h-5 w-5'
-                              )}
-                              aria-hidden="true" />
-
-                            <div className="ml-3 relative flex-1">
-                              <div className="h-3 bg-gray-100 border border-gray-200 rounded-full" />
-                              {count.count > 0 ? (
-                                <div
-                                  className="absolute inset-y-0 bg-yellow-400 border border-yellow-400 rounded-full"
-                                  style={{ width: `calc(${count.count} / ${reviews.totalCount} * 100%)` }} />
-                              ) : null}
-                            </div>
-                          </div>
-                        </dt>
-                        <dd className="ml-3 w-10 text-right tabular-nums text-sm text-gray-900">
-                          {Math.round((count.count / reviews.totalCount) * 100)}%
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
-                </div>
-
-                {/* <div className="mt-10">
-      <h3 className="text-lg font-medium text-gray-900">Share your thoughts</h3>
-      <p className="mt-1 text-sm text-gray-600">
-        If you’ve used this product, share your thoughts with other customers
-      </p>
-      <a
-        href="#"
-        className="mt-6 inline-flex w-full bg-white border border-gray-300 rounded-md py-2 px-8 items-center justify-center text-sm font-medium text-gray-900 hover:bg-gray-50 sm:w-auto lg:w-full"
-      >
-        Write a review
-      </a>
-      
-    </div> */}
-              </div>
-
-              <div className="mt-16 lg:mt-0 lg:col-start-6 lg:col-span-7">
-                <h3 className="sr-only">Recent reviews</h3>
-
-                <div className="flow-root">
-                  {/* <div className="-my-12 divide-y divide-gray-200">
-                    {reviews.featured.map((review) => (
-                      <div key={review.id} className="py-12">
-                        <div className="flex items-center">
-                          <Image src={review.avatarSrc} alt={`${review.author}.`} className="h-12 w-12 rounded-full" width='15' height='15' />
-                          <div className="ml-4">
-                            <h4 className="text-sm font-bold text-gray-900">{review.author}</h4>
-                            <div className="mt-1 flex items-center">
-                              {[0, 1, 2, 3, 4].map((rating) => (
-                                <StarIcon
-                                  key={rating}
-                                  className={classNames(
-                                    review.rating > rating ? 'text-yellow-400' : 'text-gray-300',
-                                    'h-5 w-5 flex-shrink-0'
-                                  )}
-                                  aria-hidden="true" />
-                              ))}
-                            </div>
-                            <p className="sr-only">{review.rating} out of 5 stars</p>
-                          </div>
-                        </div>
-
-                        <div
-                          className="mt-4 space-y-6 text-base italic text-gray-600"
-                          dangerouslySetInnerHTML={{ __html: review.content }} />
-                      </div>
-                    ))}
-                  </div> */}
-                </div>
+      <section aria-labelledby="reviews-heading" className="bg-white">
+        <div className="max-w-2xl mx-auto py-24 px-4 sm:px-6 lg:max-w-7xl lg:py-32 lg:px-8 lg:grid lg:grid-cols-12 lg:gap-x-8">
+          <div className="lg:col-span-12 flex flex-col items-center">
+            <h2 className="text-3xl font-bold text-center mt-4 mb-8">A Timeless & Cherished Gift</h2>
+            <div className="flex justify-center mt-8">
+              <div>
+                <Image src="https://upload.wikimedia.org/wikipedia/commons/6/66/Bundlbook.jpg" className="" alt="Your image description" height="600" width="800" objectFit="cover" />
               </div>
             </div>
-          </section>
+          </div>
+        </div>
+      </section>
         </main>
 
         <footer aria-labelledby="footer-heading" className="bg-white">
@@ -1093,36 +981,12 @@ const options = {
                   </div>
                 </div>
 
-                {/* Newsletter section */}
-                <div className="mt-12 md:mt-0 md:row-start-2 md:col-start-3 md:col-span-8 lg:row-start-1 lg:col-start-9 lg:col-span-4">
-                  <h3 className="text-sm font-medium text-gray-900">Sign up for our newsletter!</h3>
-                  <p className="mt-6 mb-6 text-sm text-gray-500">Arrives in your inbox every Tuesday.</p>
-                  <NewsletterContactForm/>
-                  {/* <form className="mt-2 flex sm:max-w-md">
-                    <label htmlFor="email-address" className="sr-only">
-                      Email address
-                    </label>
-                    <input
-                      id="email-address"
-                      type="text"
-                      autoComplete="email"
-                      required
-                      className="appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#f4978e] focus:ring-1 focus:ring-[#f4978e]" />
-                    <div className="ml-4 flex-shrink-0">
-                      <button
-                        type="submit"
-                        className="w-full bg-[#f8ad9d] hover:bg-[#f4978e] border border-transparent rounded-md shadow-sm py-2 px-4 flex items-center justify-center text-base font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                      >
-                        Sign up
-                      </button>
-                    </div>
-                  </form> */}
-                </div>
+      
               </div>
             </div>
 
             <div className="border-t border-gray-100 py-10 text-center">
-              <p className="text-sm text-gray-500">&copy; 2023 Bundl Books, Inc. All rights reserved.</p>
+              <p className="text-sm text-gray-500">&copy; 2023 Bundl, Inc. All rights reserved.</p>
             </div>
           </div>
         </footer>
