@@ -47,7 +47,7 @@ const Instructions = () => {
                   Order a Bundl book:
                 </p>{" "}
                 <p className="text-gray-700">
-                  A conseirge collects email addresses of the family and friends of the person you are giving your Bundl book to. You&apos;ll also write a brief message that will be sent out to all of your Bundl book contributors. 
+                  A consierge collects email addresses of the family and friends of the person you are giving your Bundl book to. You&apos;ll also write a brief message that will be sent out to all of your Bundl book contributors. 
                 </p>
               </div>
             </div>{" "}
