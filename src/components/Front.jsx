@@ -273,8 +273,9 @@ useEffect(() => {
       
 }
 
-        console.log('secret: ' + secret)
+    
         getClientSecret();
+        console.log('secret: ' + secret)
 
 }, []);
 
