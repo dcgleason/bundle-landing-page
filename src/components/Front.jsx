@@ -279,6 +279,11 @@ useEffect(() => {
 
 }, []);
 
+useEffect(() => {
+  console.log('secret updated:', secret);
+}, [secret]);
+
+
 
 
 
