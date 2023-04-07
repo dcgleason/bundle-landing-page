@@ -275,11 +275,9 @@ useEffect(() => {
 
         getClientSecret();
 
-});
-
-useEffect(() => {
-  console.log('secret updated:', secret);
 }, [secret]);
+
+
 
 
 const submitBetaInfo = async () => {
