@@ -261,14 +261,14 @@ export default function Front() {
   const[betaReferralSource, setBetaReferralSource] = useState('');
   const[betaName, setBetaName] = useState('');
 
-  const stripePromise = loadStripe('pk_live_51KtCf1LVDYVdzLHCUtQK32jpPhwyxyjzgPrrkkmMILYyKKIZ0IQMg6qcabL5jZm1Po6hrjoTNPOpkcaCrTyIXPyK00vfZkVAtP');
+  const stripePromise = loadStripe('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');
 
 useEffect(() => {
         const getClientSecret = async () => {
         const response =  await fetch('https://yay-api.herokuapp.com/stripe/secret').then(res => res.json());
-        console.log('response: '+ JSON.stringify(response));
+      //  console.log('response: '+ JSON.stringify(response));
         const {client_secret} = response;
-        console.log('client secret: ' + client_secret)
+        //console.log('client secret: ' + client_secret)
         setSecret(client_secret)
 }
 
