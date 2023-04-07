@@ -261,7 +261,7 @@ export default function Front() {
   const[betaReferralSource, setBetaReferralSource] = useState('');
   const[betaName, setBetaName] = useState('');
 
-  const stripePromise = loadStripe('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');
+  const stripePromise = loadStripe(process.env.STRIPE_SECRET);
 
 useEffect(() => {
         const getClientSecret = async () => {
