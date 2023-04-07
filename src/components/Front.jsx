@@ -270,12 +270,14 @@ useEffect(() => {
         const {client_secret} = response;
        
         setSecret(client_secret)
-        console.log('secret: ' + secret)
+      
 }
 
+        console.log('secret: ' + secret)
         getClientSecret();
 
 }, []);
+
 
 
 
