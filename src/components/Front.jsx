@@ -275,7 +275,7 @@ useEffect(() => {
 
         getClientSecret();
 
-}, [secret]);
+}, []);
 
 
 
