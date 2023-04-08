@@ -213,8 +213,8 @@ const Input = (props) => {
           type: 'success',
           open: true,
         });
-        await postOrderMongoDB();
-        await sendEmails();
+        postOrderMongoDB();
+       // await sendEmails();
         setIsLoading(false);
         return 'submitpayment function complete - success';
       }
@@ -241,17 +241,19 @@ const postOrderMongoDB = async () => {
           }
       }) 
       }); 
+
+      if(resp){
+        console.log('order posted to mongoDB');
+      }
+      else {
+        console.log('order not posted to mongoDB');
+      }
   }
   catch{
     console.error(error)
   }
 
-  if(resp){
-    console.log('order posted to mongoDB');
-  }
-  else {
-    console.log('order not posted to mongoDB');
-  }
+
 }
 
 const submitForm = async (e) => {
