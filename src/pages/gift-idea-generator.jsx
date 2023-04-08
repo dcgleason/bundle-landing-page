@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+import Head from "next/head"
 import axios from 'axios';
 
 
@@ -60,6 +61,10 @@ const [apiResponse, setApiResponse] = useState('');
 
   return (
     <>
+    <Head>
+    <title>Bundl - AI Gift Idea Generator</title>
+    <meta name="description" content="Bundl - AI Gift Idea Generator" />
+  </Head>
     <Transition show={isModalOpen} as={React.Fragment}>
   <Dialog
     as="div"
