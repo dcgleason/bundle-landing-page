@@ -168,7 +168,8 @@ const Input = (props) => {
       }).then((res) => res.json());
     
       const { client_secret } = response;
-      setSecret(client_secret);
+      var secret = client_secret;
+      return secret;
     };
     
     const submitPayment = async () => {
