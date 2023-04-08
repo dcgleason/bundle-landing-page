@@ -245,6 +245,13 @@ const postOrderMongoDB = async () => {
   catch{
     console.error(error)
   }
+
+  if(resp){
+    console.log('order posted to mongoDB');
+  }
+  else {
+    console.log('order not posted to mongoDB');
+  }
 }
 
 const submitForm = async (e) => {
