@@ -155,51 +155,66 @@ const Input = (props) => {
       }
     };
 
- const submitPayment = async () => {
-  // create customer and submit payment
-  setIsLoading(true);
-  console.log('ownerName: '+ ownerName);
-  console.log('ownerEmail: '+ ownerEmail);
-  console.log('clientSecret: '+ props.clientSecret);
 
-  //(async () => {
 
-    const {paymentIntent, error} = await stripe.confirmCardPayment(
-      props.clientSecret,
-      {
+    const getClientSecret = async (customerEmail) => {
+      const response = await fetch('https://yay-api.herokuapp.com/stripe/secret', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: customerEmail }),
+      }).then((res) => res.json());
+    
+      const { client_secret } = response;
+      setSecret(client_secret);
+    };
+    
+    const submitPayment = async () => {
+      setIsLoading(true);
+      console.log('ownerName: ' + ownerName);
+      console.log('ownerEmail: ' + ownerEmail);
+    
+      // Fetch the client secret
+      await getClientSecret(ownerEmail);
+    
+      // Confirm the card payment
+      const { paymentIntent, error } = await stripe.confirmCardPayment(secret, {
         payment_method: {
-          type: "card",
+          type: 'card',
           card: elements.getElement(CardElement),
           billing_details: {
             name: ownerName,
-            email: ownerEmail
+            email: ownerEmail,
           },
         },
-      },
-    );
-    // handling return values
-    if (error) {
-      setPaymentStatus({
-        status: "Error: " + error.message,
-        title: "Error",
-        type: "error",
-        open: true
-      })
-      console.log("There has been a payment error", error.message)
-    return 'submitpayment function complete - error'
-    } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-      console.log("Your payment has succeeded", paymentIntent.status)
-      setPaymentStatus({
-          status: "Your payment of $49 dollars succeeded",
-          title: "Success",
-          type: "success",
-          open: true
-        })
-      postOrderMongoDB()
-      sendEmails();
-    return 'submitpayment function complete - success' 
-     
-    }
+      });
+    
+      // Handling return values
+      if (error) {
+        setPaymentStatus({
+          status: 'Error: ' + error.message,
+          title: 'Error',
+          type: 'error',
+          open: true,
+        });
+        console.log('There has been a payment error', error.message);
+        setIsLoading(false);
+        return 'submitpayment function complete - error';
+      } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+        console.log('Your payment has succeeded', paymentIntent.status);
+        setPaymentStatus({
+          status: 'Your payment of $49 dollars succeeded',
+          title: 'Success',
+          type: 'success',
+          open: true,
+        });
+        await postOrderMongoDB();
+        await sendEmails();
+        setIsLoading(false);
+        return 'submitpayment function complete - success';
+      }
+    };
 //  })();
 
 
