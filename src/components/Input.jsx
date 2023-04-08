@@ -208,7 +208,7 @@ const Input = (props) => {
 
 const postOrderMongoDB = async () => {
   try{
-    const resp =  await fetch("https://yay-api.herokuapp.com/gift/insertOrder", { 
+    const resp =  await fetch("https://yay-api.herokuapp.com/gift/create", { 
       method: 'POST', 
       headers: { 
         'Content-type': 'application/json'
@@ -219,7 +219,8 @@ const postOrderMongoDB = async () => {
             ownerEmail: ownerEmail        
           },
           gift: {
-              recipient: name
+              recipient: name,
+              date: startDate,
           }
       }) 
       }); 

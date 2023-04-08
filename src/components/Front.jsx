@@ -288,21 +288,21 @@ useEffect(() => {
 
 
 
-const submitBetaInfo = async () => {
-  setIsModalOpen(false)
-  const response =  await fetch("https://yay-api.herokuapp.com/beta/signup", { 
-    method: 'POST', 
-    headers: { 
-      'Content-type': 'application/json'
-     }, 
-    body: JSON.stringify({
-     name: betaName,
-     email: betaEmail,
-     referralSource: betaReferralSource
-    })  
-    });
-  console.log("modal submit api response" + response);
-}
+// const submitBetaInfo = async () => {
+//   setIsModalOpen(false)
+//   const response =  await fetch("https://yay-api.herokuapp.com/beta/signup", { 
+//     method: 'POST', 
+//     headers: { 
+//       'Content-type': 'application/json'
+//      }, 
+//     body: JSON.stringify({
+//      name: betaName,
+//      email: betaEmail,
+//      referralSource: betaReferralSource
+//     })  
+//     });
+//   console.log("modal submit api response" + response);
+// }
 
 
 const options = {
