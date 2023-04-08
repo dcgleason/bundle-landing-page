@@ -946,7 +946,7 @@ export default function Front() {
       </section>
         </main>
 
-        <footer aria-labelledby="footer-heading" className="bg-white">
+        {/* <footer aria-labelledby="footer-heading" className="bg-white">
           <h2 id="footer-heading" className="sr-only">
             Footer
           </h2>
@@ -1001,7 +1001,7 @@ export default function Front() {
               <p className="text-sm text-gray-500">&copy; 2023 Bundl, Inc. All rights reserved.</p>
             </div>
           </div>
-        </footer>
+        </footer> */}
       </div></>
   )
 }
