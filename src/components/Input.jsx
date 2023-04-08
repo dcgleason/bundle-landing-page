@@ -176,19 +176,21 @@ const Input = (props) => {
       console.log('ownerEmail: ' + ownerEmail);
     
       // Fetch the client secret
-      await getClientSecret(ownerEmail);
+     // Fetch the client secret
+  const clientSecret = await getClientSecret(ownerEmail); // Get the client secret directly
+
     
-      // Confirm the card payment
-      const { paymentIntent, error } = await stripe.confirmCardPayment(secret, {
-        payment_method: {
-          type: 'card',
-          card: elements.getElement(CardElement),
-          billing_details: {
-            name: ownerName,
-            email: ownerEmail,
-          },
-        },
-      });
+  // Confirm the card payment
+  const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
+    payment_method: {
+      type: 'card',
+      card: elements.getElement(CardElement),
+      billing_details: {
+        name: ownerName,
+        email: ownerEmail,
+      },
+    },
+  });
     
       // Handling return values
       if (error) {
