@@ -245,18 +245,19 @@ const postOrderMongoDB = async () => {
   }
 }
 
-
 const submitForm = async (e) => {
   e.preventDefault();
   console.log('submitform clicked');
-  const result = await submitPayment();
- // alert('Form submitted. Y&Y is still in development - your card was not charged!')
-  console.log("result is" + result);
-  setIsLoading(false);
-  //setNotification(true);
 
-}
- 
+  try {
+    const result = await submitPayment();
+    console.log("result is" + result);
+  } catch (error) {
+    console.error("Error in submitPayment:", error);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
 // const updatePaymentIntent = async () => {
 
