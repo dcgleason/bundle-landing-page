@@ -263,21 +263,21 @@ export default function Front() {
 
   const stripePromise = loadStripe('pk_live_51KtCf1LVDYVdzLHCUtQK32jpPhwyxyjzgPrrkkmMILYyKKIZ0IQMg6qcabL5jZm1Po6hrjoTNPOpkcaCrTyIXPyK00vfZkVAtP');
 
-useEffect(() => {
-        const getClientSecret = async () => {
-        const response =  await fetch('https://yay-api.herokuapp.com/stripe/secret').then(res => res.json());
-       // console.log('response: '+ JSON.stringify(response));
-        const {client_secret} = response;
+// useEffect(() => {
+//         const getClientSecret = async () => {
+//         const response =  await fetch('https://yay-api.herokuapp.com/stripe/secret').then(res => res.json());
+//        // console.log('response: '+ JSON.stringify(response));
+//         const {client_secret} = response;
        
-        setSecret(client_secret)
+//         setSecret(client_secret)
       
-}
+// }
 
     
-        getClientSecret();
-      //  console.log('secret: ' + secret)
+//         getClientSecret();
+//       //  console.log('secret: ' + secret)
 
-}, []);
+// }, []);
 
 // useEffect(() => {
 //   console.log('secret updated:', secret);
@@ -843,8 +843,8 @@ const options = {
                 <div className="aspect-w-1 aspect-h-1 rounded-lg overflow-hidden">
 
                 {secret && (
-                  <Elements stripe={stripePromise} options={options}> 
-                    <Input clientSecret={secret} />
+                  <Elements stripe={stripePromise}> 
+                    <Input />
                   </Elements>
                       )}
                   {/* <HubspotContactForm/> */}
