@@ -35,6 +35,7 @@ const Input = (props) => {
   const [phone, setPhone] = useState('');
   const [country, setCountry] = useState('United States');
   const [state, setState] = useState('');
+  const [secret, setSecret] = useState(null);
   const [alert, setAlert] = useState({
     type: 'error',
     text: '',
