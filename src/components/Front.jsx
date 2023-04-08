@@ -946,7 +946,7 @@ export default function Front() {
       </section>
         </main>
 
-        {/* <footer aria-labelledby="footer-heading" className="bg-white">
+        <footer aria-labelledby="footer-heading" className="bg-white">
           <h2 id="footer-heading" className="sr-only">
             Footer
           </h2>
@@ -964,7 +964,7 @@ export default function Front() {
                 </div>
 
                 {/* Sitemap sections */}
-                <div className="mt-10 col-span-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:mt-0 md:row-start-1 md:col-start-3 md:col-span-8 lg:col-start-2 lg:col-span-6">
+                {/* <div className="mt-10 col-span-6 grid grid-cols-2 gap-8 sm:grid-cols-3 md:mt-0 md:row-start-1 md:col-start-3 md:col-span-8 lg:col-start-2 lg:col-span-6">
                   <div className="grid grid-cols-1 gap-y-12 sm:col-span-2 sm:grid-cols-2 sm:gap-x-8">
                     <div>
                       <h3 className="text-sm font-medium text-gray-900">Company</h3>
@@ -991,7 +991,7 @@ export default function Front() {
                       ))}
                     </ul>
                   </div>
-                </div>
+                </div> */}
 
       
               </div>
@@ -1001,7 +1001,7 @@ export default function Front() {
               <p className="text-sm text-gray-500">&copy; 2023 Bundl, Inc. All rights reserved.</p>
             </div>
           </div>
-        </footer> */}
+        </footer>
       </div></>
   )
 }
