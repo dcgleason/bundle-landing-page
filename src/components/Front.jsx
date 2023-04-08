@@ -287,6 +287,9 @@ export default function Front() {
 
 
 
+// const options = {
+//     client_secret: secret
+//   }  
 
 // const submitBetaInfo = async () => {
 //   setIsModalOpen(false)
@@ -303,12 +306,6 @@ export default function Front() {
 //     });
 //   console.log("modal submit api response" + response);
 // }
-
-
-const options = {
-    client_secret: secret
-  }  
-
 
 
   return (
@@ -843,8 +840,8 @@ const options = {
                 <div className="aspect-w-1 aspect-h-1 rounded-lg overflow-hidden">
 
   
-                  <Elements stripe={stripePromise} options={options}> 
-                    <Input clientSecret={secret} />
+                  <Elements stripe={stripePromise} > 
+                    <Input />
                   </Elements>
 
                   {/* <HubspotContactForm/> */}
