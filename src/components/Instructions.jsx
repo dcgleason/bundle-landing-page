@@ -47,7 +47,7 @@ const Instructions = () => {
                   Order a Bundl book:
                 </p>{" "}
                 <p className="text-gray-700">
-                  One of our consierges collects the email addresses of the family and friends of the person you are giving your Bundl book to from you. Our consierge will also ask that you write a short message that will be sent out to all of your Bundl book contributors so that each person knows the gift is coming from you. 
+                  One of our concierges collects the email addresses of the family and friends of the person you are giving your Bundl book to from you. Our concierge will also ask that you write a short message that will be sent out to all of your Bundl book contributors so that each person knows the gift is coming from you. 
                 </p>
               </div>
             </div>{" "}
@@ -84,7 +84,7 @@ const Instructions = () => {
               <div className="pt-1 pb-8">
                 <p className="text-gray-900 mb-2 text-lg font-bold">Collect the love:</p>{" "}
                 <p className="text-gray-700">
-                 Our consierge reaches out with your message to your Bundl book contributors and collects loving and supportive letters (from your promopts) and memorable pictures from them over 1-2 weeks. 
+                 Our concierge reaches out with your message to your Bundl book contributors and collects loving and supportive letters (from your promopts) and memorable pictures from them over 1-2 weeks. 
                   
                 </p>
               </div>
