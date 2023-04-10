@@ -974,7 +974,7 @@ export default function Front() {
                 <Image src="https://upload.wikimedia.org/wikipedia/commons/6/66/Bundlbook.jpg" className="" alt="Your image description" height="600" width="800" objectFit="cover" />
               </div>
             </div>
-            <h2 className="text-3xl font-bold text-center mt-8">Create a <em>lasting reminder</em> of the moments that matter <em>most</em></h2>
+            <h2 className="text-3xl font-bold text-center mt-8">Create a <em>lasting reminder</em> of the moments that matter <em>most</em>...</h2>
           </div>
         </div>
       </section>
