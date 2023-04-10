@@ -182,7 +182,7 @@ const navigation = {
   ],
   pages: [
     { name: 'Home', href: '#' },
-    { name: "AI Gift Idea Generator", href: 'http://givebundl.com/gift-idea-generator' },
+    { name: "AI Gift Idea Generator", href: 'https://givebundl.com/gift-idea-generator' },
   //  { name: "Add Contributors", href: 'http://bundlbooks.com/contributors'} // need a way for the browser to known what gift the person is writing for / adding contributors to (and they can only add contributors once) - git code;
 
   ],
