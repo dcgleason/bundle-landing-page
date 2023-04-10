@@ -124,7 +124,7 @@ const Instructions = () => {
                   Compile the love:
                 </p>{" "}
                 <p className="text-gray-700">
-                Once the letters and pictures are collected from friends and family, their kind words and special pictures will be compiled into a personalized, physical book aka a Bundl book for your recipient.
+                Once the letters and pictures are collected from friends and family, our conciege compiles their kind words and special pictures into a personalized, physical book, aka a Bundl book, for you to gift to your intended recipient.
                 </p>
               </div>
             </div>{" "}
@@ -154,7 +154,7 @@ const Instructions = () => {
                   Feel the love:
                 </p>{" "}
                 <p className="text-gray-700">
-                 Once the Bundl book is delivered, you will be able to give it to your recipient! It will be a moment to cherish. 
+                 Once the Bundl book is delivered to you, you&apos;ll be able to surprise your recipient with it! The reveal is always a special moment.     
                 </p>
               </div>
             </div>
