@@ -84,7 +84,7 @@ const Instructions = () => {
               <div className="pt-1 pb-8">
                 <p className="text-gray-900 mb-2 text-lg font-bold">Collect the love:</p>{" "}
                 <p className="text-gray-700">
-                 Our concierge reaches out with your message to your Bundl book contributors and collects loving and supportive letters (from your promopts) and memorable pictures from them over 1-2 weeks. 
+                 Our concierge reaches out with your message to your Bundl book contributors and collects loving and supportive letters (from your prompts) and memorable pictures from them over 1-2 weeks. 
                   
                 </p>
               </div>
