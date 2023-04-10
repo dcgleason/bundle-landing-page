@@ -194,26 +194,55 @@ const Input = (props) => {
     },
   });
     
-      // Handling return values
-      if (error) {
-        setPaymentStatus({
-          status: 'Error: ' + error.message,
-          title: 'Error',
-          type: 'error',
-          open: true,
-        });
-        console.log('There has been a payment error', error.message);
-        setIsLoading(false);
-        return 'submitpayment function complete - error';
-      } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-        console.log('Your payment has succeeded', paymentIntent.status);
-        setPaymentStatus({
-          status: 'Your payment of $49 dollars succeeded',
-          title: 'Success',
-          type: 'success',
-          open: true,
-        });
-        postOrderMongoDB();
+       // Handling return values
+  if (error) {
+    setPaymentStatus({
+      status: 'Error: ' + error.message,
+      title: 'Error',
+      type: 'error',
+      open: true,
+    });
+    console.log('There has been a payment error', error.message);
+    setIsLoading(false);
+    return 'submitpayment function complete - error';
+  } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+    console.log('Your payment has succeeded', paymentIntent.status);
+    setPaymentStatus({
+      status: 'Your payment of $49 dollars succeeded',
+      title: 'Success',
+      type: 'success',
+      open: true,
+    });
+
+    // Code block to post order to MongoDB
+    try {
+      const resp = await fetch("https://yay-api.herokuapp.com/gift/create", {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          owner: {
+            ownerName: ownerName,
+            ownerEmail: ownerEmail,
+          },
+          gift: {
+            recipient: name,
+            date: startDate,
+          },
+        }),
+      });
+
+      if (resp) {
+        console.log('order posted to mongoDB');
+      } else {
+        console.log('order not posted to mongoDB');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
+       // postOrderMongoDB();
        // await sendEmails();
         setIsLoading(false);
         return 'submitpayment function complete - success';
