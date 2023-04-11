@@ -216,7 +216,7 @@ const Input = (props) => {
 
     // Code block to post order to MongoDB
     try {
-      const resp = await fetch("https://yay-api.herokuapp.com/gift/create", {
+      const resp = await fetch("https://yay-api.herokuapp.com/gifts/create", {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
