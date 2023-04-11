@@ -828,24 +828,23 @@ export default function Front() {
                     <div className="ml-4 pl-4 border-l border-gray-300">
                       <h2 className="sr-only">Reviews</h2>
                       <div className="flex items-center">
-                        <div>
-                          <div className="flex items-center">
-                            {[0, 1, 2, 3, 4].map((rating) => (
-                              <StarIcon
-                                key={rating}
-                                className={classNames(
-                                  reviews.average > rating ? 'text-yellow-400' : 'text-gray-300',
-                                  'h-5 w-5 flex-shrink-0 align-middle'
-                                )}
-                                aria-hidden="true" />
-                            ))}
-                          </div>
-                          <p className="sr-only">{reviews.average} out of 5 stars</p>
+                        <div className="flex items-center">
+                          {[0, 1, 2, 3, 4].map((rating) => (
+                            <StarIcon
+                              key={rating}
+                              className={classNames(
+                                reviews.average > rating ? 'text-yellow-400' : 'text-gray-300',
+                                'h-5 w-5 flex-shrink-0'
+                              )}
+                              aria-hidden="true" />
+                          ))}
                         </div>
-                        <p className="ml-2 text-sm text-gray-500 align-middle">{reviews.totalCount} review</p>
+                        <p className="sr-only">{reviews.average} out of 5 stars</p>
+                        <p className="ml-2 text-sm text-gray-500">{reviews.totalCount} reviews</p>
                       </div>
                     </div>
                   </div>
+
 
                   <div className="mt-4 space-y-6">
                     <p className="text-base text-gray-500">Bundl book: <em> noun; a thoughtful gift</em>; a physical book of heartfelt, prompt-driven letters and pictures from your recipient&apos;s friends and family meant to encourage, inspire, and remind the recipient of the love they have around them.  </p> 
