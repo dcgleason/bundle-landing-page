@@ -235,7 +235,7 @@ const policies = [
 ]
 const reviews = {
   average: 5,
-  totalCount: 3,
+  totalCount: 1,
   counts: [
     { rating: 5, count: 1 },
     { rating: 4, count: 0 },
