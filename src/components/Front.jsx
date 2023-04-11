@@ -840,16 +840,29 @@ export default function Front() {
                           ))}
                         </div>
                         <p className="sr-only">{reviews.average} out of 5 stars</p>
-                        <div className="ml-2 flex items-center">
-                          <p className="text-sm text-gray-500">{reviews.totalCount} reviews</p>
-                        </div>
+                        <p className="ml-2 text-sm text-gray-500">{reviews.totalCount} reviews</p>
                       </div>
                     </div>
                   </div>
 
+
                   <div className="mt-4 space-y-6">
-                    {/* ... */}
+                    <p className="text-base text-gray-500">Bundl book: <em> noun; a thoughtful gift</em>; a physical book of heartfelt, prompt-driven letters and pictures from your recipient&apos;s friends and family meant to encourage, inspire, and remind the recipient of the love they have around them.  </p> 
+                    {/* <b>Bundle book</b>,  <em>noun</em>: a physical book of written heartfelt messages of contragulations and support collected for an employee from <em>his or her</em> co-workers, given for a special occation */}
                   </div>
+                  {/* <div className="mt-6 text-center">
+                    <a href="#" className="group inline-flex text-base font-medium">
+                      <ShieldCheckIcon
+                        className="flex-shrink-0 mr-2 h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                        aria-hidden="true" />
+                      <span className="text-gray-500 hover:text-gray-700">Tears of joy or your money back.</span>
+                    </a>
+                  </div> */}
+
+                  {/* <div className="mt-6 flex items-center">
+      <CheckIcon className="flex-shrink-0 w-5 h-5 text-green-500" aria-hidden="true" />
+      <p className="ml-2 text-sm text-gray-500">In stock and ready to ship</p>
+    </div> */}
                 </section>
               </div>
 
