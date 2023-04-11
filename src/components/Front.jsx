@@ -842,7 +842,7 @@ export default function Front() {
                           </div>
                           <p className="sr-only">{reviews.average} out of 5 stars</p>
                         </div>
-                        <p className="ml-2 text-sm text-gray-500">{reviews.totalCount} reviews</p>
+                        <p className="ml-2 text-sm text-gray-500 self-center">{reviews.totalCount} reviews</p>
                       </div>
                     </div>
                   </div>
