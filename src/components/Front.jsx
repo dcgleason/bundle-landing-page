@@ -50,9 +50,7 @@ const Footer = () => {
     <iframe
       ref={iframeRef}
       id="testimonialto-bundl-tag-all-light"
-      src="https://embed-v2.testimonial.to/w/bundl?theme=light&card=large&loadMore=on&initialCount=10&randomize=on&tag=all"
-      frameBorder="0"
-      scrolling="no"
+      src="https://embed-v2.testimonial.to/carousel/all/bundl?theme=light&autoplay=off&showmore=on&one-row=on&same-height=off&tag=all"
       width="100%"
     ></iframe>
   );
@@ -867,10 +865,9 @@ export default function Front() {
               <div className="mt-10 pb-20 lg:mt-0 lg:col-start-2 lg:row-span-2 lg:self-center">
                 <div className="aspect-w-1 aspect-h-1 rounded-lg overflow-hidden">
 
-  
-                  <Elements stripe={stripePromise} > 
-                    <Input />
-                  </Elements>
+         {/* Reviews section */}
+         <Footer/>
+               
 
                   {/* <HubspotContactForm/> */}
 
@@ -949,10 +946,14 @@ export default function Front() {
             </div>
           </div>
 
+   
+
     <div className="max-w-2xl mx-auto px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
             {/* Instructions section */}
 
+
             <Instructions/>
+        
 
        {/* Picture section */}
 
@@ -960,10 +961,10 @@ export default function Front() {
       </div>
 
       <section aria-labelledby="reviews-heading" className="bg-white">
-        <div className="max-w-2xl mx-auto py-24 px-4 sm:px-6 lg:max-w-7xl lg:py-32 lg:px-8 lg:grid lg:grid-cols-12 lg:gap-x-8">
+        <div className="max-w-2xl mx-auto py-12 px-4 sm:px-6 lg:max-w-7xl lg:py-32 lg:px-8 lg:grid lg:grid-cols-12 lg:gap-x-8">
           <div className="lg:col-span-12 flex flex-col items-center">
             {/* <h2 className="text-2xl font-bold text-center mt-4 mb-6">Gather love and support from family & friends ...</h2> */}
-            <div className="flex justify-center mt-8">
+            <div className="flex justify-center">
               <div>
                 <Image src="https://upload.wikimedia.org/wikipedia/commons/6/66/Bundlbook.jpg" className="" alt="Your image description" height="600" width="800" objectFit="cover" />
               </div>
@@ -973,8 +974,18 @@ export default function Front() {
         </div>
       </section>
         </main>
+        <div className="flex justify-center items-center">
+          <div className="w-2/4 py-12">
+            <Elements stripe={stripePromise}>
+              <Input />
+            </Elements>
+          </div>
+        </div>
 
-        <Footer/>
+
+      
+
+     
       </div></>
   )
 }
