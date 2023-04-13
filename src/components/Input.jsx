@@ -724,7 +724,7 @@ const handleClick = () => {
               type="submit"
               onClick={submitForm}
             >
-              Submit Payment & Order Bundl book
+              Submit Payment ($49) & Order Bundl book
             </button>  
           </div>
       }
