@@ -47,18 +47,14 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer aria-labelledby="footer-heading" className="bg-white">
-      {/* ... */}
-      <iframe
-        ref={iframeRef}
-        id="testimonialto-grid-selected-0-bundl-light"
-        src="https://embed-v2.testimonial.to/grid/selected/bundl/0?theme=light&card=large&loadMore=on&initialCount=20&randomize=on&hideDate=on"
-        frameBorder="0"
-        scrolling="no"
-        width="100%"
-      ></iframe>
-      {/* ... */}
-    </footer>
+    <iframe
+      ref={iframeRef}
+      id="testimonialto-carousel-all-bundl-tag-all-light"
+      src="https://embed-v2.testimonial.to/carousel/all/bundl?theme=light&autoplay=on&showmore=off&one-row=on&same-height=off&tag=all"
+      frameBorder="0"
+      scrolling="no"
+      width="100%"
+    ></iframe>
   );
 };
 
