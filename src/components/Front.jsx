@@ -53,7 +53,7 @@ const Footer = () => {
       src="https://embed-v2.testimonial.to/carousel/all/bundl?theme=light&autoplay=on&showmore=off&one-row=on&same-height=off&tag=all"
       frameBorder="0"
       scrolling="no"
-      width="100%"
+      width="60%"
     ></iframe>
   );
 };
