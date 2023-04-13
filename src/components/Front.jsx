@@ -49,11 +49,11 @@ const Footer = () => {
   return (
     <iframe
       ref={iframeRef}
-      id="testimonialto-carousel-all-bundl-tag-all-light"
-      src="https://embed-v2.testimonial.to/carousel/all/bundl?theme=light&autoplay=on&showmore=off&one-row=on&same-height=off&tag=all"
+      id="testimonialto-bundl-tag-all-light"
+      src="https://embed-v2.testimonial.to/w/bundl?theme=light&card=large&loadMore=on&initialCount=10&randomize=on&tag=all"
       frameBorder="0"
       scrolling="no"
-      width="60%"
+      width="100%"
     ></iframe>
   );
 };
