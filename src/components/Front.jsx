@@ -975,7 +975,7 @@ export default function Front() {
       </section>
         </main>
         <div className="flex justify-center items-center">
-          <div className="w-2/4 sm:w-auto py-12 ">
+          <div className="w-full sm:w-2/4 py-12">
             <Elements stripe={stripePromise}>
               <Input />
             </Elements>
