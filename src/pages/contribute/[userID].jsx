@@ -354,7 +354,7 @@ const submit = async (event) => {
           <div>
             <h3 className="text-lg mt-20 leading-6 font-medium text-gray-900">Write a Letter</h3>
             <p className="mt-1 max-w-2xl text-sm text-gray-500">
-            <div className='underline'>Instructions :</div> <br></br>Please contribute to the Bundl book for {giftData.recipientName} being gifted by {userData.firstName} by filling out the form below.
+            <div className='underline'>Instructions :</div> <br></br>Please contribute to the Bundl book for {giftData.recipientName} being gifted by {userData.firstName} {userData.lastName} by filling out the form below.
             </p>
           </div>
 
