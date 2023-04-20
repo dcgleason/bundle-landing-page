@@ -95,7 +95,7 @@ const Messages = () => {
     fetchUserData();
   }, [userID]); // only run the effect on first render --< how to 
 
-  // 636468ef285378771155ce54 --> user id of the giftOwner
+  // 636468ef285378771155ce54 --> user id of the giftOwner --> use this in the url to get the gift id
 
   // gift ID of eliza's gift 63c55c5ee92e0ca3cbbececf
   const getDataChild = (data) => { // make this the same as the onsubmit 
