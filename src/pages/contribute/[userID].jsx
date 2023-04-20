@@ -85,6 +85,8 @@ const Messages = () => {
 
 
   useEffect(() => {
+
+    console.log("userid is " + userID);
     async function fetchUserData() {
       const res = await fetch(`https://yay-api.herokuapp.com/users/${userID}`);
       const data = await res.json();
