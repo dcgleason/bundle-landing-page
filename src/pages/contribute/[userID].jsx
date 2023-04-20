@@ -88,6 +88,8 @@ const Messages = () => {
       const res = await fetch(`http://localhost:3001/gifts/user/${userID}`);
       const data = await res.json();
       setGiftData(data);
+      console.log('Here is the first custom prompt' + data.customPrompts[0])
+      console.log('gift id ' + data._id)
 
     }
 
