@@ -96,12 +96,11 @@ const Messages = () => {
     }
 
     async function fetchGiftData() {
-      const res = await fetch(`https://yay-api.herokuapp.com/gifts/${userID}`);
+      const res = await fetch(`https://yay-api.herokuapp.com/gifts/byowner/${userID}`);
       const data = await res.json();
       setGiftData(data);
       console.log('Here is the first custom prompt' + data.customPrompts[0])
       console.log('gift id ' + data._id)
-
     }
 
     fetchGiftData();
