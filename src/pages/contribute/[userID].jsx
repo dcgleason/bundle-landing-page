@@ -378,18 +378,18 @@ const submit = async (event) => {
             </div>
 
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"></div>
-
             <div className="text-center text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 mb-4">
-              <em>Here is a message from Manny (to you):</em> <br />
-              <strong>NOTE:</strong> [note from {userData.firstName}] <br />
-              <br />
-              <strong>Suggested PROMPTS:</strong>
-              <ul className="list-disc">
-                <ol>What are some of your favorite memories with {giftData.recipientName}?</ol>
-                <ol>How has {giftData.recipientName} impacted your life?</ol>
-                <ol>What advice would you give to {giftData.recipientName} for the future?</ol>
-              </ul>
-            </div>
+                  <em>Here is a message from Manny (to you):</em> <br />
+                  <strong>NOTE:</strong> {giftData.introNote ? giftData.introNote : '[note from ' + userData.firstName + ']'} <br />
+                  <br />
+                  <strong>Suggested PROMPTS:</strong>
+                  <ul className="list-disc">
+                    {giftData.customPrompts &&
+                      giftData.customPrompts.map((prompt, index) => (
+                        <ol key={index}>{prompt}</ol>
+                      ))}
+                  </ul>
+                </div>
           <div className="mt-6 sm:mt-5 space-y-6 sm:space-y-5"></div>
 
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5 items-start ">
