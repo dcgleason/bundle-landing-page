@@ -78,6 +78,7 @@ const Messages = () => {
       console.log('no userID...')
       return; // Don't run the fetching functions if userID is not available
     }
+  })
   
   
 
