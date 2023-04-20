@@ -85,7 +85,7 @@ const Messages = () => {
 
   useEffect(() => {
     async function fetchUserData() {
-      const res = await fetch(`http://localhost:3001/users/${userID}`);
+      const res = await fetch(`https://yay-api.herokuapp.com/users/${userID}`);
       const data = await res.json();
       setUserData(data);
       console.log("user first name" + data.firstName); // first name of the gift owner
@@ -93,7 +93,7 @@ const Messages = () => {
     }
 
     async function fetchGiftData() {
-      const res = await fetch(`http://localhost:3001/gifts/user/${userID}`);
+      const res = await fetch(`https://yay-api.herokuapp.com/gifts/user/${userID}`);
       const data = await res.json();
       setGiftData(data);
       console.log('Here is the first custom prompt' + data.customPrompts[0])
