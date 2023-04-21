@@ -136,222 +136,33 @@ const Messages = () => {
     })
   }
 
-const submit = async (event) => {
-      event.preventDefault();  
-
+  const submit = async (event) => {
+    event.preventDefault();
   
-  if(file!==null){
+    if (file !== null) {
+      // Create a FormData object to hold the file and other parameters
+      const formData = new FormData();
+      formData.append("name", contributorName);
+      formData.append("message", questionOne);
+      formData.append("associatedGiftID", giftData._id);
+      formData.append("contributed", true);
+      formData.append("imageAddress", file);
   
-      const { url } = await fetch("http://localhost:3001/s3Url").then((res) => // manny has this route / code on this local machine
-        res.json()
-      );
-      console.log("url" + url);
-      //post the image to the s3 bucket
-      await fetch(url, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        body: file,
+      // Send the POST request to create a contribution
+      const response = await fetch("https://yay-api.herokuapp.com/contribution/create", {
+        method: "POST",
+        body: formData,
       });
-      const imageUrl = url.split("?")[0];
-      console.log(imageUrl); //this is the url of the image in the s3 bucket -- you can use this to display the image (or store it in the database)
-          // creating the PDF document with the image(or not) and audio (or not) 
-
-    
-
-      // if(blob){ // if there is audio && image
-      //       // template with image and audio (1 page of text with audio)
-      //       const originalString = blob;
-      //       const newBlobString = originalString.substring(originalString.indexOf("http"));
-          
-
-      //           const res = await fetch("http://localhost:3001/contribution/convert-audio-to-mp3", {
-      //             method: "POST",
-      //             headers: {
-      //               "Content-Type": "application/json",
-      //             },
-      //             body: JSON.stringify({
-      //               data: {
-      //                 blob: newBlobString,
-      //               },
-      //             }),
-      //           });
-      //           const data = await res.json();
-      //           const audioAddress = data.audioAddress;
-
-          
-      //           const response = await fetch("http://localhost:3001/contribution/create-document-three", {
-      //             method: "POST",
-      //             headers: {
-      //               "Content-Type": "application/json",
-      //             },
-      //             body: JSON.stringify({
-      //               data: {
-      //                 letter: questionOne,
-      //                 name: contributorName,
-      //                 qrcode: audioAddress,
-      //                 image: imageUrl,
-      //               },
-      //               template: '571024',
-      //               giftID: giftData._id,
-      //               optionsCode: 4
-      //             }),
-      //           });
-
-      //           if(response.status === 200){
-      //             setSuccess(true);
-      //           }else{
-      //             setFailure(true);
-      //             console.log(response)
-      //           }
-
-          
-      //         }
+  
+      if (response.status === 200) {
+        handleClick("success");
+      } else {
+        handleClick("failure");
+      }
+    }
+  };
 
 
-      //     if(!blob){ // if there is no audio && image
-            
-      //       //template with image only (1 page of text no audio)
-          
-           
-      //         const response = await fetch("http://localhost:3001/contribution/create-document-four", {
-      //           method: "POST",
-      //           headers: {
-      //             "Content-Type": "application/json",
-      //           },
-      //           body: JSON.stringify({
-      //             data: {
-      //               letter: questionOne,
-      //               name: contributorName,
-      //               image: imageUrl,
-      //             },
-      //             template: '570862',
-      //             giftID: giftData._id,
-      //             optionsCode: 3
-      //           }),
-      //         });
-          
-      //         if(response.status === 200){
-      //           setSuccess(true);
-      //         }else{
-      //           setFailure(true);
-      //           console.log(response)
-      //         }
-
-
-           
-      //     }
-
- 
-        }
-
-        handleClick();
-    // if (file==null){
-
-    //   // create a new FormData object
-    //   //  const form = new FormData();
-    //   //   form.append("audio", audio); // append the audio file
-    //   //   form.append("imageUrl", imageUrl); // append the image url
-    //   //   form.append("message", questionOne); // append the message
-    //   //   form.append("contributorName", contributorName); // append the contributor name 
-    //     if(blob){ // if there is audio && no image
-
-    //       console.log('two pages, blob is set: ' + blob)
-    //       //template with audio only (2 pages of text with audio)
-
-    //       const originalString = blob;
-    //       const newBlobString = originalString.substring(originalString.indexOf("http"));
-
-    //       if (questionOne.length > 1750) {
-    //         const pageTwo = questionOne.slice(-1750);
-    //         const pageOne = questionOne.slice(0, 1750);
-    //         console.log(pageOne);
-          
-
-    //       const res = await fetch("http://localhost:3001/contribution/convert-audio-to-mp3", {
-    //         method: "POST",
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify({
-    //           data: {
-    //             blob: newBlobString,
-    //           },
-    //         }),
-    //       });
-
-    //       const data = await res.json();
-
-    //       const audioAddress = data.audioAddress;
-        
-    //         const response = await fetch("http://localhost:3001/contribution/create-document-one", {
-    //           method: "POST",
-    //           headers: {
-    //             "Content-Type": "application/json",
-    //           },
-    //           body: JSON.stringify({
-    //             data: {
-    //               letter: pageOne,
-    //               letterTwo: pageTwo,
-    //               name: contributorName,
-    //               qrcode: audioAddress,
-    //             },
-    //             template: '571157',
-    //             giftID: giftData._id,
-    //             optionsCode: 2
-    //           }),
-            
-    //         });
-        
-    //         if(response.status === 200){
-    //           setSuccess(true);
-    //         }else{
-    //           setFailure(true);
-    //           console.log(response)
-    //         }
-    //       }
-    //     }      
-                
-    //     if(!blob){ //
-        
-    //       // template with no image or audio, just two pages of text  (2 pages of text no audio)
-        
-    //       if (questionOne.length > 1750) {
-    //         const pageTwo = questionOne.slice(-1750);
-    //         const pageOne = questionOne.slice(0, 1750);
-    //         console.log(pageOne);
-        
-    //         const response = await fetch("http://localhost:3001/contribution/create-document-two", {
-    //           method: "POST",
-    //           headers: {
-    //             "Content-Type": "application/json",
-    //           },
-    //           body: JSON.stringify({
-    //             data: {
-    //               letter: questionOne,
-    //               letterTwo: pageTwo,
-    //               name: contributorName,
-    //             },
-    //             template: '571124',
-    //             giftID: giftData._id,
-    //             optionsCode: 1
-    //           }),
-    //         });
-
-    //         if(response.status === 200){
-    //           setSuccess(true);
-    //         }else{
-    //           setFailure(true);
-    //           console.log(response)
-    //         }
-
-        
-    //     }
-    //   }
-    //   }
-     
-    };
 
 
   
