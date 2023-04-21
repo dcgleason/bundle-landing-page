@@ -269,7 +269,7 @@ const Messages = () => {
 
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5 items-start ">
               <label htmlFor="username" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-              <div className='underline'>Letter :</div> Please write your letter here (<em> we ask that you write from a place of love, support, and encouragement</em>):
+              <div className='underline'>Letter :</div> Please write your letter here (<em>ask that you write from a place of love, support, and encouragement</em>):
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2 w-full">
                 <div className="flex rounded-md shadow-sm">
