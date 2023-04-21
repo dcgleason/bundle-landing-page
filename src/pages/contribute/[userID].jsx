@@ -195,7 +195,6 @@ const Messages = () => {
           severity={alert.type}
           color={alert.type}
           role="button"
-          onClose={() => handleClose()}
           closeText="Doesn't Work!"
           sx={{
             width: '80%',
