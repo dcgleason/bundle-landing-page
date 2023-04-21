@@ -68,6 +68,7 @@ const Messages = () => {
   const [blob, setBlob] = useState(null);
   const [pageTwo, setPageTwo] = useState('');
   const [error, setError] = useState(null);
+  const [submissionStatus, setSubmissionStatus] = useState(null);
   const [alert, setAlert] = useState(
     {
       type: "success",
@@ -77,6 +78,12 @@ const Messages = () => {
 
     }
   );
+
+  useEffect(() => {
+    if (submissionStatus) {
+      handleClick(submissionStatus);
+    }
+  }, [submissionStatus]);
 
   useEffect(() => {
     if (!blob) {
@@ -170,11 +177,9 @@ const Messages = () => {
       });
   
       if (response.status === 200) {
-        handleClick("success");
-        console.log('success')
+        setSubmissionStatus("success");
       } else {
-        handleClick("failure");
-        console.log('failure')
+        setSubmissionStatus("failure");
       }
     }
   };
