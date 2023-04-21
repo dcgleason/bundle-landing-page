@@ -15,6 +15,7 @@ dotenv.config()
 import RecorderControls from '@/components/recorder-controls/index.jsx'
 import RecordingsList from "@/components/recordings-list/index.jsx";
 import useRecorder from "@/hooks/useRecorder";
+import LoadingSpinnerContr from '@/components/LoadingSpinnerContr'
 
 
 
@@ -70,6 +71,7 @@ const Messages = () => {
   const [error, setError] = useState(null);
   const [submissionStatus, setSubmissionStatus] = useState(null);
   const [alert, setAlert] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (submissionStatus) {
@@ -160,6 +162,7 @@ const Messages = () => {
 
   const submit = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
   
     if (file !== null) {
       // Create a FormData object to hold the file and other parameters
@@ -175,7 +178,7 @@ const Messages = () => {
         method: "POST",
         body: formData,
       });
-
+         setIsLoading(false);
         setSubmissionStatus(response.status);
     
     }
@@ -366,6 +369,8 @@ const Messages = () => {
 
       <div className="pt-5">
         <div className="flex justify-end">
+
+         {isLoading? <LoadingSpinnerContr/>: 
          
           <button
             type="submit"
@@ -374,6 +379,7 @@ const Messages = () => {
           >
             Send
           </button>
+}
         </div>
       </div>
     </form>
