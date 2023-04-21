@@ -178,8 +178,9 @@ const Messages = () => {
         method: "POST",
         body: formData,
       });
-         setIsLoading(false);
+ 
         setSubmissionStatus(response.status);
+        setIsLoading(false);
     
     }
   };
