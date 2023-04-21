@@ -257,7 +257,7 @@ const Messages = () => {
                   <em>Here is a message from {userData.firstName} (to you):</em> <br />
                   <strong>NOTE:</strong> {giftData.introNote ? giftData.introNote : '[note from ' + userData.firstName + ']'} <br />
                   <br />
-                  <strong>Suggested PROMPTS:</strong>
+                  <strong>Suggested PROMPTS (from {userData.firstName}):</strong>
                   <ul className="list-disc">
                     {giftData.customPrompts &&
                       giftData.customPrompts.map((prompt, index) => (
