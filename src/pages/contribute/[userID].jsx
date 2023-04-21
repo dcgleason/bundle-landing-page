@@ -150,6 +150,14 @@ const Messages = () => {
     }
   }
 
+  const handleClose = () => {
+    setAlert({
+      ...alert,
+      open: false,
+    });
+  };
+  
+
   const submit = async (event) => {
     event.preventDefault();
   
@@ -182,12 +190,12 @@ const Messages = () => {
   return (
     <>
 
-    <Dialog open={alert.open} onClose={handleClick}>
+    <Dialog open={alert.open} onClose={handleClose}>
         <Alert
           severity={alert.type}
           color={alert.type}
           role="button"
-          onClose={() => handleClick()}
+          onClose={() => handleClose()}
           closeText="Doesn't Work!"
           sx={{
             width: '80%',
