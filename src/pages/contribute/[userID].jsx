@@ -254,8 +254,8 @@ const Messages = () => {
 
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"></div>
             <div className="text-center text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 mb-4">
-                  <em>Here is a message from {userData.firstName} (to you):</em> <br />
-                  <strong></strong> {giftData.introNote ? giftData.introNote : 'oops! Having a technical error.'} <br />
+            <div className="underline"><em>Here is a message from {userData.firstName} (to you):</em> </div> <br />
+                <strong></strong> {giftData.introNote ? giftData.introNote : 'oops! Having a technical error.'} <br />
                   <br />
                   <strong>Suggested PROMPTS (from {userData.firstName}):</strong>
                   <ul className="list-disc">
