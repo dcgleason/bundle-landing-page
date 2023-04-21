@@ -129,9 +129,9 @@ const Messages = () => {
 
   }
 
-  const handleClick = (title) => {
+  const handleClick = (status) => {
 
-    if(title === "success") {
+    if(status === 200) {
     setAlert({
       type: "success",
       text: "Contribution submitted!",
@@ -167,12 +167,9 @@ const Messages = () => {
         method: "POST",
         body: formData,
       });
-  
-      if (response.status === 200) {
-        setSubmissionStatus("success");
-      } else {
-        setSubmissionStatus("failure");
-      }
+
+        setSubmissionStatus(response.status);
+    
     }
   };
 
