@@ -69,15 +69,7 @@ const Messages = () => {
   const [pageTwo, setPageTwo] = useState('');
   const [error, setError] = useState(null);
   const [submissionStatus, setSubmissionStatus] = useState(null);
-  const [alert, setAlert] = useState(
-    {
-      type: "success",
-      text: "Contribution submitted!",
-      title: "Success!",
-      open: false,
-
-    }
-  );
+  const [alert, setAlert] = useState({});
 
   useEffect(() => {
     if (submissionStatus) {
