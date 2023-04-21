@@ -8,6 +8,9 @@ import Failure from '../error';
 import Head from "next/head"
 import { useRouter } from 'next/router';
 import dotenv from 'dotenv'
+import Dialog from "@mui/material/Dialog";
+import Alert from '@material-ui/lab/Alert';
+import AlertTitle from '@material-ui/lab/Alert';
 dotenv.config()
 import RecorderControls from '@/components/recorder-controls/index.jsx'
 import RecordingsList from "@/components/recordings-list/index.jsx";
@@ -65,6 +68,15 @@ const Messages = () => {
   const [blob, setBlob] = useState(null);
   const [pageTwo, setPageTwo] = useState('');
   const [error, setError] = useState(null);
+  const [alert, setAlert] = useState(
+    {
+      type: "success",
+      text: "Contribution submitted!",
+      title: "Success!",
+      open: false,
+
+    }
+  );
 
   useEffect(() => {
     if (!blob) {
@@ -117,6 +129,13 @@ const Messages = () => {
 
 
   }
+
+  const handleClick = () => {
+    setAlert({
+      open: false
+    })
+  }
+
 const submit = async (event) => {
       event.preventDefault();  
 
@@ -141,195 +160,196 @@ const submit = async (event) => {
 
     
 
-      if(blob){ // if there is audio && image
-            // template with image and audio (1 page of text with audio)
-            const originalString = blob;
-            const newBlobString = originalString.substring(originalString.indexOf("http"));
+      // if(blob){ // if there is audio && image
+      //       // template with image and audio (1 page of text with audio)
+      //       const originalString = blob;
+      //       const newBlobString = originalString.substring(originalString.indexOf("http"));
           
 
-                const res = await fetch("http://localhost:3001/contribution/convert-audio-to-mp3", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    data: {
-                      blob: newBlobString,
-                    },
-                  }),
-                });
-                const data = await res.json();
-                const audioAddress = data.audioAddress;
+      //           const res = await fetch("http://localhost:3001/contribution/convert-audio-to-mp3", {
+      //             method: "POST",
+      //             headers: {
+      //               "Content-Type": "application/json",
+      //             },
+      //             body: JSON.stringify({
+      //               data: {
+      //                 blob: newBlobString,
+      //               },
+      //             }),
+      //           });
+      //           const data = await res.json();
+      //           const audioAddress = data.audioAddress;
 
           
-                const response = await fetch("http://localhost:3001/contribution/create-document-three", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    data: {
-                      letter: questionOne,
-                      name: contributorName,
-                      qrcode: audioAddress,
-                      image: imageUrl,
-                    },
-                    template: '571024',
-                    giftID: giftData._id,
-                    optionsCode: 4
-                  }),
-                });
+      //           const response = await fetch("http://localhost:3001/contribution/create-document-three", {
+      //             method: "POST",
+      //             headers: {
+      //               "Content-Type": "application/json",
+      //             },
+      //             body: JSON.stringify({
+      //               data: {
+      //                 letter: questionOne,
+      //                 name: contributorName,
+      //                 qrcode: audioAddress,
+      //                 image: imageUrl,
+      //               },
+      //               template: '571024',
+      //               giftID: giftData._id,
+      //               optionsCode: 4
+      //             }),
+      //           });
 
-                if(response.status === 200){
-                  setSuccess(true);
-                }else{
-                  setFailure(true);
-                  console.log(response)
-                }
+      //           if(response.status === 200){
+      //             setSuccess(true);
+      //           }else{
+      //             setFailure(true);
+      //             console.log(response)
+      //           }
 
           
-              }
+      //         }
 
 
-          if(!blob){ // if there is no audio && image
+      //     if(!blob){ // if there is no audio && image
             
-            //template with image only (1 page of text no audio)
+      //       //template with image only (1 page of text no audio)
           
            
-              const response = await fetch("http://localhost:3001/contribution/create-document-four", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  data: {
-                    letter: questionOne,
-                    name: contributorName,
-                    image: imageUrl,
-                  },
-                  template: '570862',
-                  giftID: giftData._id,
-                  optionsCode: 3
-                }),
-              });
+      //         const response = await fetch("http://localhost:3001/contribution/create-document-four", {
+      //           method: "POST",
+      //           headers: {
+      //             "Content-Type": "application/json",
+      //           },
+      //           body: JSON.stringify({
+      //             data: {
+      //               letter: questionOne,
+      //               name: contributorName,
+      //               image: imageUrl,
+      //             },
+      //             template: '570862',
+      //             giftID: giftData._id,
+      //             optionsCode: 3
+      //           }),
+      //         });
           
-              if(response.status === 200){
-                setSuccess(true);
-              }else{
-                setFailure(true);
-                console.log(response)
-              }
+      //         if(response.status === 200){
+      //           setSuccess(true);
+      //         }else{
+      //           setFailure(true);
+      //           console.log(response)
+      //         }
 
 
            
-          }
+      //     }
 
  
         }
 
-    if (file==null){
+        handleClick();
+    // if (file==null){
 
-      // create a new FormData object
-      //  const form = new FormData();
-      //   form.append("audio", audio); // append the audio file
-      //   form.append("imageUrl", imageUrl); // append the image url
-      //   form.append("message", questionOne); // append the message
-      //   form.append("contributorName", contributorName); // append the contributor name 
-        if(blob){ // if there is audio && no image
+    //   // create a new FormData object
+    //   //  const form = new FormData();
+    //   //   form.append("audio", audio); // append the audio file
+    //   //   form.append("imageUrl", imageUrl); // append the image url
+    //   //   form.append("message", questionOne); // append the message
+    //   //   form.append("contributorName", contributorName); // append the contributor name 
+    //     if(blob){ // if there is audio && no image
 
-          console.log('two pages, blob is set: ' + blob)
-          //template with audio only (2 pages of text with audio)
+    //       console.log('two pages, blob is set: ' + blob)
+    //       //template with audio only (2 pages of text with audio)
 
-          const originalString = blob;
-          const newBlobString = originalString.substring(originalString.indexOf("http"));
+    //       const originalString = blob;
+    //       const newBlobString = originalString.substring(originalString.indexOf("http"));
 
-          if (questionOne.length > 1750) {
-            const pageTwo = questionOne.slice(-1750);
-            const pageOne = questionOne.slice(0, 1750);
-            console.log(pageOne);
+    //       if (questionOne.length > 1750) {
+    //         const pageTwo = questionOne.slice(-1750);
+    //         const pageOne = questionOne.slice(0, 1750);
+    //         console.log(pageOne);
           
 
-          const res = await fetch("http://localhost:3001/contribution/convert-audio-to-mp3", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              data: {
-                blob: newBlobString,
-              },
-            }),
-          });
+    //       const res = await fetch("http://localhost:3001/contribution/convert-audio-to-mp3", {
+    //         method: "POST",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify({
+    //           data: {
+    //             blob: newBlobString,
+    //           },
+    //         }),
+    //       });
 
-          const data = await res.json();
+    //       const data = await res.json();
 
-          const audioAddress = data.audioAddress;
+    //       const audioAddress = data.audioAddress;
         
-            const response = await fetch("http://localhost:3001/contribution/create-document-one", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                data: {
-                  letter: pageOne,
-                  letterTwo: pageTwo,
-                  name: contributorName,
-                  qrcode: audioAddress,
-                },
-                template: '571157',
-                giftID: giftData._id,
-                optionsCode: 2
-              }),
+    //         const response = await fetch("http://localhost:3001/contribution/create-document-one", {
+    //           method: "POST",
+    //           headers: {
+    //             "Content-Type": "application/json",
+    //           },
+    //           body: JSON.stringify({
+    //             data: {
+    //               letter: pageOne,
+    //               letterTwo: pageTwo,
+    //               name: contributorName,
+    //               qrcode: audioAddress,
+    //             },
+    //             template: '571157',
+    //             giftID: giftData._id,
+    //             optionsCode: 2
+    //           }),
             
-            });
+    //         });
         
-            if(response.status === 200){
-              setSuccess(true);
-            }else{
-              setFailure(true);
-              console.log(response)
-            }
-          }
-        }      
+    //         if(response.status === 200){
+    //           setSuccess(true);
+    //         }else{
+    //           setFailure(true);
+    //           console.log(response)
+    //         }
+    //       }
+    //     }      
                 
-        if(!blob){ //
+    //     if(!blob){ //
         
-          // template with no image or audio, just two pages of text  (2 pages of text no audio)
+    //       // template with no image or audio, just two pages of text  (2 pages of text no audio)
         
-          if (questionOne.length > 1750) {
-            const pageTwo = questionOne.slice(-1750);
-            const pageOne = questionOne.slice(0, 1750);
-            console.log(pageOne);
+    //       if (questionOne.length > 1750) {
+    //         const pageTwo = questionOne.slice(-1750);
+    //         const pageOne = questionOne.slice(0, 1750);
+    //         console.log(pageOne);
         
-            const response = await fetch("http://localhost:3001/contribution/create-document-two", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                data: {
-                  letter: questionOne,
-                  letterTwo: pageTwo,
-                  name: contributorName,
-                },
-                template: '571124',
-                giftID: giftData._id,
-                optionsCode: 1
-              }),
-            });
+    //         const response = await fetch("http://localhost:3001/contribution/create-document-two", {
+    //           method: "POST",
+    //           headers: {
+    //             "Content-Type": "application/json",
+    //           },
+    //           body: JSON.stringify({
+    //             data: {
+    //               letter: questionOne,
+    //               letterTwo: pageTwo,
+    //               name: contributorName,
+    //             },
+    //             template: '571124',
+    //             giftID: giftData._id,
+    //             optionsCode: 1
+    //           }),
+    //         });
 
-            if(response.status === 200){
-              setSuccess(true);
-            }else{
-              setFailure(true);
-              console.log(response)
-            }
+    //         if(response.status === 200){
+    //           setSuccess(true);
+    //         }else{
+    //           setFailure(true);
+    //           console.log(response)
+    //         }
 
         
-        }
-      }
-      }
+    //     }
+    //   }
+    //   }
      
     };
 
@@ -339,6 +359,27 @@ const submit = async (event) => {
 
   return (
     <>
+
+    <Dialog open={alert.open} onClose={handleClick}>
+        <Alert
+          severity={alert.type}
+          color={alert.type}
+          role="button"
+          onClose={() => handleClick()}
+          closeText="Doesn't Work!"
+          sx={{
+            width: '80%',
+            margin: 'auto',
+            "& .MuiAlert-icon": {
+              color: "blue"
+            }
+            //backgroundColor: "green"
+          }}
+        >
+          <AlertTitle>{alert.title}</AlertTitle>
+          {alert.text}
+        </Alert>
+      </Dialog>
 
     <Head>
         <title>Messages - Bundl</title>
