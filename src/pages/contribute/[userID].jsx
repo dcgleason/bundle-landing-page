@@ -130,10 +130,25 @@ const Messages = () => {
 
   }
 
-  const handleClick = () => {
+  const handleClick = (title) => {
+
+    if(title === "success") {
     setAlert({
-      open: false
+      type: "success",
+      text: "Contribution submitted!",
+      title: "Success!",
+      open: true
+
     })
+
+    } else {
+      setAlert({
+        type: "error",
+        text: "Contribution failed to submit.",
+        title: "Error!",
+        open: true
+      })
+    }
   }
 
   const submit = async (event) => {
@@ -156,8 +171,10 @@ const Messages = () => {
   
       if (response.status === 200) {
         handleClick("success");
+        console.log('success')
       } else {
         handleClick("failure");
+        console.log('failure')
       }
     }
   };
