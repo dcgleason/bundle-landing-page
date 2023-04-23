@@ -12,6 +12,7 @@ import {
   useElements
 } from '@stripe/react-stripe-js';
 import DatePicker from 'react-datepicker';
+import { Modal } from 'antd';
  
 import "react-datepicker/dist/react-datepicker.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -289,7 +290,21 @@ const submitForm = async (e) => {
   e.preventDefault();
   console.log('submitform clicked');
 
+  // Calculate the date 3 weeks from now
+  let threeWeeks = new Date(Date.now() + 18144e5);
+
+  // Check if the selected date is before 3 weeks from now
+  if (selectedDate < threeWeeks) {
+    // Show the modal with the warning message
+    Modal.warning({
+      title: 'Invalid Date',
+      content: 'Please select a date at least 3 weeks from now.',
+    });
+    return;
+  }
+
   try {
+    setIsLoading(true);
     const result = await submitPayment();
     console.log("result is" + result);
   } catch (error) {
