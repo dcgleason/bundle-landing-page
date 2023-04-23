@@ -355,6 +355,12 @@ let month = fortnight.getMonth() + 1;
 let day = fortnight.getDate();
 let year = fortnight.getFullYear();
 let twoWeekDate = month + "/" + day + "/" + year;
+
+let threeWeeks = new Date(Date.now() + 18144e5);
+let theMonth = threeWeeks.getMonth() + 1;
+let theDay = threeWeeks.getDate();
+let theYear = threeWeeks.getFullYear();
+let threeWeekDate = theMonth + "/" + theDay + "/" + theYear;
  
 
 
@@ -667,7 +673,7 @@ const handleClick = () => {
               required
             />
             <label  className="block text-gray-700 text-sm py-2 font-bold mb-2">
-             Your Bundl book delivery date (earliest possible: {String(twoWeekDate)}):
+             Your Bundl book delivery date (earliest possible: {String(threeWeekDate)}):
             </label>
             <div className="form-group">
                 <DatePicker
