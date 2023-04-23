@@ -22,6 +22,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { setMaxIdleHTTPParsers } from 'http';
 
 
 
@@ -296,10 +297,7 @@ const submitForm = async (e) => {
   // Check if the selected date is before 3 weeks from now
   if (selectedDate < threeWeeks) {
     // Show the modal with the warning message
-    Modal.warning({
-      title: 'Invalid Date',
-      content: 'Please select a date at least 3 weeks from now.',
-    });
+    props.showModal();
     return;
   }
 

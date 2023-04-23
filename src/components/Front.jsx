@@ -288,8 +288,13 @@ export default function Front() {
   const[betaEmail, setBetaEmail] = useState('');
   const[betaReferralSource, setBetaReferralSource] = useState('');
   const[betaName, setBetaName] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
 
   const stripePromise = loadStripe('pk_live_51KtCf1LVDYVdzLHCUtQK32jpPhwyxyjzgPrrkkmMILYyKKIZ0IQMg6qcabL5jZm1Po6hrjoTNPOpkcaCrTyIXPyK00vfZkVAtP');
+
+  const showModal = () => {
+    setModalVisible(true);
+  };
 
 // useEffect(() => {
 //         const getClientSecret = async () => {
@@ -977,7 +982,7 @@ export default function Front() {
         <div className="flex justify-center items-center">
           <div className="w-full sm:w-2/4 py-12">
             <Elements stripe={stripePromise}>
-              <Input />
+              <Input showModal={showModal} />
             </Elements>
           </div>
         </div>
