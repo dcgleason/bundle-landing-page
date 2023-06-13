@@ -979,18 +979,20 @@ export default function Front() {
         </div>
       </section>
         </main>
+
+        
         <div className="flex justify-center items-center">
           <div className="w-full sm:w-2/4 py-12">
-            <Elements stripe={stripePromise}>
+          <a href="https://usebundl.com/signup">
+              <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                Start Your Bundl
+              </button>
+            </a>
+            {/* <Elements stripe={stripePromise}>
               <Input showModal={showModal} />
-            </Elements>
+            </Elements> */}
           </div>
         </div>
-
-
-      
-
-     
-      </div></>
+   </div></>
   )
 }
