@@ -981,18 +981,16 @@ export default function Front() {
         </main>
 
         
-        <div className="flex justify-center items-center">
-          <div className="w-full sm:w-2/4 py-12">
+        <div className="flex justify-center items-center h-screen"> {/* h-screen added to center vertically */}
+        <div className="w-full sm:w-2/4 py-12 text-center"> {/* text-center added to center the button */}
           <a href="https://usebundl.com/signup">
-              <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                Start Your Bundl
-              </button>
-            </a>
-            {/* <Elements stripe={stripePromise}>
-              <Input showModal={showModal} />
-            </Elements> */}
-          </div>
+            <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-8 text-2xl rounded">
+              Start Your Bundl
+            </button>
+          </a>
         </div>
+      </div>
+
    </div></>
   )
 }
