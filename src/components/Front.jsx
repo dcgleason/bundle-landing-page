@@ -221,7 +221,7 @@ const policies = [
     imageSrc: 'https://tailwindui.com/img/ecommerce/icons/icon-fast-checkout-light.svg',
   },
   {
-    name: 'Vouchers',u
+    name: 'Vouchers',
     description:
       "Not a great time for you to gift a Bundle right now? Email us your details and we will send you a voucher to use for later, or to gift to someone you know.",
     imageSrc: 'https://tailwindui.com/img/ecommerce/icons/icon-delivery-light.svg',

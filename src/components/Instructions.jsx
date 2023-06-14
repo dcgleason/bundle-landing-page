@@ -152,7 +152,7 @@ const Instructions = () => {
                 Feel the love:
               </p>{" "}
               <p className="text-gray-700">
-               Once the Bundl book is delivered to you, you'll be able to surprise your recipient with it! The reveal is always a special moment.     
+               Once the Bundl book is delivered to you, you&apos;ll be able to surprise your recipient with it! The reveal is always a special moment.     
               </p>
             </div>
           </div>
