@@ -301,18 +301,30 @@ function MyModal() {
             backgroundColor: 'rgba(0, 0, 0, 0.75)'
           },
           content: {
-            color: 'red',
+            color: 'black',
             textAlign: 'center',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
             fontSize: '2em',
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            width: '50%',
+            height: '50%',
+            padding: '20px',
+            boxSizing: 'border-box'
           }
         }}
       >
-        <p>Illicit <i>tears of joy</i>...</p>
+        <button onClick={() => setModalIsOpen(false)} style={{ position: 'absolute', top: '10px', right: '10px' }}>X</button>
+        <p>Happy tears...</p>
         <p>or your money back</p>
       </Modal>
     </div>
