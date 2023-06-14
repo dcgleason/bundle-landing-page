@@ -186,7 +186,7 @@ const userNavigation = [
   // { name: 'Create account', href: '#' },
 ]
 const product = {
-  name: "Celebrate Their Special Day with a Heartfelt Bundl Book", // // give love, get love. //   "Love is not just an emotion, it's an action."
+  name: "Your best gift...ever.", // // give love, get love. //   "Love is not just an emotion, it's an action."
   price: '$59',
   description:
    '',
@@ -221,7 +221,7 @@ const policies = [
     imageSrc: 'https://tailwindui.com/img/ecommerce/icons/icon-fast-checkout-light.svg',
   },
   {
-    name: 'Vouchers',
+    name: 'Vouchers',u
     description:
       "Not a great time for you to gift a Bundle right now? Email us your details and we will send you a voucher to use for later, or to gift to someone you know.",
     imageSrc: 'https://tailwindui.com/img/ecommerce/icons/icon-delivery-light.svg',
