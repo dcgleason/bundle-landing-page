@@ -846,7 +846,7 @@ export default function Front() {
 
 
                   <div className="mt-4 space-y-6">
-                    <p className="text-base text-gray-500">Bundl book: <em> noun; a thoughtful gift</em>; a physical book of heartfelt, prompt-driven letters and pictures from your recipient&apos;s friends and family meant to encourage, inspire, and remind the recipient of the love they have around them.  </p> 
+                    <p className="text-base text-gray-500">Bundl book: <em> noun; a thoughtful gift</em>; a physical book of heartfelt, prompt-driven letters and pictures from your recipient&apos;s friends and family meant to encourage, inspire, and remind the recipient of the love they have around them. Perfect for birthdays, babyshowers, retirements, etc. </p> 
                     {/* <b>Bundle book</b>,  <em>noun</em>: a physical book of written heartfelt messages of contragulations and support collected for an employee from <em>his or her</em> co-workers, given for a special occation */}
                   </div>
                   {/* <div className="mt-6 text-center">
