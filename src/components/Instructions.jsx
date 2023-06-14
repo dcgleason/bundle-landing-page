@@ -122,7 +122,7 @@ const Instructions = () => {
                 Compile the love:
               </p>{" "}
               <p className="text-gray-700">
-              Once the letters and pictures are collected from friends and family, our web app automatically compiles their kind words and special pictures into a personalized, physical book, aka a Bundl book, for you to gift to your intended recipient.
+              Once the letters and pictures are collected from friends and family, our web app automatically compiles their kind words and special pictures into a personalized, physical book, aka a Bundl book, for you to review and gift to your intended recipient.
               </p>
             </div>
           </div>{" "}
