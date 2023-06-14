@@ -983,7 +983,7 @@ export default function Front() {
         
         <div className="flex justify-center items-center h-screen"> {/* h-screen added to center vertically */}
         <div className="w-full sm:w-2/4 py-12 text-center"> {/* text-center added to center the button */}
-          <a href="https://usebundl.com/signup">
+          <a href="https://admin.givebundl.com/signup">
             <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-8 text-2xl rounded">
               Start Your Bundl Now (no credit card required)
             </button>

@@ -23,7 +23,7 @@ export default function Example() {
             </p>
           </div>
           <a
-            href="https://usebundle.co/order"
+            href="https://www.admin.givebundl.com"
             className="mt-8 w-full bg-red-400 border border-transparent px-5 py-3 inline-flex items-center justify-center text-base font-medium rounded-md text-white hover:bg-red-500 sm:mt-10 sm:w-auto xl:mt-0"
           >
             Get started today
