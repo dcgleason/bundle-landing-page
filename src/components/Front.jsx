@@ -27,6 +27,11 @@ import Head from "next/head"
 import Image from 'next/image';
 import Script from 'next/script';
 import { useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#__next')
+
 
 const Footer = () => {
   const iframeRef = useRef(null);
@@ -276,7 +281,44 @@ const footerNavigation = {
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
+
 }
+
+function MyModal() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  useEffect(() => {
+    setModalIsOpen(true);
+  }, []);
+
+  return (
+    <div>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={() => setModalIsOpen(false)}
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.75)'
+          },
+          content: {
+            color: 'red',
+            textAlign: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontSize: '2em',
+            fontWeight: 'bold'
+          }
+        }}
+      >
+        <p>Illicit <i>tears of joy</i>...</p>
+        <p>or your money back</p>
+      </Modal>
+    </div>
+  );
+}
+
 
 export default function Front() {
 
@@ -774,6 +816,7 @@ export default function Front() {
         </header>
 
         <main>
+          <MyModal/>
           {/* Product */}
           <div className="bg-white">
             <div className="max-w-2xl mx-auto px-4 pt-10 sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:gap-x-8">
