@@ -191,7 +191,7 @@ const userNavigation = [
   // { name: 'Create account', href: '#' },
 ]
 const product = {
-  name: "Your best gift...ever.", // // give love, get love. //   "Love is not just an emotion, it's an action."
+  name: "Your best gift idea...ever.", // // give love, get love. //   "Love is not just an emotion, it's an action."
   price: '$59',
   description:
    '',
