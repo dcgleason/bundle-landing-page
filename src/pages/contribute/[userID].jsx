@@ -238,7 +238,7 @@ const Messages = () => {
           <div className="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <label htmlFor="username" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-              <div className='underline'>Your name :</div> What does {bookData.firstName} normally call you? <em>e.g. Mom, Dad, your first name, nickname, etc.</em> 
+              <div className='underline'>Your name :</div> What does {bookData.rec_first_name} normally call you? <em>e.g. Mom, Dad, your first name, nickname, etc.</em> 
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <div className="max-w-lg flex rounded-md shadow-sm">
@@ -256,7 +256,7 @@ const Messages = () => {
 
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                   <label htmlFor="cover-photo" className="block underline text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                  Do you want to upload  picture of you and {bookData.firstName}? <em>(optional)</em> 
+                  Do you want to upload  picture of you and {bookData.rec_first_name}? <em>(optional)</em> 
                   (this will impact your max character count)
                   </label>
                     <div className="mt-1 sm:mt-0 sm:col-span-2">
@@ -292,7 +292,7 @@ const Messages = () => {
                   id="about"
                   name="about"
                   spellCheck="true"
-                  placeholder={`Dear ${bookData.firstName}, ...`}
+                  placeholder={`Dear ${bookData.rec_first_name}, ...`}
                   maxLength= {wantUploadPicture ? 1750 : 3500}
                   minLength= {wantUploadPicture ? 0 : 1750}
                   rows={8}
