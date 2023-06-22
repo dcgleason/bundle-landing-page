@@ -289,7 +289,23 @@ function WaitlistForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Here you can handle the email, for example, send it to your server
+   
+    fetch('https://yay-api.herokuapp.com/beta/waitlist', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email }),
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Success:', data);
+        setEmail('');
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  
     console.log(email);
   };
 
