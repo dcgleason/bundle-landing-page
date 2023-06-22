@@ -192,7 +192,7 @@ const userNavigation = [
 ]
 const product = {
   name: "Your best gift idea...ever.", // // give love, get love. //   "Love is not just an emotion, it's an action."
-  price: '$59',
+  price: '$79',
   description:
    '',
   imageSrc: "test",
@@ -282,6 +282,34 @@ const footerNavigation = {
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 
+}
+
+function WaitlistForm() {
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Here you can handle the email, for example, send it to your server
+    console.log(email);
+  };
+
+  return (
+    <div className="w-full sm:w-2/4 py-12 text-center">
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          className="px-4 py-2 text-2xl"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <button type="submit" className="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-8 text-2xl rounded ml-4">
+          Join Waitlist
+        </button>
+      </form>
+    </div>
+  );
 }
 
 function MyModal() {
@@ -1038,13 +1066,7 @@ export default function Front() {
 
         
         <div className="flex justify-center items-center h-screen"> {/* h-screen added to center vertically */}
-        <div className="w-full sm:w-2/4 py-12 text-center"> {/* text-center added to center the button */}
-          <a href="https://console.givebundl.com/signup">
-            <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-8 text-2xl rounded">
-              Start Your Bundl Now (no credit card required)
-            </button>
-          </a>
-        </div>
+      <WaitlistForm/>
       </div>
 
    </div></>
