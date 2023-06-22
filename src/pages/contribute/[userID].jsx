@@ -270,13 +270,13 @@ const Messages = () => {
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"></div>
             <div className="text-center text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 mb-4">
             <div className="underline"><em>Here is a message from {userData.name} (to you):</em> </div> <br />
-                <strong></strong> {bookData.introNote ? bookData.introNote : 'oops! Having a technical error.'} <br />
+                <strong></strong> {userData.introNote ? userData.introNote : 'oops! Having a technical error.'} <br />
                   <br />
                   <strong>Suggested PROMPTS (from {userData.name}):</strong>
                   <ul className="list-disc">
-                    {giftData.customPrompts &&
-                      giftData.customPrompts.map((prompt, index) => (
-                        <ol key={index}>{prompt}</ol>
+                    {userData.prompts &&
+                      userData.prompts.map((prompt, index) => (
+                        <li key={index}>{prompt}</li>
                       ))}
                   </ul>
                 </div>
