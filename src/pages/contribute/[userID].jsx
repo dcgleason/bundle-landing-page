@@ -109,18 +109,6 @@ const Messages = () => {
 
     }
 
-    async function fetchBookData() {
-      const res = await fetch(`https://yay-api.herokuapp.com/book/${userID}`);
-      const data = await res.json();
-      if (data.error) {
-        console.error('Error fetching book:', data.message);
-      } else {
-        setBookData(data);
-        console.log("book data" + data);
-      }
-    }
-
-    fetchBookData();
     fetchUserData();
   }, [userID]); // only run the effect on first render --< how to 
 
