@@ -245,7 +245,10 @@ const Messages = () => {
 
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                   <label htmlFor="cover-photo" className="block underline text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                  Do you want to upload  picture of you and {userData.recipientFirst}? <em>(optional)</em>  Note: this will impact your max character count
+                  Do you want to upload  picture of you and {userData.recipientFirst}? <em>(optional)</em> 
+                  </label>
+                  <label htmlFor="cover-photo" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                  Note: this will impact your max character count
                   </label>
                     <div className="mt-1 sm:mt-0 sm:col-span-2">
                         <select className='rounded-md shadow-sm  border-gray-300' id="upload" name="upload" onChange={e => setWantUploadPicture(e.target.value === 'yes')}>
