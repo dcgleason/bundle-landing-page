@@ -116,6 +116,7 @@ const Messages = () => {
         console.error('Error fetching book:', data.message);
       } else {
         setBookData(data);
+        console.log("book data" + data);
       }
     }
 
