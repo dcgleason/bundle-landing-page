@@ -232,14 +232,14 @@ const Messages = () => {
           <div>
             <h3 className="text-lg mt-20 leading-6 font-medium text-gray-900">Write a Letter</h3>
             <p className="mt-1 max-w-2xl text-sm text-gray-500">
-            <div className='underline'>Instructions :</div> <br></br>Please contribute to the Bundl book for {bookData.rec_name} being gifted by {userData.name} by filling out the form below.
+            <div className='underline'>Instructions :</div> <br></br>Please contribute to the Bundl book for {userData.recipient} being gifted by {userData.name} by filling out the form below.
             </p>
           </div>
 
           <div className="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <label htmlFor="username" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-              <div className='underline'>Your name :</div> What does {bookData.rec_first_name} normally call you? <em>e.g. Mom, Dad, your first name, nickname, etc.</em> 
+              <div className='underline'>Your name :</div> What does {userData.recipientFirst} normally call you? <em>e.g. Mom, Dad, your first name, nickname, etc.</em> 
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <div className="max-w-lg flex rounded-md shadow-sm">
@@ -257,7 +257,7 @@ const Messages = () => {
 
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                   <label htmlFor="cover-photo" className="block underline text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                  Do you want to upload  picture of you and {bookData.rec_first_name}? <em>(optional)</em> 
+                  Do you want to upload  picture of you and {userData.recipientFirst}? <em>(optional)</em> 
                   (this will impact your max character count)
                   </label>
                     <div className="mt-1 sm:mt-0 sm:col-span-2">
@@ -293,7 +293,7 @@ const Messages = () => {
                   id="about"
                   name="about"
                   spellCheck="true"
-                  placeholder={`Dear ${bookData.rec_first_name}, ...`}
+                  placeholder={`Dear ${userData.recipientFirst}, ...`}
                   maxLength= {wantUploadPicture ? 1750 : 3500}
                   minLength= {wantUploadPicture ? 0 : 1750}
                   rows={8}
@@ -339,7 +339,7 @@ const Messages = () => {
 {wantUploadPicture ? 
     <>
         <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-          <label htmlFor="cover-photo" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> <div className='underline'>Picture (optional) :</div> A picture of you and {bookData.rec_name}: </label>
+          <label htmlFor="cover-photo" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> <div className='underline'>Picture (optional) :</div> A picture of you and {userData.recipient}: </label>
           <div className="mt-1 sm:mt-0 sm:col-span-2">
             <div className="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
               <div className="space-y-1 text-center">
