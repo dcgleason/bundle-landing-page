@@ -265,7 +265,7 @@ const Messages = () => {
                   <ul className="list-disc">
                     {userData.prompts &&
                       userData.prompts.map((prompt, index) => (
-                        <li key={index}>{prompt}</li>
+                        <ol key={index}>{prompt}</ol>
                       ))}
                   </ul>
                 </div>
