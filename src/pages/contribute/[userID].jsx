@@ -253,7 +253,7 @@ const Messages = () => {
                     <option value='no'>No</option>
                 </select>
                 <label htmlFor="cover-photo" className="block text-sm italic text-gray-700 sm:mt-px sm:pt-2">
-                    Note: this will impact your max character count
+                    Note: this will impact your max character count for your letter.
                 </label>
             </div>
         </div>
