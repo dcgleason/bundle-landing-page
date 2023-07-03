@@ -93,7 +93,7 @@ export default function Example() {
         <Row gutter={[16, 16]}>
           <Col xs={24}>
             <p className="text-lg text-gray-500">
-              Click to upload your CSV file with your contributors' information here:
+              Click to upload your CSV file with your contributors information here:
             </p>
           </Col>
           <Col xs={24} sm={12} md={8} className="mx-auto">
