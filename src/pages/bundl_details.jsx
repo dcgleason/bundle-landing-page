@@ -10,6 +10,38 @@ export default function Example() {
 
     const [message, setMessage] = useState("We are creating a book of supportive letters and nice pictures (or 'Bundl') for Dan G. It will only take you a minute to write and submit your letter. It should make for an unforgettable gift that shares our collective love and appreciation. Don't be the last to submit!");
 
+    
+  const changeHandler = (event) => {
+    // Passing file data (event.target.files[0]) to parse using Papa.parse
+    console.log('event.target.files[0]', event.target.files[0])
+    Papa.parse(event.target.files[0], {
+      header: true,
+      skipEmptyLines: true,
+      complete: function (results) {
+        const rowsArray = [];
+        const valuesArray = [];
+
+        // Iterating data to get column name and their values
+        results.data.map((d) => {
+          rowsArray.push(Object.keys(d));
+          valuesArray.push(Object.values(d));
+        });
+
+
+        // Parsed Data Response in array format
+        setParsedData(results.data);
+
+        // Filtered Column Names
+        setTableRows(rowsArray[0]);
+
+        // Filtered Values
+        setValues(valuesArray);
+        console.log('values = '+ values)
+        console.log('parsedData = '+ parsedData)
+      },
+    });
+  };
+  
     return (
         <>
 
@@ -40,6 +72,66 @@ export default function Example() {
                 </div>
               </div>
             </div>
+
+            <form className="mt-10" action="#" method="POST">
+  <Row gutter={[16, 16]} justify="center">
+    <Col xs={24} sm={22} md={20} lg={18} xl={16}>
+      <div className="px-4 py-5 bg-white shadow sm:rounded-lg sm:p-6">
+        <Row gutter={[16, 16]}>
+          <Col xs={24}>
+            <p className="text-lg text-gray-500">
+              Click to upload your CSV file with your contributors' information here:
+            </p>
+          </Col>
+          <Col xs={24} sm={12} md={8} className="mx-auto">
+            <input
+              type="file"
+              name="file"
+              accept=".csv"
+              onChange={changeHandler}
+            />
+          </Col>
+        </Row>
+      </div>
+      <Row justify="space-between" align="middle">
+        <Button onClick={addtoList}>Add to above list</Button>
+          <Button
+            onClick={handleDownloadCSV}
+            onMouseEnter={handleHoverOn}
+            onMouseLeave={handleHoverOff}
+          >
+            Download CSV template
+          </Button>
+                </Row>
+                <div className="mt-8">
+                    <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+                    <table className="min-w-full divide-y divide-gray-300">
+                        <thead className="bg-gray-50">
+                        <tr>
+                            {tableRows.map((rows, index) => {
+                            return (
+                                <th key={index}>{rows}</th>
+                            )
+                            })}
+                        </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-200 bg-white">
+                        {values.map((value, index) => {
+                            return (
+                            <tr key={index}>
+                                {value.map((val, i) => {
+                                return <td key={i} className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{val}</td>
+                                })}
+                            </tr>
+                            );
+                        })}
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+                </Col>
+            </Row>
+            </form>
 
             <div className="col-span-full">
                     <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
