@@ -9,8 +9,21 @@ import moment from 'moment';
 export default function Example() {
 
     const [message, setMessage] = useState("We are creating a book of supportive letters and nice pictures (or 'Bundl') for Dan G. It will only take you a minute to write and submit your letter. It should make for an unforgettable gift that shares our collective love and appreciation. Don't be the last to submit!");
+    const [values, setValues] = useState([]);
+    const [parsedData, setParsedData] = useState([]);
+    const [tableRows, setTableRows] = useState([]);
 
-    
+    const handleDownloadCSV = () => {
+        window.open('https://docs.google.com/spreadsheets/d/1_fXj2aWK8dXI-GgjzuObLC0crXYx7HpVGTTaQZmdj7g/edit?usp=sharing', '_blank');
+      }
+
+      const handleHoverOn = () => {
+        setHover(true);
+      }
+      
+    const handleHoverOff = () => {
+        setHover(false);
+      }
   const changeHandler = (event) => {
     // Passing file data (event.target.files[0]) to parse using Papa.parse
     console.log('event.target.files[0]', event.target.files[0])
@@ -41,7 +54,7 @@ export default function Example() {
       },
     });
   };
-  
+
     return (
         <>
 
