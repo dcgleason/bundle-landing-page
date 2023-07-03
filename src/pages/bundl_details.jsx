@@ -11,7 +11,163 @@ export default function Example() {
     const [message, setMessage] = useState("We are creating a book of supportive letters and nice pictures (or 'Bundl') for Dan G. It will only take you a minute to write and submit your letter. It should make for an unforgettable gift that shares our collective love and appreciation. Don't be the last to submit!");
     const [values, setValues] = useState([]);
     const [parsedData, setParsedData] = useState([]);
+    const [dataSource, setDataSource] = useState([]);
     const [tableRows, setTableRows] = useState([]);
+    const [userID, setUserID] = useState(null);
+
+
+    
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+  
+    if (!token) {
+      console.error('Token is not available in local storage');
+      signInWithGoogle(); // Redirect to Google's authorization URL
+      return;
+    }
+  
+    // Decode the JWT token to get the user's ID
+    const decodedToken = jwt_decode(token);
+    const userID = decodedToken.userId; // Changed from 'userID' to 'userId'
+    if (!userID) {
+      console.error('User ID is not available in the decoded JWT token');
+      return;
+    }
+  
+    setUserID(userID);
+  
+    // Fetch the book messages using the user's ID
+    fetch(`https://yay-api.herokuapp.com/book/${userID}/messages`, {
+      credentials: 'include',
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Check if data.messages is an object before proceeding
+      if (data && typeof data.messages === 'object') {
+        const transformedData = Object.entries(data.messages).map(([key, value], index) => {
+          return {
+            id: index + 1, // This is the index in the table
+            uuid: key, // This is the UUID of the message
+            name: value.name || "Name not available",
+            email: value.email || "No email given",
+            submitted: value.msg ? "Yes" : "No",
+            notes: '', // Not sure where this data comes from
+            submission: value.msg || "No submission",
+            picture: !!value.img_file, // Convert to boolean; true if exists, false otherwise
+          };
+        });
+  
+          setDataSource(transformedData);
+          console.log('Transformed data:', transformedData);
+        } else {
+          console.log('Data is not in the expected format');
+        }
+      })
+      .catch(error => {
+        console.error('Failed to fetch:', error);
+      });
+  }, []);
+
+
+  function signInWithGoogle() {
+    const clientId = '764289968872-3rstr2akvdot7cfjk9ektjeaghe2pghr.apps.googleusercontent.com';
+    const redirectUri = 'https://www.givebundl.com/api/oauth2callback'; // Update this to your actual server address
+    const scope = 'https://www.googleapis.com/auth/gmail.send';
+    const responseType = 'code';
+    const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
+    window.location.href = url;
+  }
+
+  function onSendSMS(time, recipient, gifter, to) {
+    const url = 'https://yay-api.herokuapp.com/sms/sendSMS';
+    const data = {
+      time: time,
+      recipient: recipient,
+      gifter: gifter,
+      to: to
+    };
+  
+    fetch(url, {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data), 
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  }
+    const addtoList = async () => {
+        let objects = [];
+        console.log('values', values)
+      
+        const firstValue = dataSource.length > 0 ? dataSource[dataSource.length - 1].id : 0;
+        console.log('firstValue', firstValue);
+        for (let i = 0; i < values.length; i ++) {
+          objects.push({
+            id: firstValue + 1 + i,
+            name: values[i][1],
+            email: values[i][2],
+            address: values[i][3],
+            submitted: false,
+            submission: '',
+            picture: '',
+          });
+        }
+      
+        // Add the new contacts to the dataSource state
+        setDataSource([...dataSource, ...objects]);
+      
+        // Now, send the new contacts to the server
+        try {
+          const promises = objects.map((contact) => {
+            return fetch(`https://yay-api.herokuapp.com/book/${userID}/message`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                layout_id: 1, // Or whatever layout_id you want to use
+                name: contact.name,
+                msg: contact.submission,
+                img_file: contact.picture,
+                email: contact.email,
+              }),
+            });
+          });
+      
+          console.log('promises', promises);
+      
+          const responses = await Promise.all(promises);
+      
+          responses.forEach((response, index) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status} for contact ${objects[index].name}`);
+            }
+          });
+      
+          const data = await Promise.all(responses.map(response => response.json()));
+      
+          data.forEach((item, index) => {
+            if (!item.success) { // Check if the server actually saved the new contributor
+              throw new Error(`Server failed to save contact ${objects[index].name}`);
+            }
+          });
+      
+          console.log('Contacts added to the server successfully');
+        } catch (error) {
+          console.error('Failed to add contacts to the server:', error);
+        }
+      };
+      
 
     const handleDownloadCSV = () => {
         window.open('https://docs.google.com/spreadsheets/d/1_fXj2aWK8dXI-GgjzuObLC0crXYx7HpVGTTaQZmdj7g/edit?usp=sharing', '_blank');
