@@ -1062,7 +1062,7 @@ const handleHoverOff = () => {
                             onCancel={handleClosePictureModal}
                             footer={null}
                         >
-                            <img src={pictureUrl} alt="Submission" style={{ maxWidth: '100%' }} />
+                            {/* <img src={pictureUrl} alt="Submission" style={{ maxWidth: '100%' }} /> */}
                         </Modal>
                 </header>
                 </div>
@@ -1076,7 +1076,7 @@ const handleHoverOff = () => {
                     <Row gutter={[16, 16]}>
                     <Col xs={24}>
                         <p className="text-lg text-gray-500">
-                        Click to upload your CSV file with your contributors' information here:
+                        Click to upload your CSV file with your contributors information here:
                         </p>
                     </Col>
                     <Col xs={24} sm={12} md={8} className="mx-auto">
@@ -1344,7 +1344,7 @@ const handleHoverOff = () => {
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">Notifications</h2>
           <p className="mt-1 text-sm leading-6 text-gray-600">
-            We'll always let you know about important changes, but you pick what else you want to hear about.
+            We will always let you know about important changes, but you pick what else you want to hear about.
           </p>
 
           <div className="mt-10 space-y-10">
