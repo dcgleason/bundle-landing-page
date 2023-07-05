@@ -170,6 +170,22 @@ const Messages = () => {
         method: "POST",
         body: formData,
       });
+
+            // If the submission was successful, send a notification email
+            const emailResponse = await fetch("https://yay-api.herokuapp.com/email/sendContributorNotification", {
+              method: "POST",
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                email: userData.username, // assuming this is the user's email
+              }),
+            });
+      
+            if (!emailResponse.ok) {
+              console.error('Failed to send notification email');
+            }
+          }
  
         setSubmissionStatus(response.status);
         setIsLoading(false);

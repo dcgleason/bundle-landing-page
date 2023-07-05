@@ -242,7 +242,7 @@ export default function Example() {
               </div>
             </div>
 
-            <form className="mt-10" action="#" method="POST">
+            <div className="col-span-full">
                 <Row gutter={[16, 16]} justify="center">
                     <Col xs={24} sm={22} md={20} lg={18} xl={16}>
                     <div className="px-4 py-5 bg-white shadow sm:rounded-lg sm:p-6">
@@ -300,7 +300,7 @@ export default function Example() {
                             </div>
                             </Col>
                         </Row>
-                        </form>
+                </div>
 
             <div className="col-span-full">
                     <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
