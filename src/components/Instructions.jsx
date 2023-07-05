@@ -43,11 +43,10 @@ const Instructions = () => {
             </div>{" "}
             <div className="pt-1 pb-8">
               <p className="text-gray-900 mb-2 text-lg font-bold">
-                Upload your contacts:
+               Give us the basics:
               </p>{" "}
               <p className="text-gray-700">
-                Upload the contacts of the family and friends of the person you are giving your Bundl book to. You can also write a short message that will be sent out to all of your Bundl book contributors so that each person knows the gift is coming from you. 
-              </p>
+              We just need a few things from you. Tell us what you want your friends and family to write about (those are the prompts). Write a welcome message for them. Give us their contact details, and we&apos;ll help you collect these. Tell us who the gift is for and where we should send the Bundl. And finally, give us your email so we can keep you updated.              </p>
             </div>
           </div>{" "}
           <div className="flex">
@@ -81,10 +80,9 @@ const Instructions = () => {
               <div className="w-px h-full bg-gray-300" />
             </div>{" "}
             <div className="pt-1 pb-8">
-              <p className="text-gray-900 mb-2 text-lg font-bold">Collect the love:</p>{" "}
+              <p className="text-gray-900 mb-2 text-lg font-bold">We handle everything else:</p>{" "}
               <p className="text-gray-700">
-               Our web app automatically reaches out with your message to your Bundl book contributors and collects loving and supportive letters (from your prompts) and memorable pictures from them over 1-2 weeks. 
-              </p>
+              We&apos;ll ask your friends and family to write their messages and submit their pictures with your welcome message and collect all of your submissions. We&apos;ll put everything together in a beautiful Bundl book. You&apos;ll get a message each time someone adds to the book.  </p>
             </div>
           </div>{" "}
           <div className="flex">
@@ -119,11 +117,10 @@ const Instructions = () => {
             </div>{" "}
             <div className="pt-1 pb-8">
               <p className="text-gray-900 mb-2 text-lg font-bold">
-                Compile the love:
+              Relax and wait for the surprise:
               </p>{" "}
               <p className="text-gray-700">
-              Once the letters and pictures are collected from friends and family, our web app automatically compiles their kind words and special pictures into a personalized, physical book, aka a Bundl book, for you to review and gift to your intended recipient.
-              </p>
+              Now, you can sit back and relax. We&apos;ll take care of everything else. Within two weeks, they&apos;ll get a special book, sent to the address you provided, filled with loving messages and pictures from their loved ones. It&apos;s a gift they&apos;ll keep forever.              </p>
             </div>
           </div>{" "}
           <div className="flex">

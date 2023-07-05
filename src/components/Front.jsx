@@ -192,7 +192,7 @@ const userNavigation = [
 ]
 const product = {
   name: "Your best gift idea...ever.", // // give love, get love. //   "Love is not just an emotion, it's an action."
-  price: '$79',
+  price: '$99',
   description:
    '',
   imageSrc: "test",
