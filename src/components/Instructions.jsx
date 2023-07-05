@@ -115,7 +115,7 @@ const Instructions = () => {
             </div>
           </div>{" "}
           <div className="flex">
-            <div className="flex flex-col items-center mr-4">
+            {/* <div className="flex flex-col items-center mr-4">
               <div>
                 <div className="flex items-start justify-center w-10 h-10 border rounded-full">
                   <svg
@@ -134,7 +134,7 @@ const Instructions = () => {
                   </svg>
                 </div>
               </div>
-            </div>{" "}
+            </div>{" "} */}
             {/* <div className="pt-1 pb-8">
               <p className="text-gray-900 mb-2 text-lg font-bold">
                 Feel the love:
