@@ -120,7 +120,7 @@ const Instructions = () => {
               Relax and wait for the surprise:
               </p>{" "}
               <p className="text-gray-700">
-              Now, you can sit back and relax. We&apos;ll take care of everything else. Within two weeks, they&apos;ll get a special book, sent to the address you provided, filled with loving messages and pictures from their loved ones. It&apos;s a gift they&apos;ll keep forever.              </p>
+              Now, you can sit back and relax. We&apos;ll take care of everything else. Within two weeks, they&apos;ll get a special book, sent to the address you provided, filled with loving messages and pictures from their loved ones. It&apos;s a gift they&apos;ll for sure cherish.              </p>
             </div>
           </div>{" "}
           <div className="flex">
@@ -144,14 +144,14 @@ const Instructions = () => {
                 </div>
               </div>
             </div>{" "}
-            <div className="pt-1 pb-8">
+            {/* <div className="pt-1 pb-8">
               <p className="text-gray-900 mb-2 text-lg font-bold">
                 Feel the love:
               </p>{" "}
               <p className="text-gray-700">
-               Once the Bundl book is delivered to you, you&apos;ll be able to surprise your recipient with it! The reveal is always a special moment.     
+               Once the Bundl book is delivered, you&apos;ll be able to surprise your recipient with it! The reveal is always a special moment.     
               </p>
-            </div>
+            </div> */}
           </div>
         </div>{" "}
       </div>
