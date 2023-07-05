@@ -151,7 +151,6 @@ const Messages = () => {
     });
   };
   
-
   const submit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
@@ -165,31 +164,37 @@ const Messages = () => {
       formData.append("contributed", true);
       formData.append("imageAddress", file);
   
+      // Fetch the book associated with the user
+      const bookResponse = await fetch(`https://yay-api.herokuapp.com/book/${userData._id}`);
+      const contributorBook = await bookResponse.json();
+  
       // Send the POST request to create a contribution
       const response = await fetch("https://yay-api.herokuapp.com/contribution/create", {
         method: "POST",
         body: formData,
       });
-
-            // If the submission was successful, send a notification email
-            const emailResponse = await fetch("https://yay-api.herokuapp.com/email/sendContributorNotification", {
-              method: "POST",
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                email: userData.username, // assuming this is the user's email
-              }),
-            });
-      
-            if (!emailResponse.ok) {
-              console.error('Failed to send notification email');
-            }
-          }
- 
-        setSubmissionStatus(response.status);
-        setIsLoading(false);
-    
+  
+      if (response.ok) {
+        // If the submission was successful, send a notification email
+        const emailResponse = await fetch("https://yay-api.herokuapp.com/email/sendContributorNotification", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: userData.username, // assuming this is the user's email
+            contributor: contributorBook.messages.name, // assuming this is the contributor's name
+            recipient: giftData.recipient, // assuming this is the gift recipient's name
+          }),
+        });
+  
+        if (!emailResponse.ok) {
+          console.error('Failed to send notification email');
+        }
+      }
+  
+      setSubmissionStatus(response.status);
+      setIsLoading(false);
     }
   };
 
