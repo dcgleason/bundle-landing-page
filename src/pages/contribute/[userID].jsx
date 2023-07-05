@@ -164,9 +164,6 @@ const Messages = () => {
       formData.append("contributed", true);
       formData.append("imageAddress", file);
   
-      // Fetch the book associated with the user
-      const bookResponse = await fetch(`https://yay-api.herokuapp.com/book/${userData._id}`);
-      const contributorBook = await bookResponse.json();
   
       // Send the POST request to create a contribution
       const response = await fetch("https://yay-api.herokuapp.com/contribution/create", {
@@ -175,6 +172,14 @@ const Messages = () => {
       });
   
       if (response.ok) {
+
+                // Fetch the book associated with the user
+          const bookResponse = await fetch(`https://yay-api.herokuapp.com/book/${userData._id}`);
+          const contributorBook = await bookResponse.json();
+
+          //if the book was found, send the contributor a notification email
+          if (bookResponse.ok) {
+  
         // If the submission was successful, send a notification email
         const emailResponse = await fetch("https://yay-api.herokuapp.com/email/sendContributorNotification", {
           method: "POST",
@@ -182,9 +187,9 @@ const Messages = () => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            email: userData.username, // assuming this is the user's email
-            contributor: contributorBook.messages.name, // assuming this is the contributor's name
-            recipient: giftData.recipient, // assuming this is the gift recipient's name
+            email: userData.username, // this is the user's email
+            contributor: contributorBook.messages.name, //  this is the contributor's name
+            recipient: userData.recipient, //  this is the gift recipient's name
           }),
         });
   
@@ -192,6 +197,7 @@ const Messages = () => {
           console.error('Failed to send notification email');
         }
       }
+    }
   
       setSubmissionStatus(response.status);
       setIsLoading(false);
