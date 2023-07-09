@@ -22,8 +22,8 @@ export default function Example() {
   
     if (!token) {
       console.error('Token is not available in local storage');
-      signInWithGoogle(); // Redirect to Google's authorization URL
-      return;
+    //   signInWithGoogle(); // Redirect to Google's authorization URL
+    //   return;
     }
   
     // Decode the JWT token to get the user's ID
