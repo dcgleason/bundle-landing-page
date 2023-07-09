@@ -9,123 +9,655 @@ import moment from 'moment';
 export default function Example() {
 
     const [message, setMessage] = useState("We are creating a book of supportive letters and nice pictures (or 'Bundl') for Dan G. It will only take you a minute to write and submit your letter. It should make for an unforgettable gift that shares our collective love and appreciation. Don't be the last to submit!");
-    const [values, setValues] = useState([]);
     const [parsedData, setParsedData] = useState([]);
-    const [dataSource, setDataSource] = useState([]);
     const [tableRows, setTableRows] = useState([]);
     const [userID, setUserID] = useState(null);
 
-// need to create a book on submit    
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [notes, setNotes] = useState("");
+    const [submitted, setSubmitted] = useState("");
+    const [newStudent, setNewStudent] = useState(null);
+    const [pictureSubmitted, setPictureSubmitted ] = useState(false);
+
+    const [hover, setHover] = useState(false);
+
+    const [emailModalVisible, setEmailModalVisible] = useState(false);
+    const [emailBody, setEmailBody] = useState('');
+    const [emailSubject, setEmailSubject] = useState("Contribute please - 3 days left!");
+    const [emailRecipients, setEmailRecipients] = useState([]);
+    const [values, setValues] = useState([]);
+    const [modalData, setModalData] = useState("");
+    const [ submission, setSubmission ] = useState("");
+    const [openGmail, setOpenGmail] = useState(false)
+    const [ gmailContacts, setGmailContacts ] = useState([{}]);
+    const [contacts, setContacts] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [layout, setLayout] = useState('');
+    const [msg, setMsg] = useState('');
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [lastEmailSent, setLastEmailSent] = useState(null);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const cancelButtonRef = useRef(null)
+    const [isEditing, setIsEditing] = useState(false);
+    const [editingStudent, setEditingStudent] = useState(null);
+    const [pictureUrl, setPictureUrl] = useState(null);
+    const [viewPicture, setViewPicture] = useState(false);
+    const [dataSource, setDataSource] = useState([]);
+    const [isSendingEmail, setIsSendingEmail] = useState(false);
+    const [isPromptModalVisible, setIsPromptModalVisible] = useState(false);
+    const [prompts, setPrompts] = useState([
+      "How has Jimmy affected your life?",
+      "What do you love about Jimmy?",
+      "What's your favorite memory with Jimmy?",
+      "How has Jimmy inspired you?",
+      "What do you wish for Jimmy's future?"
+    ]);
+    const [longMessage, setLongMessage] = useState('');
+    const [token, setToken] = useState(null);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [recipientFirstName, setRecipientFirstName] = useState("");
+    const [recipientlastName, setRecipientLastName] = useState("");
+    const [userData, setUserData] = useState(null);
+  
+    
+  
+  
+  
+    const columns = [
+      {
+        key: "1",
+        title: "ID",
+        dataIndex: "id",
+      },
+      {
+        key: "2",
+        title: "Name",
+        dataIndex: "name",
+      },
+      {
+        key: "3",
+        title: "Email",
+        dataIndex: "email",
+      },
+      {
+        key: "4",
+        title: "SMS",
+        dataIndex: "sms",
+      },
+      {
+        key: "5",
+        title: "Submitted",
+        dataIndex: "submitted",
+        render: (_, record) => {
+          return record.submitted == "Yes" ? "Yes" : "No";
+        },
+      },
+      {
+        key: "6",
+        title: "Submission",
+        dataIndex: "submission",
+        render: (_, record) => { 
+          return (
+            <>
+            {record.submission && record.submission !== "No submission" ?
+            <a className="underline" onClick={ () => handleModalOpen(record)}>Preview Submission</a>
+            :
+            "No Submission"
+            }
+            </>
+          )
+        }
+      },   
+      {
+        key: "7",
+        title: "Picture",
+        dataIndex: "picture",
+        render: (_,record) => { 
+          return (
+            <>
+            {record.img_file && record.img_file !== "" ?
+            <a className="underline" onClick={ () => handleViewPicture(record)}>View Picture</a>
+            :
+            "No Picture Uploaded"
+            }
+            </>
+          )
+        }
+      },
+      {
+        key: "8",
+        title: "Notes",
+        dataIndex: "notes",
+      },
+      {
+        key: "9",
+        title: "Actions",
+        render: (record) => {
+          return (
+            <>
+              <EditOutlined
+                onClick={() => {
+                  onEditStudent(record);
+                }}
+              />
+              <DeleteOutlined
+                onClick={() => {
+                  onDeleteStudent(record);
+                }}
+                style={{ color: "red", marginLeft: 12 }}
+              />
+            </>
+          );
+        },
+      },
+    ];
   
 
-
- 
-  }
-    const addtoList = async () => {
-        let objects = [];
-        console.log('values', values)
-      
-        const firstValue = dataSource.length > 0 ? dataSource[dataSource.length - 1].id : 0;
-        console.log('firstValue', firstValue);
-        for (let i = 0; i < values.length; i ++) {
-          objects.push({
-            id: firstValue + 1 + i,
-            name: values[i][1],
-            email: values[i][2],
-            address: values[i][3],
-            submitted: false,
-            submission: '',
-            picture: '',
-          });
-        }
-      
-        // Add the new contacts to the dataSource state
-        setDataSource([...dataSource, ...objects]);
-      
-        // Now, send the new contacts to the server
-        try {
-          const promises = objects.map((contact) => {
-            return fetch(`https://yay-api.herokuapp.com/book/${userID}/message`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                layout_id: 1, // Or whatever layout_id you want to use
-                name: contact.name,
-                msg: contact.submission,
-                img_file: contact.picture,
-                email: contact.email,
-              }),
-            });
-          });
-      
-          console.log('promises', promises);
-      
-          const responses = await Promise.all(promises);
-      
-          responses.forEach((response, index) => {
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status} for contact ${objects[index].name}`);
-            }
-          });
-      
-          const data = await Promise.all(responses.map(response => response.json()));
-      
-          data.forEach((item, index) => {
-            if (!item.success) { // Check if the server actually saved the new contributor
-              throw new Error(`Server failed to save contact ${objects[index].name}`);
-            }
-          });
-      
-          console.log('Contacts added to the server successfully');
-        } catch (error) {
-          console.error('Failed to add contacts to the server:', error);
-        }
+    
+    function signInWithGoogle() {
+      const clientId = '764289968872-3rstr2akvdot7cfjk9ektjeaghe2pghr.apps.googleusercontent.com';
+      const redirectUri = 'https://www.console.givebundl.com/api/oauth2callback'; // Update this to your actual server address
+      const scope = 'https://www.googleapis.com/auth/gmail.send';
+      const responseType = 'code';
+      const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
+      window.location.href = url;
+    }
+  
+    function onSendSMS(time, recipient, gifter, to) {
+      const url = 'https://yay-api.herokuapp.com/sms/sendSMS';
+      const data = {
+        time: time,
+        recipient: recipient,
+        gifter: gifter,
+        to: to
       };
-      
-
-    const handleDownloadCSV = () => {
-        window.open('https://docs.google.com/spreadsheets/d/1_fXj2aWK8dXI-GgjzuObLC0crXYx7HpVGTTaQZmdj7g/edit?usp=sharing', '_blank');
+    
+      fetch(url, {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data), 
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    }
+  
+    const openEmailModal = () => {
+      // Get the emails of people who have not yet contributed
+      const nonContributors = dataSource.filter(student => student.submitted === "No").map(student => student.email);
+      setEmailRecipients(nonContributors.join(', '));
+      console.log('Non-contributors:', nonContributors);
+      setEmailModalVisible(true);
+    };
+    
+    // const handleEmailModalOk = async () => {
+    //   // Here you would handle sending the email
+    //   console.log(emailBody, emailSubject, emailRecipients);
+    
+    //   // Prepare the data to send
+    //   const emailData = {
+    //     body: emailBody,
+    //     subject: emailSubject,
+    //     recipients: emailRecipients.split(', '), // Assuming recipients are separated by a comma and a space
+    //   };
+    
+    //   try {
+    //     // Send a POST request to your backend
+    //     const response = await fetch('https://yay-api.herokuapp.com/email/send', {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //         'Authorization': `Bearer ${session.accessToken}`,
+    //       },
+    //       body: JSON.stringify({
+    //         subject: 'Contribute please - 3 days left!',
+    //         body: 'We would love you to contribute to this bundle',
+    //         recipients: emailRecipients.split(', ')
+    //       }),
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => console.log(data))
+    //     .catch((error) => {
+    //       console.error('Error:', error);
+    //     });
+    
+    //     // Check if the request was successful
+    //     if (!response.ok) {
+    //       throw new Error(`HTTP error! status: ${response.status}`);
+    //     }
+    
+    //     console.log('Email sent successfully');
+    //   } catch (error) {
+    //     console.error('Failed to send email:', error);
+    //   }
+    
+    //   setEmailModalVisible(false);
+    // };
+   
+    
+    const handleEmailModalCancel = () => {
+      setEmailModalVisible(false);
+    };
+    
+  
+    const closeModal = () => {
+      setOpenGmail(false);
+    };
+  
+  
+    
+      // const contactsResponse = await fetch('https://yay-api.herokuapp.com/email/contacts', {
+      //   method: 'GET',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     'Authorization': `Bearer ${accessToken}`,
+      //   },
+      // });
+    
+      // const contacts = await contactsResponse.json();
+      // setContacts(contacts);
+      // setShowModal(true);
+  
+    const handleClose = () => {
+      setShowModal(false);
+    };
+  
+    const handleChangeUpload = (info) => {
+      if (info.file.status !== "uploading") {
+        console.log(info.file, info.fileList);
+  
       }
-
-      const handleHoverOn = () => {
-        setHover(true);
-      }
-      
-    const handleHoverOff = () => {
-        setHover(false);
-      }
-  const changeHandler = (event) => {
-    // Passing file data (event.target.files[0]) to parse using Papa.parse
-    console.log('event.target.files[0]', event.target.files[0])
-    Papa.parse(event.target.files[0], {
-      header: true,
-      skipEmptyLines: true,
-      complete: function (results) {
-        const rowsArray = [];
-        const valuesArray = [];
-
-        // Iterating data to get column name and their values
-        results.data.map((d) => {
-          rowsArray.push(Object.keys(d));
-          valuesArray.push(Object.values(d));
+      if (info.file.status === "done") {
+        message.success(`${info.file.name} file uploaded successfully`);
+        notification.success({
+          message: 'Picture successfully uploaded',
+          duration: 2,
         });
-
-
-        // Parsed Data Response in array format
-        setParsedData(results.data);
-
-        // Filtered Column Names
-        setTableRows(rowsArray[0]);
-
-        // Filtered Values
-        setValues(valuesArray);
-        console.log('values = '+ values)
-        console.log('parsedData = '+ parsedData)
-      },
-    });
-  };
+        setPictureSubmitted(true);
+      } else if (info.file.status === "error") {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    };
+  
+    const handleModalClose = () => {
+      setShowModal(false);
+    };
+  
+    const handleModalOpen = (data) => {
+      setModalData(data);
+      console.log("data is", data)
+      setShowModal(true);
+    };
+  
+    const displaySubmission = (data) => {
+      if (!data || !data.submission) {
+        return "No submission available";
+      }
+    
+      return (
+        <div>
+          <p>{data.submission}</p>
+        </div>
+      );
+    };
+  
+    const handleViewPicture = (record) => {
+      setPictureUrl(record.img_file);
+      setViewPicture(true)
+    };
+    
+    const handleClosePictureModal = () => {
+      setPictureUrl(null);
+      setViewPicture(false);
+    };
+    
+    
+    const addtoList = async () => {
+      let objects = [];
+      console.log('values', values)
+    
+      const firstValue = dataSource.length > 0 ? dataSource[dataSource.length - 1].id : 0;
+      console.log('firstValue', firstValue);
+      for (let i = 0; i < values.length; i ++) {
+        objects.push({
+          id: firstValue + 1 + i,
+          name: values[i][1],
+          email: values[i][2],
+          address: values[i][3],
+          submitted: false,
+          submission: '',
+          picture: '',
+        });
+      }
+    
+      // Add the new contacts to the dataSource state
+      setDataSource([...dataSource, ...objects]);
+    
+      // Now, send the new contacts to the server
+      try {
+        const promises = objects.map((contact) => {
+          return fetch(`https://yay-api.herokuapp.com/book/${userID}/message`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              layout_id: 1, // Or whatever layout_id you want to use
+              name: contact.name,
+              msg: contact.submission,
+              img_file: contact.picture,
+              email: contact.email,
+            }),
+          });
+        });
+    
+        console.log('promises', promises);
+    
+        const responses = await Promise.all(promises);
+    
+        responses.forEach((response, index) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status} for contact ${objects[index].name}`);
+          }
+        });
+    
+        const data = await Promise.all(responses.map(response => response.json()));
+    
+        data.forEach((item, index) => {
+          if (!item.success) { // Check if the server actually saved the new contributor
+            throw new Error(`Server failed to save contact ${objects[index].name}`);
+          }
+        });
+    
+        console.log('Contacts added to the server successfully');
+      } catch (error) {
+        console.error('Failed to add contacts to the server:', error);
+      }
+    };
+    
+    
+  
+    const changeHandler = (event) => {
+      // Passing file data (event.target.files[0]) to parse using Papa.parse
+      console.log('event.target.files[0]', event.target.files[0])
+      Papa.parse(event.target.files[0], {
+        header: true,
+        skipEmptyLines: true,
+        complete: function (results) {
+          const rowsArray = [];
+          const valuesArray = [];
+  
+          // Iterating data to get column name and their values
+          results.data.map((d) => {
+            rowsArray.push(Object.keys(d));
+            valuesArray.push(Object.values(d));
+          });
+  
+  
+          // Parsed Data Response in array format
+          setParsedData(results.data);
+  
+          // Filtered Column Names
+          setTableRows(rowsArray[0]);
+  
+          // Filtered Values
+          setValues(valuesArray);
+          console.log('values = '+ values)
+          console.log('parsedData = '+ parsedData)
+        },
+      });
+    };
+  
+    const handlePromptOk = async () => {
+      const token = localStorage.getItem('token');
+      const userID = jwt_decode(token).userId;
+      const url = `https://yay-api.herokuapp.com/users/${userID}/prompts`;
+    
+      try {
+        const response = await fetch(url, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ prompts, longMessage }),
+        });
+    
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+    
+        console.log('Prompts updated on the server successfully');
+        setIsPromptModalVisible(false);
+      } catch (error) {
+        console.error('Failed to update prompts on the server:', error);
+      }
+    };
+  
+    const handleDownloadCSV = () => {
+      window.open('https://docs.google.com/spreadsheets/d/1_fXj2aWK8dXI-GgjzuObLC0crXYx7HpVGTTaQZmdj7g/edit?usp=sharing', '_blank');
+    }
+  
+    const handleHoverOn = () => {
+      setHover(true);
+    }
+    
+  const handleHoverOff = () => {
+      setHover(false);
+    }
+    
+    const onAddStudent = () => {
+      setIsModalVisible(true);
+    
+      const newStudent = {
+        id: dataSource[dataSource.length - 1].id + 1,
+        name: name,
+        email: email,
+        layout: layout? layout : 1,
+        msg: msg,
+      };
+    
+      // Make a POST request to your API endpoint
+      fetch(`https://yay-api.herokuapp.com/book/${userID}/message`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newStudent),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        // Update the local state only after the new student has been added to the database
+        setDataSource((pre) => {
+          return [...pre, newStudent];
+        });
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    };
+  
+  
+    const handleSendEmail = async () => {
+      setIsSendingEmail(true);
+      console.log('email sent')
+      let token = localStorage.getItem('token');
+      if (!token) {
+        // If the user is not signed in, prompt them to do so
+        // You would need to implement this part based on how your sign-in system works
+      } else {
+        // If the user is signed in, send the email
+        const recipientEmails = emailRecipients.split(',').map(email => email.trim());
+    
+        // Decode the JWT
+        const decoded = jwt_decode(token);
+    
+        // Extract the sender's name and username from the decoded JWT
+        const senderName = decoded.name;
+        const senderEmail = decoded.username;
+        const userID = decoded.userId;
+    
+        const response = await fetch('/api/sendEmail', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`, // Use the new token
+          },
+          body: JSON.stringify({
+            senderName,
+            senderEmail,
+            emailSubject, // Use the emailSubject state variable
+            emailBody, // Use the emailBody state variable
+            recipientEmails,
+            userID,
+          }),
+        });
+    
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+    
+        console.log('Email sent successfully');
+        setIsSendingEmail(false);
+        setEmailModalVisible(false);
+        setShowSuccessModal(true);
+    
+        // Create a new date only if lastEmailSent is null
+        let newDate;
+        newDate = moment().toDate();
+        localStorage.setItem('lastEmailSent', newDate);
+    
+          // Update lastEmailed attribute in the backend
+          await fetch(`https://yay-api.herokuapp.com/users/${userID}/lastEmailed`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              lastEmailed: newDate,
+            }),
+          });
+    
+          // Format the new date and update the lastEmailSent state variable
+          setLastEmailSent(moment(newDate).format('MMMM Do, YYYY @ h:mm A'));
+      }
+    };
+    
+  
+  
+    const onEditStudent = (record) => {
+      setIsEditing(true);
+      setEditingStudent({ ...record });
+    };
+    
+    
+    const onDeleteStudent = (record) => {
+      console.log('delete record.uuid = '+ record.uuid)
+      Modal.confirm({
+        title: "Are you sure, you want to delete this student record?",
+        okText: "Yes",
+        okType: "danger",
+        onOk: async () => {
+          setDataSource((pre) => {
+            return pre.filter((student) => student.id !== record.id);
+          });
+    
+          // Send a DELETE request to your server to delete the student
+          const response = await fetch(`https://yay-api.herokuapp.com/book/${userID}/message/${record.uuid}`, {
+            method: 'DELETE',
+          });
+    
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+    
+          console.log('Student deleted from the server successfully');
+        },
+      });
+    };
+    const resetEditing = () => {
+      setIsEditing(false);
+      setEditingStudent(null);
+    };
+  
+    const openPrompts = () => {
+      setIsPromptModalVisible(true);
+    };
+  
+  
+    const handlePromptCancel = () => {
+      setIsPromptModalVisible(false);
+    };
+  
+    const handleRecipientOk = async () => {
+      const response = await fetch(`https://yay-api.herokuapp.com/users/${userID}/recipient`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          recipientFullName: `${firstName} ${lastName}`,
+          recipientFirstName: firstName,
+        }),
+      });
+  
+      if (response.ok) {
+        setModalIsOpen(false);
+      } else {
+        console.error('Failed to update recipient');
+      }
+    };
+  
+    const handleOk = async () => {
+      setIsModalVisible(false);
+    
+      const newStudent = {
+        id: dataSource.length + 1,
+        name: name,
+        email: email,
+        submitted: submitted,
+        submission: submission,
+        picture: pictureSubmitted, // starts as an empty string
+        notes: notes,
+      };
+    
+      // Add the new student to the dataSource state
+      setDataSource([...dataSource, newStudent]);
+    
+      // Now, send the new student to the server
+      try {
+        const formData = new FormData();
+        formData.append('layout_id', 1); // Or whatever layout_id you want to use
+        formData.append('name', newStudent.name);
+        formData.append('msg', newStudent.submission || 'none');
+        formData.append('imageAddress', newStudent.picture || 'none'); // Assuming newStudent.picture is a File object
+        formData.append('email', newStudent.email || 'none');
+    
+        const response = await fetch(`https://yay-api.herokuapp.com/book/${userID}/message`, {
+          method: 'POST',
+          body: formData, // Send formData instead of JSON
+        });
+    
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+    
+        console.log('Student added to the server successfully');
+      } catch (error) {
+        console.error('Failed to add student to the server:', error);
+      }
+    }
+    
+  
+    const handleCancel = () => {
+      setIsModalVisible(false);
+    };
 
     return (
         <>
