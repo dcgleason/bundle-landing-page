@@ -39,7 +39,6 @@ export default function Example() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [lastEmailSent, setLastEmailSent] = useState(null);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
-    const cancelButtonRef = useRef(null)
     const [isEditing, setIsEditing] = useState(false);
     const [editingStudent, setEditingStudent] = useState(null);
     const [pictureUrl, setPictureUrl] = useState(null);
