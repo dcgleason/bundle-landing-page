@@ -22,7 +22,7 @@ export default function Example() {
   
     if (!token) {
       console.error('Token is not available in local storage');
-    //   signInWithGoogle(); // Redirect to Google's authorization URL
+    //  signInWithGoogle(); // Redirect to Google's authorization URL
     //   return;
     }
   
