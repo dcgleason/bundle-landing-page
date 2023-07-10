@@ -7,6 +7,7 @@ import Cookies from 'js-cookie';
 import moment from 'moment';
 import { google } from 'googleapis';
 
+
 export default function Example() {
 
     const [message, setMessage] = useState("We are creating a book of supportive letters and nice pictures (or 'Bundl') for Dan G. It will only take you a minute to write and submit your letter. It should make for an unforgettable gift that shares our collective love and appreciation. Don't be the last to submit!");
