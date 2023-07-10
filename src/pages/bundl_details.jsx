@@ -199,14 +199,14 @@ export default function Example() {
       .catch(error => console.error('Failed to sign in:', error));
   };
     
-    function signInWithGoogle() {
-      const clientId = '764289968872-3rstr2akvdot7cfjk9ektjeaghe2pghr.apps.googleusercontent.com';
-      const redirectUri = 'https://www.console.givebundl.com/api/oauth2callback'; // Update this to your actual server address
-      const scope = 'https://www.googleapis.com/auth/gmail.send';
-      const responseType = 'code';
-      const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
-      window.location.href = url;
-    }
+  function signInWithGoogle() {
+    const clientId = '764289968872-3rstr2akvdot7cfjk9ektjeaghe2pghr.apps.googleusercontent.com';
+    const redirectUri = 'https://www.console.givebundl.com/api/oauth2callback'; // Update this to your actual server address
+    const scope = 'https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/contacts.readonly';
+    const responseType = 'code';
+    const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
+    window.location.href = url;
+  }
   
     function onSendSMS(time, recipient, gifter, to) {
       const url = 'https://yay-api.herokuapp.com/sms/sendSMS';
