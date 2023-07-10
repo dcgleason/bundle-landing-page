@@ -180,7 +180,7 @@ export default function Example() {
   
         const tokens = JSON.parse(Cookies.get('auth'));
         console.log('testing!!')
-        console.log("cookies.get(auth)" + tokens);
+        console.log("cookies.get(auth)" + JSON.stringify(tokens));
   
         if (!tokens) {
           window.location.href = url;
