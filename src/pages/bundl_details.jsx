@@ -808,8 +808,9 @@ export default function Example() {
               </div>
             </div>
 
-            <Modal title="Select a contact">
-                {contacts.map(contact => (
+                    {isModalOpen && (
+                <Modal title="Select a contact" onCancel={() => setIsModalOpen(false)}>
+                {googleContacts.map(contact => (
                     <div key={contact.resourceName}>
                     <input
                         type="checkbox"
@@ -820,7 +821,8 @@ export default function Example() {
                     </div>
                 ))}
                 <button onClick={addSelectedContactsToList}>Add to list</button>
-                </Modal>
+        </Modal>
+      )}
             <Modal
                 title={`Contributor List (${dataSource.length})`}
                 open={isTableModalVisible}
@@ -856,6 +858,7 @@ export default function Example() {
                     </div>
                     <Row justify="space-between" align="middle">
                         <Button onClick={addtoList}>Add to Contributor List</Button>
+                        <Button onClick={openModal}>Open Google Contacts</Button>
                         <Button onClick={showTableModal}>View Contributor List</Button>
                         <Button
                             onClick={handleDownloadCSV}
