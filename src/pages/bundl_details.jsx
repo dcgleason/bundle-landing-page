@@ -202,7 +202,7 @@ export default function Example() {
   function signInWithGoogle() {
     const clientId = '764289968872-tdema5ev8sf7djdjlp6a8is5k5mjrf5t.apps.googleusercontent.com';
     const redirectUri = 'https://www.givebundl.com/api/oauth2callback'; // Update this to your actual server address
-    const scope = 'https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/contacts.readonly';
+    const scope = 'https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/contacts.readonly profile';
     const responseType = 'code';
     const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
     window.location.href = url;
