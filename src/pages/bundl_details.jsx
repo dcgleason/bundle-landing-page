@@ -623,66 +623,88 @@ export default function Example() {
       setIsModalVisible(false);
     };
 
-    async function submitAndSendWelcomeMessage() {
-        // Step 1: Google OAuth
-        // This step is typically handled by redirecting the user to Google's OAuth URL.
-        // Once the user has authorized your app, Google will redirect them back to your app with an authorization code.
-        // You can then exchange this code for an access token and refresh token.
-        // This is a complex process that involves multiple steps and cannot be easily included in a single function.
-        // You should handle this step separately, before calling this function.
+    async function handleSubmit(event) {
+        event.preventDefault();
       
-        // Step 2: Send email to all contributors
-        const emailResponse = await fetch('https://www.console.givebundl.com/api/sendEmail', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            // Include the access token in the Authorization header
-            'Authorization': `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify({
-            // Include the necessary data for the email
-          }),
-        });
-      
-        if (!emailResponse.ok) {
-          throw new Error(`Failed to send email: ${emailResponse.status}`);
+        // Check if the user is authenticated
+        const auth = Cookies.get('auth'); // Get the authentication tokens from the cookie
+        if (!auth) {
+          // If the user is not authenticated, redirect them to Google's OAuth URL
+          signInWithGoogle();
+          return;
         }
       
-        // Step 3: Send text message to all contributors
-        const smsResponse = await fetch('https://www.console.givebundl.com/api/sendSMS', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            // Include the necessary credentials, if any
-          },
-          body: JSON.stringify({
-            // Include the necessary data for the SMS
-          }),
-        });
-      
-        if (!smsResponse.ok) {
-          throw new Error(`Failed to send SMS: ${smsResponse.status}`);
+        // If the user is authenticated, proceed with submitting the form and sending the welcome message
+        try {
+          await submitAndSendWelcomeMessage(contributors);
+          console.log('Form submitted and welcome message sent');
+        } catch (error) {
+          console.error('Failed to submit form and send welcome message:', error);
         }
-      
-        // Step 4: Send all contributors to the backend API
-        const bookResponse = await fetch('https://yay-api.herokuapp.com/book/create', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            userId: userID, // The ID of the user
-            // Include any other necessary data
-          }),
-        });
-      
-        if (!bookResponse.ok) {
-          throw new Error(`Failed to create book: ${bookResponse.status}`);
-        }
-      
-        const book = await bookResponse.json();
-        console.log('Created book:', book);
       }
+
+   async function submitAndSendWelcomeMessage(contributors) {
+  // Assume that contributors is an array of objects, where each object has an email and phone property
+
+  // Step 2: Send email to all contributors
+  const emailResponse = await fetch('https://www.console.givebundl.com/api/sendEmail', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      // Include the access token in the Authorization header
+      'Authorization': `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({
+      senderName: 'Your Name',
+      senderEmail: 'your-email@example.com',
+      emailSubject: 'Welcome to the project!',
+      emailBody: 'Thank you for contributing to our project. We appreciate your support!',
+      recipientEmails: contributors.map(contributor => contributor.email),
+    }),
+  });
+
+  if (!emailResponse.ok) {
+    throw new Error(`Failed to send email: ${emailResponse.status}`);
+  }
+
+  // Step 3: Send text message to all contributors
+  for (const contributor of contributors) {
+    const smsResponse = await fetch('https://www.console.givebundl.com/api/sendSMS', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // Include the necessary credentials, if any
+      },
+      body: JSON.stringify({
+        to: contributor.phone,
+        message: 'Thank you for contributing to our project. We appreciate your support!',
+      }),
+    });
+
+    if (!smsResponse.ok) {
+      throw new Error(`Failed to send SMS: ${smsResponse.status}`);
+    }
+  }
+
+  // Step 4: Send all contributors to the backend API
+  const bookResponse = await fetch('https://yay-api.herokuapp.com/book/create', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      userId: userID, // The ID of the user
+      // Include any other necessary data
+    }),
+  });
+
+  if (!bookResponse.ok) {
+    throw new Error(`Failed to create book: ${bookResponse.status}`);
+  }
+
+  const book = await bookResponse.json();
+  console.log('Created book:', book);
+}
 
     return (
         <>
