@@ -5,7 +5,6 @@ import Papa from 'papaparse';
 import jwt_decode from 'jwt-decode';
 import Cookies from 'js-cookie';
 import moment from 'moment';
-import { google } from 'googleapis';
 
 
 export default function Example() {
@@ -178,20 +177,14 @@ export default function Example() {
     const responseType = 'code';
     const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
   
-    const oauth2Client = new google.auth.OAuth2(clientId, NEXT_PUBLIC_GOOGLE_SECRET, redirectUri);
-  
     // Get the tokens from the cookie
     const tokens = JSON.parse(Cookies.get('auth'));
-
   
-    oauth2Client.setCredentials(tokens);
-  
-    // Check if the token is expired or does not exist
-    if (oauth2Client.isTokenExpiry()) {
-      // If the token is expired or does not exist, redirect the user to the Google sign-in page
+    // If the tokens do not exist, redirect the user to the Google sign-in page
+    if (!tokens) {
       window.location.href = url;
     } else {
-      // If the token is not expired and exists, set isAuthenticated to true
+      // If the tokens exist, set isAuthenticated to true
       setIsAuthenticated(true);
       // Fetch Google Contacts
       const response = await fetch('/api/getPeople', {
