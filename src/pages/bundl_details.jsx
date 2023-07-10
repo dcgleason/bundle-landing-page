@@ -200,7 +200,7 @@ export default function Example() {
   };
     
   function signInWithGoogle() {
-    const clientId = '764289968872-3rstr2akvdot7cfjk9ektjeaghe2pghr.apps.googleusercontent.com';
+    const clientId = process.env.GOOGLE_ID;
     const redirectUri = 'https://www.givebundl.com/api/oauth2callback'; // Update this to your actual server address
     const scope = 'https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/contacts.readonly';
     const responseType = 'code';
