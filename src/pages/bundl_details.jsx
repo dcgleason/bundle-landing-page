@@ -167,6 +167,20 @@ export default function Example() {
       .then(() => setIsModalOpen(true))
       .catch(error => console.error('Failed to sign in:', error));
   };
+
+  async function getGoogleContacts() {
+    const oauth2Client = new google.auth.OAuth2(clientId, YOUR_CLIENT_SECRET, redirectUri);
+    const tokens = await oauth2Client.getToken(YOUR_AUTHORIZATION_CODE);
+    oauth2Client.setCredentials(tokens);
+  
+    const service = google.people({ version: 'v1', auth: oauth2Client });
+    const response = await service.people.connections.list({
+      resourceName: 'people/me',
+      personFields: 'names,emailAddresses',
+    });
+  
+    return response.data.connections;
+  }
     
   async function signInWithGoogle () {
     const clientId = '764289968872-tdema5ev8sf7djdjlp6a8is5k5mjrf5t.apps.googleusercontent.com';
@@ -186,6 +200,9 @@ export default function Example() {
   } else {
     // If the token is not expired and exists, set isAuthenticated to true
     setIsAuthenticated(true);
+
+    const contacts = await getGoogleContacts();
+    setGoogleContacts(contacts);
   }
 }
   
