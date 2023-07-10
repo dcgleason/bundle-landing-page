@@ -56,9 +56,11 @@ export default function Example() {
     const [longMessage, setLongMessage] = useState('');
     const [token, setToken] = useState(null);
     const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const [userData, setUserData] = useState(null);
+    const [recipientFullName, setRecipientFullName] = useState("");
     const [recipientFirstName, setRecipientFirstName] = useState("");
     const [recipientlastName, setRecipientLastName] = useState("");
-    const [userData, setUserData] = useState(null);
   
     
   
@@ -661,6 +663,49 @@ export default function Example() {
     return (
         <>
 
+        <Modal
+            title="Add a new contributor manually"
+            open={isModalVisible}
+            onOk={handleOk}
+            onCancel={handleCancel}
+           >
+            <label>Name</label> <Input placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}/>
+            <label>Email</label> <Input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <label>Submitted</label> 
+            <Select
+              defaultValue="Yes"
+              style={{ width: 120 }}
+              onChange={(value) => setSubmitted(value)}
+              allowClear
+              options={[
+                {
+                  value: 'yes',
+                  label: 'Yes',
+                },
+                {
+                  value: 'no',
+                  label: 'No',
+                }
+              ]}
+            />
+            <label>Submission</label> 
+            <TextArea type='textarea' rows={10} maxLength={650} placeholder="Submission" value={submission} onChange={(e) => setSubmission(e.target.value)}/>
+            <label>Picture Upload</label>
+            <Upload
+              name="avatar"
+              listType="picture"
+              className="avatar-uploader"
+              showUploadList={false}
+              action='api/upload' // POST request to this api endpoint for picture
+              onChange={handleChangeUpload}
+            >
+              <div>
+                <InboxOutlined />
+              </div>
+            </Upload>
+            <label>Notes</label> 
+            <Input placeholder="Notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
+          </Modal>
     
     <form className="space-y-8 divide-y divide-gray-200 lg:px-32 lg:mx-32">
       <div className="space-y-12">
@@ -673,7 +718,7 @@ export default function Example() {
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-4">
               <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
-                Recipient Name
+                Your Bundl Recipient&apos;s Name
               </label>
               <div className="mt-2">
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
@@ -682,6 +727,8 @@ export default function Example() {
                     name="username"
                     id="username"
                     autoComplete="username"
+                    value={recipientFullName}
+                    onChange={(e) => setRecipientFullName(e.target.value)}
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                     placeholder="janesmith"
                   />
