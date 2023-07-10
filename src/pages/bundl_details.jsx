@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Modal, List, Typography, Button, Table, Input, Select, Upload, message, notification, Form, Row, Col, Space, TextArea, Spin} from 'antd';
+import {Modal, List, Typography, Button, Table, Input, Select, Upload, message, notification, Form, Row, Col, Space, TextArea, Spin, Card} from 'antd';
 import { EditOutlined, DeleteOutlined, InboxOutlined  } from "@ant-design/icons";
 import Papa from 'papaparse';
 import jwt_decode from 'jwt-decode';
@@ -796,67 +796,64 @@ return (
                 </Row>
                 </Modal>
 
-            <div className="col-span-full">
-                <Row gutter={[16, 16]} justify="center">
-                    <Col xs={24} sm={22} md={20} lg={18} xl={16}>
-                    <div className="px-4 py-5 bg-white shadow sm:rounded-lg sm:p-6">
-                        <Row gutter={[16, 16]}>
-                        <Col xs={24}>
-                            <p className="text-lg text-gray-500">
-                            Click to upload your CSV file with your contributors information here:
-                            </p>
-                        </Col>
-                        <Col xs={24} sm={12} md={8} className="mx-auto">
-                            <input
-                            type="file"
-                            name="file"
-                            accept=".csv"
-                            onChange={changeHandler}
-                            />
-                        </Col>
-                        </Row>
-                    </div>
-                    <Row justify="space-between" align="middle">
-                        <Button onClick={addtoList}>Add to Contributor List</Button>
-                        <Button onClick={openModal}>Open Google Contacts</Button>
-                        <Button onClick={showTableModal}>View Contributor List</Button>
-                        <Button
-                            onClick={handleDownloadCSV}
-                            onMouseEnter={handleHoverOn}
-                            onMouseLeave={handleHoverOff}
-                        >
-                            Download CSV template
-                        </Button>
-                 </Row>
-                            <div className="mt-8">
-                                <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-                                <table className="min-w-full divide-y divide-gray-300">
-                                    <thead className="bg-gray-50">
-                                    <tr>
-                                        {tableRows.map((rows, index) => {
-                                        return (
-                                            <th key={index}>{rows}</th>
-                                        )
-                                        })}
-                                    </tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-gray-200 bg-white">
-                                    {values.map((value, index) => {
-                                        return (
-                                        <tr key={index}>
-                                            {value.map((val, i) => {
-                                            return <td key={i} className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{val}</td>
-                                            })}
-                                        </tr>
-                                        );
-                                    })}
-                                    </tbody>
-                                </table>
-                                </div>
-                            </div>
-                            </Col>
-                        </Row>
-                </div>
+                <div className="col-span-full">
+  <Row gutter={[16, 16]} justify="center">
+    <Col xs={24} sm={22} md={20} lg={18} xl={16}>
+      <Row gutter={[16, 16]} justify="space-around">
+        <Col xs={24} sm={12}>
+          <Card title="Upload CSV">
+            <p className="text-lg text-gray-500">
+              Click to upload your CSV file with your contributors information here:
+            </p>
+            <input
+              type="file"
+              name="file"
+              accept=".csv"
+              onChange={changeHandler}
+              className="mx-auto d-block"
+            />
+            <Button className="mt-2" onClick={addtoList}>Add to Contributor List</Button>
+            <Button className="mt-2" onClick={handleDownloadCSV}>Download CSV template</Button>
+          </Card>
+        </Col>
+        <Col xs={24} sm={12}>
+          <Card title="Pull Contacts from Gmail">
+            <Button className="mt-2" onClick={openModal}>Open Google Contacts</Button>
+          </Card>
+        </Col>
+      </Row>
+      <Row justify="center" className="mt-2">
+        <Button onClick={showTableModal}>View Contributor List</Button>
+      </Row>
+      <div className="mt-8">
+        <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+          <table className="min-w-full divide-y divide-gray-300">
+            <thead className="bg-gray-50">
+              <tr>
+                {tableRows.map((rows, index) => {
+                  return (
+                    <th key={index}>{rows}</th>
+                  )
+                })}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200 bg-white">
+              {values.map((value, index) => {
+                return (
+                  <tr key={index}>
+                    {value.map((val, i) => {
+                      return <td key={i} className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{val}</td>
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </Col>
+  </Row>
+</div>
 
             <div className="col-span-full">
                     <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
