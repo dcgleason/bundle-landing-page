@@ -179,6 +179,7 @@ export default function Example() {
         const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
   
         const tokens = JSON.parse(Cookies.get('auth'));
+        console.log("cookies.get(auth)" + tokens);
   
         if (!tokens) {
           window.location.href = url;
