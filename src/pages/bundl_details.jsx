@@ -736,6 +736,12 @@ export default function Example() {
               </div>
             </div>
 
+            <Row gutter={[16, 16]} justify="center">
+                <Col xs={24}>
+                <Table columns={columns} dataSource={dataSource}></Table>
+                </Col>
+            </Row>
+
             <div className="col-span-full">
                 <Row gutter={[16, 16]} justify="center">
                     <Col xs={24} sm={22} md={20} lg={18} xl={16}>
