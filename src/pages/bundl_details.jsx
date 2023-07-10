@@ -782,7 +782,7 @@ export default function Example() {
               </div>
             </div>
             <Modal
-                title="Contributor List"
+                title={`Contributor List (${dataSource.length})`}
                 open={isTableModalVisible}
                 onOk={handleTableModalOk}
                 onCancel={handleTableModalCancel}
