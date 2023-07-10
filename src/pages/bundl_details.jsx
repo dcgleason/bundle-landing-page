@@ -18,6 +18,8 @@ export default function Example() {
     const [submitted, setSubmitted] = useState("");
     const [newStudent, setNewStudent] = useState(null);
     const [pictureSubmitted, setPictureSubmitted ] = useState(false);
+    const [isTableModalVisible, setIsTableModalVisible] = useState(false);
+
 
     const [hover, setHover] = useState(false);
 
@@ -61,100 +63,63 @@ export default function Example() {
     const [recipientFullName, setRecipientFullName] = useState("");
     const [recipientFirstName, setRecipientFirstName] = useState("");
     const [recipientlastName, setRecipientLastName] = useState("");
-  
-    
-  
-  
-  
     const columns = [
-      {
-        key: "1",
-        title: "ID",
-        dataIndex: "id",
-      },
-      {
-        key: "2",
-        title: "Name",
-        dataIndex: "name",
-      },
-      {
-        key: "3",
-        title: "Email",
-        dataIndex: "email",
-      },
-      {
-        key: "4",
-        title: "SMS",
-        dataIndex: "sms",
-      },
-      {
-        key: "5",
-        title: "Submitted",
-        dataIndex: "submitted",
-        render: (_, record) => {
-          return record.submitted == "Yes" ? "Yes" : "No";
+        {
+          key: "1",
+          title: "ID",
+          dataIndex: "id",
         },
-      },
-      {
-        key: "6",
-        title: "Submission",
-        dataIndex: "submission",
-        render: (_, record) => { 
-          return (
-            <>
-            {record.submission && record.submission !== "No submission" ?
-            <a className="underline" onClick={ () => handleModalOpen(record)}>Preview Submission</a>
-            :
-            "No Submission"
-            }
-            </>
-          )
-        }
-      },   
-      {
-        key: "7",
-        title: "Picture",
-        dataIndex: "picture",
-        render: (_,record) => { 
-          return (
-            <>
-            {record.img_file && record.img_file !== "" ?
-            <a className="underline" onClick={ () => handleViewPicture(record)}>View Picture</a>
-            :
-            "No Picture Uploaded"
-            }
-            </>
-          )
-        }
-      },
-      {
-        key: "8",
-        title: "Notes",
-        dataIndex: "notes",
-      },
-      {
-        key: "9",
-        title: "Actions",
-        render: (record) => {
-          return (
-            <>
-              <EditOutlined
-                onClick={() => {
-                  onEditStudent(record);
-                }}
-              />
-              <DeleteOutlined
-                onClick={() => {
-                  onDeleteStudent(record);
-                }}
-                style={{ color: "red", marginLeft: 12 }}
-              />
-            </>
-          );
+        {
+          key: "2",
+          title: "Name",
+          dataIndex: "name",
         },
-      },
-    ];
+        {
+          key: "3",
+          title: "Email",
+          dataIndex: "email",
+        },
+        {
+          key: "4",
+          title: "SMS",
+          dataIndex: "sms",
+        },
+        {
+          key: "9",
+          title: "Actions",
+          render: (record) => {
+            return (
+              <>
+                <EditOutlined
+                  onClick={() => {
+                    onEditStudent(record);
+                  }}
+                />
+                <DeleteOutlined
+                  onClick={() => {
+                    onDeleteStudent(record);
+                  }}
+                  style={{ color: "red", marginLeft: 12 }}
+                />
+              </>
+            );
+          },
+        },
+      ];
+      
   
+      const showTableModal = () => {
+        setIsTableModalVisible(true);
+      };
+      
+      const handleTableModalOk = () => {
+        setIsTableModalVisible(false);
+      };
+      
+      const handleTableModalCancel = () => {
+        setIsTableModalVisible(false);
+      };
+      
 
     
     function signInWithGoogle() {
@@ -320,67 +285,62 @@ export default function Example() {
     
     
     const addtoList = async () => {
-      let objects = [];
-      console.log('values', values)
-    
-      const firstValue = dataSource.length > 0 ? dataSource[dataSource.length - 1].id : 0;
-      console.log('firstValue', firstValue);
-      for (let i = 0; i < values.length; i ++) {
-        objects.push({
-          id: firstValue + 1 + i,
-          name: values[i][1],
-          email: values[i][2],
-          address: values[i][3],
-          submitted: false,
-          submission: '',
-          picture: '',
-        });
-      }
-    
-      // Add the new contacts to the dataSource state
-      setDataSource([...dataSource, ...objects]);
-    
-      // Now, send the new contacts to the server
-      try {
-        const promises = objects.map((contact) => {
-          return fetch(`https://yay-api.herokuapp.com/book/${userID}/message`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              layout_id: 1, // Or whatever layout_id you want to use
-              name: contact.name,
-              msg: contact.submission,
-              img_file: contact.picture,
-              email: contact.email,
-            }),
+        let objects = [];
+        console.log('values', values)
+      
+        const firstValue = dataSource.length > 0 ? dataSource[dataSource.length - 1].id : 0;
+        console.log('firstValue', firstValue);
+        for (let i = 0; i < values.length; i ++) {
+          objects.push({
+            id: firstValue + 1 + i,
+            name: values[i][1],
+            email: values[i][2],
+            address: values[i][3],
           });
-        });
-    
-        console.log('promises', promises);
-    
-        const responses = await Promise.all(promises);
-    
-        responses.forEach((response, index) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status} for contact ${objects[index].name}`);
-          }
-        });
-    
-        const data = await Promise.all(responses.map(response => response.json()));
-    
-        data.forEach((item, index) => {
-          if (!item.success) { // Check if the server actually saved the new contributor
-            throw new Error(`Server failed to save contact ${objects[index].name}`);
-          }
-        });
-    
-        console.log('Contacts added to the server successfully');
-      } catch (error) {
-        console.error('Failed to add contacts to the server:', error);
-      }
-    };
+        }
+      
+        // Add the new contacts to the dataSource state
+        setDataSource([...dataSource, ...objects]);
+      
+        // Now, send the new contacts to the server
+        try {
+          const promises = objects.map((contact) => {
+            return fetch(`https://yay-api.herokuapp.com/book/${userID}/message`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                layout_id: 1, // Or whatever layout_id you want to use
+                name: contact.name,
+                email: contact.email,
+              }),
+            });
+          });
+      
+          console.log('promises', promises);
+      
+          const responses = await Promise.all(promises);
+      
+          responses.forEach((response, index) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status} for contact ${objects[index].name}`);
+            }
+          });
+      
+          const data = await Promise.all(responses.map(response => response.json()));
+      
+          data.forEach((item, index) => {
+            if (!item.success) { // Check if the server actually saved the new contributor
+              throw new Error(`Server failed to save contact ${objects[index].name}`);
+            }
+          });
+      
+          console.log('Contacts added to the server successfully');
+        } catch (error) {
+          console.error('Failed to add contacts to the server:', error);
+        }
+      };
     
     
   
@@ -735,12 +695,18 @@ export default function Example() {
                 </div>
               </div>
             </div>
-
-            <Row gutter={[16, 16]} justify="center">
-                <Col xs={24}>
-                <Table columns={columns} dataSource={dataSource}></Table>
-                </Col>
-            </Row>
+            <Modal
+                title="Contributor List"
+                open={isTableModalVisible}
+                onOk={handleTableModalOk}
+                onCancel={handleTableModalCancel}
+                >
+                <Row gutter={[16, 16]} justify="center">
+                    <Col xs={24}>
+                    <Table columns={columns} dataSource={dataSource}></Table>
+                    </Col>
+                </Row>
+                </Modal>
 
             <div className="col-span-full">
                 <Row gutter={[16, 16]} justify="center">
@@ -764,6 +730,7 @@ export default function Example() {
                     </div>
                     <Row justify="space-between" align="middle">
                         <Button onClick={addtoList}>Add to above list</Button>
+                        <Button onClick={showTableModal}>View Contributor List</Button>
                         <Button
                             onClick={handleDownloadCSV}
                             onMouseEnter={handleHoverOn}
