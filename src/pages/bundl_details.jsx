@@ -673,7 +673,7 @@ export default function Example() {
   // Assume that contributors is an array of objects, where each object has an email and phone property
 
   // Step 2: Send email to all contributors
-  const emailResponse = await fetch('https://www.console.givebundl.com/api/sendEmail', {
+  const emailResponse = await fetch('https://www.givebundl.com/api/sendEmail', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -695,7 +695,7 @@ export default function Example() {
 
   // Step 3: Send text message to all contributors
   for (const contributor of contributors) {
-    const smsResponse = await fetch('https://www.console.givebundl.com/api/sendSMS', {
+    const smsResponse = await fetch('https://www.givebundl.com/api/sendSMS', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
