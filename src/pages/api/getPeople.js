@@ -18,6 +18,8 @@ export default async function handler(req, res) {
       personFields: 'names,emailAddresses',
     });
 
+    console.log('Connections:', connections); // Log the connections
+
     res.json(connections.data.connections);
 
   } catch (error) {
