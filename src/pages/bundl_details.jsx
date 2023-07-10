@@ -162,41 +162,48 @@ export default function Example() {
     setDataSource(prevDataSource => [...prevDataSource, newContact]);
 
   };
-
   const openModal = () => {
     signInWithGoogle()
       .then(() => setIsModalOpen(true))
       .catch(error => console.error('Failed to sign in:', error));
   };
-
+  
     
-  async function signInWithGoogle () {
-    const clientId = '764289968872-tdema5ev8sf7djdjlp6a8is5k5mjrf5t.apps.googleusercontent.com';
-    const redirectUri = 'https://www.givebundl.com/api/oauth2callback'; // Update this to your actual server address
-    const scope = 'https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/contacts.readonly profile';
-    const responseType = 'code';
-    const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
+  async function signInWithGoogle() {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const clientId = '764289968872-tdema5ev8sf7djdjlp6a8is5k5mjrf5t.apps.googleusercontent.com';
+        const redirectUri = 'https://www.givebundl.com/api/oauth2callback';
+        const scope = 'https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/contacts.readonly profile';
+        const responseType = 'code';
+        const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
   
-    // Get the tokens from the cookie
-    const tokens = JSON.parse(Cookies.get('auth'));
-    console.log("here are the tokesn" + JSON.stringify(tokens));
+        const tokens = JSON.parse(Cookies.get('auth'));
   
-    // If the tokens do not exist, redirect the user to the Google sign-in page
-    if (!tokens) {
-      window.location.href = url;
-    } else {
-      // If the tokens exist, set isAuthenticated to true
-      setIsAuthenticated(true);
-      // Fetch Google Contacts
-      const response = await fetch('/api/getPeople', {
-        headers: {
-          'Authorization': `Bearer ${JSON.stringify(tokens)}`,
-        },
-      });
-      console.log('response: ', response);
-      const contacts = await response.json();
-      setGoogleContacts(contacts);
-    }
+        if (!tokens) {
+          window.location.href = url;
+        } else {
+          setIsAuthenticated(true);
+  
+          const response = await fetch('/api/getPeople', {
+            headers: {
+              'Authorization': `Bearer ${JSON.stringify(tokens)}`,
+            },
+          });
+  
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+  
+          const contacts = await response.json();
+          setGoogleContacts(contacts);
+          resolve();
+        }
+      } catch (error) {
+        console.error('Failed to sign in:', error);
+        reject(error);
+      }
+    });
   }
   
   
