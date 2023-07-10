@@ -178,7 +178,7 @@ export default function Example() {
         const responseType = 'code';
         const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
   
-        console.log("cookies" + JSON.stringify(Cookies));
+        console.log("cookies" + Cookies);
         const tokens = JSON.parse(Cookies.get('auth'));
         console.log('testing!!')
         console.log("cookies.get(auth)" + JSON.stringify(tokens));
