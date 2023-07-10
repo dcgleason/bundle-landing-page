@@ -26,7 +26,7 @@ export default async function handler(req, res) {
     // Set the tokens in a cookie
     res.setHeader('Set-Cookie', cookie.serialize('auth', JSON.stringify(tokens), {
         httpOnly: false,
-        secure: true, // Use HTTPS in production
+        secure: false, // Use HTTPS in production
         maxAge: 60 * 60 * 24 * 7, // 1 week
         sameSite: 'lax', // Changed from 'strict' to 'lax'
         path: '/',
