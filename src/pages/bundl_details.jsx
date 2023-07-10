@@ -163,34 +163,6 @@ export default function Example() {
     // Add the new contact to the dataSource state
     setDataSource(prevDataSource => [...prevDataSource, newContact]);
 
-    // Now, send the new contact to the server
-    try {
-      const response = await fetch(`https://yay-api.herokuapp.com/book/${userID}/message`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          layout_id: 1, // Or whatever layout_id you want to use
-          name: newContact.name,
-          email: newContact.email,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status} for contact ${newContact.name}`);
-      }
-
-      const data = await response.json();
-
-      if (!data.success) { // Check if the server actually saved the new contributor
-        throw new Error(`Server failed to save contact ${newContact.name}`);
-      }
-
-      console.log('Contact added to the server successfully');
-    } catch (error) {
-      console.error('Failed to add contact to the server:', error);
-    }
   };
 
   const openModal = () => {
