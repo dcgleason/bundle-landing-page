@@ -178,11 +178,11 @@ export default function Example() {
     const responseType = 'code';
     const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
   
-    const oauth2Client = new google.auth.OAuth2(clientId, process.env.GOOGLE_SECRET, redirectUri);
+    const oauth2Client = new google.auth.OAuth2(clientId, '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', redirectUri);
   
     // Get the tokens from the cookie
-    const cookies = cookie.parse(document.cookie);
-    const tokens = JSON.parse(cookies.auth);
+    const tokens = JSON.parse(Cookies.get('auth'));
+
   
     oauth2Client.setCredentials(tokens);
   
