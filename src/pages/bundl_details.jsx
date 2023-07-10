@@ -172,13 +172,13 @@ export default function Example() {
 
     
   async function signInWithGoogle () {
-    const clientId = '764289968872-tdema5ev8sf7djdjlp6a8is5k5mjrf5t.apps.googleusercontent.com';
+    const clientId = NEXT_PUBLIC_GOOGLE_ID;
     const redirectUri = 'https://www.givebundl.com/api/oauth2callback'; // Update this to your actual server address
     const scope = 'https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/contacts.readonly profile';
     const responseType = 'code';
     const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
   
-    const oauth2Client = new google.auth.OAuth2(clientId, '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', redirectUri);
+    const oauth2Client = new google.auth.OAuth2(clientId, NEXT_PUBLIC_GOOGLE_SECRET, redirectUri);
   
     // Get the tokens from the cookie
     const tokens = JSON.parse(Cookies.get('auth'));
