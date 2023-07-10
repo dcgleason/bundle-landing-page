@@ -192,7 +192,7 @@ export default function Example() {
               'Authorization': `Bearer ${JSON.stringify(tokens)}`,
             },
           });
-          console.log("people response" + response);
+          console.log("people response" + JSON.stringify(response));
   
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
