@@ -193,6 +193,7 @@ export default function Example() {
           'Authorization': `Bearer ${JSON.stringify(tokens)}`,
         },
       });
+      console.log('response: ', response);
       const contacts = await response.json();
       setGoogleContacts(contacts);
     }
