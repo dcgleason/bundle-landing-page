@@ -63,6 +63,9 @@ export default function Example() {
     const [recipientFullName, setRecipientFullName] = useState("");
     const [recipientFirstName, setRecipientFirstName] = useState("");
     const [recipientlastName, setRecipientLastName] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [googleContacts, setGoogleContacts] = useState([]);
+    const [selectedContacts, setSelectedContacts] = useState([]);
     const columns = [
         {
           key: "1",
@@ -121,6 +124,80 @@ export default function Example() {
       };
       
 
+
+
+  useEffect(() => {
+    if (isModalOpen) {
+      fetch('/api/getPeople')
+        .then(response => response.json())
+        .then(data => setGoogleContacts(data));
+    }
+  }, [isModalOpen]);
+
+  const handleContactSelect = (contact, isSelected) => {
+    setSelectedContacts(prevSelectedContacts => {
+      if (isSelected) {
+        return [...prevSelectedContacts, contact];
+      } else {
+        return prevSelectedContacts.filter(c => c.resourceName !== contact.resourceName);
+      }
+    });
+  };
+
+  const addSelectedContactsToList = async () => {
+    for (const contact of selectedContacts) {
+      await addContactToList(contact);
+    }
+    setSelectedContacts([]);
+    setIsModalOpen(false);
+  };
+
+  const addContactToList = async (contact) => {
+    const newContact = {
+      id: dataSource.length > 0 ? dataSource[dataSource.length - 1].id + 1 : 0,
+      name: contact.names[0].displayName,
+      email: contact.emailAddresses[0].value,
+      address: '', // Google Contacts does not provide an address field
+    };
+
+    // Add the new contact to the dataSource state
+    setDataSource(prevDataSource => [...prevDataSource, newContact]);
+
+    // Now, send the new contact to the server
+    try {
+      const response = await fetch(`https://yay-api.herokuapp.com/book/${userID}/message`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          layout_id: 1, // Or whatever layout_id you want to use
+          name: newContact.name,
+          email: newContact.email,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status} for contact ${newContact.name}`);
+      }
+
+      const data = await response.json();
+
+      if (!data.success) { // Check if the server actually saved the new contributor
+        throw new Error(`Server failed to save contact ${newContact.name}`);
+      }
+
+      console.log('Contact added to the server successfully');
+    } catch (error) {
+      console.error('Failed to add contact to the server:', error);
+    }
+  };
+
+  const openModal = () => {
+    signInWithGoogle()
+      .then(() => setIsModalOpen(true))
+      .catch(error => console.error('Failed to sign in:', error));
+  };
     
     function signInWithGoogle() {
       const clientId = '764289968872-3rstr2akvdot7cfjk9ektjeaghe2pghr.apps.googleusercontent.com';
@@ -165,49 +242,7 @@ export default function Example() {
       setEmailModalVisible(true);
     };
     
-    // const handleEmailModalOk = async () => {
-    //   // Here you would handle sending the email
-    //   console.log(emailBody, emailSubject, emailRecipients);
-    
-    //   // Prepare the data to send
-    //   const emailData = {
-    //     body: emailBody,
-    //     subject: emailSubject,
-    //     recipients: emailRecipients.split(', '), // Assuming recipients are separated by a comma and a space
-    //   };
-    
-    //   try {
-    //     // Send a POST request to your backend
-    //     const response = await fetch('https://yay-api.herokuapp.com/email/send', {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': `Bearer ${session.accessToken}`,
-    //       },
-    //       body: JSON.stringify({
-    //         subject: 'Contribute please - 3 days left!',
-    //         body: 'We would love you to contribute to this bundle',
-    //         recipients: emailRecipients.split(', ')
-    //       }),
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => console.log(data))
-    //     .catch((error) => {
-    //       console.error('Error:', error);
-    //     });
-    
-    //     // Check if the request was successful
-    //     if (!response.ok) {
-    //       throw new Error(`HTTP error! status: ${response.status}`);
-    //     }
-    
-    //     console.log('Email sent successfully');
-    //   } catch (error) {
-    //     console.error('Failed to send email:', error);
-    //   }
-    
-    //   setEmailModalVisible(false);
-    // };
+   
    
     
     const handleEmailModalCancel = () => {
@@ -221,17 +256,7 @@ export default function Example() {
   
   
     
-      // const contactsResponse = await fetch('https://yay-api.herokuapp.com/email/contacts', {
-      //   method: 'GET',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Authorization': `Bearer ${accessToken}`,
-      //   },
-      // });
     
-      // const contacts = await contactsResponse.json();
-      // setContacts(contacts);
-      // setShowModal(true);
   
     const handleClose = () => {
       setShowModal(false);
@@ -346,6 +371,7 @@ export default function Example() {
       };
     
     
+      
   
     const changeHandler = (event) => {
       // Passing file data (event.target.files[0]) to parse using Papa.parse
@@ -781,6 +807,20 @@ export default function Example() {
                 </div>
               </div>
             </div>
+
+            <Modal title="Select a contact">
+                {contacts.map(contact => (
+                    <div key={contact.resourceName}>
+                    <input
+                        type="checkbox"
+                        checked={selectedContacts.includes(contact)}
+                        onChange={event => handleContactSelect(contact, event.target.checked)}
+                    />
+                    {contact.names[0].displayName}
+                    </div>
+                ))}
+                <button onClick={addSelectedContactsToList}>Add to list</button>
+                </Modal>
             <Modal
                 title={`Contributor List (${dataSource.length})`}
                 open={isTableModalVisible}
