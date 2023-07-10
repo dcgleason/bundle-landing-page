@@ -179,6 +179,7 @@ export default function Example() {
   
     // Get the tokens from the cookie
     const tokens = JSON.parse(Cookies.get('auth'));
+    console.log("here are the tokesn" + tokens);
   
     // If the tokens do not exist, redirect the user to the Google sign-in page
     if (!tokens) {
