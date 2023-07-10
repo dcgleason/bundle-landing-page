@@ -204,7 +204,6 @@ export default function Example() {
     }
   }
   
-}
   
     function onSendSMS(time, recipient, gifter, to) {
       const url = 'https://yay-api.herokuapp.com/sms/sendSMS';
@@ -693,7 +692,7 @@ export default function Example() {
   console.log('Created book:', book);
 }
 
-    return (
+return (
         <>
 
         <Modal
