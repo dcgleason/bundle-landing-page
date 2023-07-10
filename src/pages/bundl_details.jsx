@@ -169,7 +169,7 @@ export default function Example() {
   };
 
   async function getGoogleContacts() {
-    const oauth2Client = new google.auth.OAuth2(clientId, YOUR_CLIENT_SECRET, redirectUri);
+    const oauth2Client = new google.auth.OAuth2('764289968872-tdema5ev8sf7djdjlp6a8is5k5mjrf5t.apps.googleusercontent.com', process.env.GOOGLE_SECRET, redirectUri);
     const tokens = await oauth2Client.getToken(YOUR_AUTHORIZATION_CODE);
     oauth2Client.setCredentials(tokens);
   
@@ -200,8 +200,9 @@ export default function Example() {
   } else {
     // If the token is not expired and exists, set isAuthenticated to true
     setIsAuthenticated(true);
-
-    const contacts = await getGoogleContacts();
+    // Fetch Google Contacts
+    const response = await fetch('/api/getPeople');
+    const contacts = await response.json();
     setGoogleContacts(contacts);
   }
 }

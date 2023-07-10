@@ -1,11 +1,9 @@
 // pages/api/getPeople.js
 
 import { google } from 'googleapis';
-import cookie from 'cookie';
 
 export default async function handler(req, res) {
-  const cookies = cookie.parse(req.headers.cookie || '');
-  const tokens = JSON.parse(cookies.auth);
+  const tokens = JSON.parse(req.headers.authorization.replace('Bearer ', ''));
 
   const oauth2Client = new google.auth.OAuth2();
   oauth2Client.setCredentials(tokens);
