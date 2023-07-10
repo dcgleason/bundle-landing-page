@@ -181,6 +181,7 @@ export default function Example() {
         const tokens = JSON.parse(Cookies.get('auth'));
         console.log('testing!!')
         console.log("cookies.get(auth)" + JSON.stringify(tokens));
+        console.log("cookies" + JSON.stringify(Cookies));
   
         if (!tokens) {
           window.location.href = url;
