@@ -729,7 +729,7 @@ export default function Example() {
                         </Row>
                     </div>
                     <Row justify="space-between" align="middle">
-                        <Button onClick={addtoList}>Add to above list</Button>
+                        <Button onClick={addtoList}>Add to Contributor List</Button>
                         <Button onClick={showTableModal}>View Contributor List</Button>
                         <Button
                             onClick={handleDownloadCSV}
