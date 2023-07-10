@@ -124,15 +124,12 @@ export default function Example() {
       };
       
 
+      useEffect(() => {
+        if (isAuthenticated) {
+          setIsModalOpen(true);
+        }
+      }, [isAuthenticated]);
 
-
-  useEffect(() => {
-    if (isModalOpen) {
-      fetch('/api/getPeople')
-        .then(response => response.json())
-        .then(data => setGoogleContacts(data));
-    }
-  }, [isModalOpen]);
 
   const handleContactSelect = (contact, isSelected) => {
     setSelectedContacts(prevSelectedContacts => {
@@ -171,14 +168,26 @@ export default function Example() {
       .catch(error => console.error('Failed to sign in:', error));
   };
     
-  function signInWithGoogle() {
+  async function signInWithGoogle () {
     const clientId = '764289968872-tdema5ev8sf7djdjlp6a8is5k5mjrf5t.apps.googleusercontent.com';
     const redirectUri = 'https://www.givebundl.com/api/oauth2callback'; // Update this to your actual server address
     const scope = 'https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/contacts.readonly profile';
     const responseType = 'code';
     const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
+    
+        const oauth2Client = new google.auth.OAuth2(clientId, YOUR_CLIENT_SECRET, redirectUri);
+        const tokens = await oauth2Client.getToken(YOUR_AUTHORIZATION_CODE); // you might need to handle this asynchronously
+        oauth2Client.setCredentials(tokens);
+
+  // Check if the token is expired or does not exist
+  if (oauth2Client.isTokenExpiry()) {
+    // If the token is expired or does not exist, redirect the user to the Google sign-in page
     window.location.href = url;
+  } else {
+    // If the token is not expired and exists, set isAuthenticated to true
+    setIsAuthenticated(true);
   }
+}
   
     function onSendSMS(time, recipient, gifter, to) {
       const url = 'https://yay-api.herokuapp.com/sms/sendSMS';
