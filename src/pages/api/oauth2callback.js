@@ -45,22 +45,7 @@ export default async function handler(req, res) {
     const userGoogleEmail = me.data.emailAddresses && me.data.emailAddresses.length && me.data.emailAddresses[0].value;
     console.log('userGoogleEmail' + userGoogleEmail)
 
-    // Make a request to your API to save the refresh token
-    const apiResponse = await fetch('https://yay-api.herokuapp.com/login/saveRefreshToken', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        googleId: userGoogleId,
-        email: userGoogleEmail,
-        refreshToken: process.env.GMAIL_REFRESH_TOKEN,
-      }),
-    });
 
-    if (!apiResponse.ok) {
-      throw new Error(`API response status: ${apiResponse.status}`);
-    }
 
     res.redirect('https://www.givebundl.com/bundl_details'); // Redirect the user back to your site
   } catch (error) {
