@@ -184,7 +184,7 @@ export default function Example() {
       const authCookie = Cookies.get('auth');
       if (authCookie === undefined) {
         console.log('Undefined token');
-        window.location.href = 'https://givebundl.com/bundl_details'; 
+       // window.location.href = 'https://givebundl.com/bundl_details'; 
         return false;
       }
       const tokens = JSON.parse(authCookie);
