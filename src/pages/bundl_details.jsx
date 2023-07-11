@@ -186,10 +186,12 @@ export default function Example() {
   
       if (tokens === undefined) {
         console.log('Undefined token');
+        console.log('token is undefined')
         window.location.href = 'https://givebundl.com/bundl_details'; 
         return false;
       } else if (!tokens) {
         window.location.href = url;
+        console.log('No token from within the else if');
         return false;
       } else {
         setIsAuthenticated(true);
@@ -210,7 +212,7 @@ export default function Example() {
         return true;
       }
     } catch (error) {
-      console.error('Failed to sign in:', error);
+      console.error('Failed to sign in from within the catch:', error);
       return false;
     }
   }
