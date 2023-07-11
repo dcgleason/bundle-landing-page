@@ -182,7 +182,7 @@ export default function Example() {
   
       console.log("cookies", Cookies);
       const tokens = JSON.parse(Cookies.get('auth'));
-      console.log('testing!!')
+      console.log('testing tokens', tokens)
   
       if (tokens === undefined) {
         console.log('Undefined token');
