@@ -204,6 +204,7 @@ export default function Example() {
         console.log("people response" + JSON.stringify(response));
   
         if (!response.ok) {
+          console.log('response not ok', response);
           throw new Error(`HTTP error! status: ${response.status}`);
         }
   
