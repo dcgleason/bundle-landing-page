@@ -162,55 +162,58 @@ export default function Example() {
     setDataSource(prevDataSource => [...prevDataSource, newContact]);
 
   };
-  const openModal = () => {
-    signInWithGoogle()
-      .then(() => setIsModalOpen(true))
-      .catch(error => console.error('Failed to sign in:', error));
+  const openModal = async () => {
+    const result = await signInWithGoogle();
+    if (result) {
+      console.log('Successfully signed in');
+      setIsModalOpen(true);
+    } else {
+      console.error('Failed to sign in');
+    }
   };
   
   async function signInWithGoogle() {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const clientId = '764289968872-tdema5ev8sf7djdjlp6a8is5k5mjrf5t.apps.googleusercontent.com';
-        const redirectUri = 'https://www.givebundl.com/api/oauth2callback';
-        const scope = 'https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/contacts.readonly profile';
-        const responseType = 'code';
-        const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
+    try {
+      const clientId = '764289968872-tdema5ev8sf7djdjlp6a8is5k5mjrf5t.apps.googleusercontent.com';
+      const redirectUri = 'https://www.givebundl.com/api/oauth2callback';
+      const scope = 'https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/contacts.readonly profile';
+      const responseType = 'code';
+      const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
   
-        console.log("cookies", Cookies);
-        const tokens = JSON.parse(Cookies.get('auth'));
-        console.log('testing!!')
+      console.log("cookies", Cookies);
+      const tokens = JSON.parse(Cookies.get('auth'));
+      console.log('testing!!')
   
-        if (tokens === undefined) {
-          console.log('Undefined token');
-          window.location.href = 'https://givebundl.com/bundl_details'; 
-        } else if (!tokens) {
-          window.location.href = url;
-        } else {
-          setIsAuthenticated(true);
+      if (tokens === undefined) {
+        console.log('Undefined token');
+        window.location.href = 'https://givebundl.com/bundl_details'; 
+        return false;
+      } else if (!tokens) {
+        window.location.href = url;
+        return false;
+      } else {
+        setIsAuthenticated(true);
   
-          const response = await fetch('/api/getPeople', {
-            headers: {
-              'Authorization': `Bearer ${JSON.stringify(tokens)}`,
-            },
-          });
-          console.log("people response" + JSON.stringify(response));
+        const response = await fetch('/api/getPeople', {
+          headers: {
+            'Authorization': `Bearer ${JSON.stringify(tokens)}`,
+          },
+        });
+        console.log("people response" + JSON.stringify(response));
   
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-  
-          const contacts = await response.json();
-          setGoogleContacts(contacts);
-          resolve();
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-      } catch (error) {
-        console.error('Failed to sign in:', error);
-        reject(error);
-      }
-    });
-  }
   
+        const contacts = await response.json();
+        setGoogleContacts(contacts);
+        return true;
+      }
+    } catch (error) {
+      console.error('Failed to sign in:', error);
+      return false;
+    }
+  }
     function onSendSMS(time, recipient, gifter, to) {
       const url = 'https://yay-api.herokuapp.com/sms/sendSMS';
       const data = {
