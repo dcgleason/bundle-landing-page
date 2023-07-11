@@ -183,7 +183,7 @@ export default function Example() {
   
         if (tokens === undefined) {
           console.log('Undefined token');
-          window.location.href = '/login'; // Redirect to login or another appropriate page
+          window.location.href = 'https://givebundl.com/bundl_details'; 
         } else if (!tokens) {
           window.location.href = url;
         } else {
