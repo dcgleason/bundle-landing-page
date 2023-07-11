@@ -168,7 +168,6 @@ export default function Example() {
       .catch(error => console.error('Failed to sign in:', error));
   };
   
-    
   async function signInWithGoogle() {
     return new Promise(async (resolve, reject) => {
       try {
@@ -181,10 +180,11 @@ export default function Example() {
         console.log("cookies", Cookies);
         const tokens = JSON.parse(Cookies.get('auth'));
         console.log('testing!!')
-
-      
   
-        if (!tokens) {
+        if (tokens === undefined) {
+          console.log('Undefined token');
+          window.location.href = '/login'; // Redirect to login or another appropriate page
+        } else if (!tokens) {
           window.location.href = url;
         } else {
           setIsAuthenticated(true);
@@ -210,7 +210,6 @@ export default function Example() {
       }
     });
   }
-  
   
     function onSendSMS(time, recipient, gifter, to) {
       const url = 'https://yay-api.herokuapp.com/sms/sendSMS';
