@@ -181,15 +181,16 @@ export default function Example() {
       const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
   
       console.log("cookies", Cookies);
-      const tokens = JSON.parse(Cookies.get('auth'));
-      console.log('testing tokens', tokens)
-  
-      if (tokens === undefined) {
+      const authCookie = Cookies.get('auth');
+      if (authCookie === undefined) {
         console.log('Undefined token');
-        console.log('token is undefined')
         window.location.href = 'https://givebundl.com/bundl_details'; 
         return false;
-      } else if (!tokens) {
+      }
+      const tokens = JSON.parse(authCookie);
+      console.log('testing tokens', tokens)
+  
+      if (!tokens) {
         window.location.href = url;
         console.log('No token from within the else if');
         return false;
@@ -204,7 +205,6 @@ export default function Example() {
         console.log("people response" + JSON.stringify(response));
   
         if (!response.ok) {
-          console.log('response not ok', response);
           throw new Error(`HTTP error! status: ${response.status}`);
         }
   
@@ -217,6 +217,8 @@ export default function Example() {
       return false;
     }
   }
+
+  
     function onSendSMS(time, recipient, gifter, to) {
       const url = 'https://yay-api.herokuapp.com/sms/sendSMS';
       const data = {
