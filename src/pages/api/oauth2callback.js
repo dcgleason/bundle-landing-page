@@ -47,7 +47,7 @@ export default async function handler(req, res) {
 
 
 
-    res.redirect('https://www.givebundl.com/bundl_details'); // Redirect the user back to your site
+    res.redirect('https://www.givebundl.com/order-details'); // Redirect the user back to your site
   } catch (error) {
     console.error('Error:', error);
     res.status(500).send(`Error: ${error.message}`);
