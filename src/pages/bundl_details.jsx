@@ -127,23 +127,6 @@ export default function Example() {
       ;
 
 
-  const handleContactSelect = (contact, isSelected) => {
-    setSelectedContacts(prevSelectedContacts => {
-      if (isSelected) {
-        return [...prevSelectedContacts, contact];
-      } else {
-        return prevSelectedContacts.filter(c => c.resourceName !== contact.resourceName);
-      }
-    });
-  };
-
-  const addSelectedContactsToList = async () => {
-    for (const contact of selectedContacts) {
-      await addContactToList(contact);
-    }
-    setSelectedContacts([]);
-    setIsModalOpen(false);
-  };
 
   const addContactToList = async (contact) => {
     const newContact = {
@@ -167,6 +150,24 @@ useEffect(() => {
   }
 }, []);
   
+
+const handleContactSelect = (contact, isSelected) => {
+  setSelectedContacts(prevSelectedContacts => {
+    if (isSelected) {
+      return [...prevSelectedContacts, contact];
+    } else {
+      return prevSelectedContacts.filter(c => c.resourceName !== contact.resourceName);
+    }
+  });
+};
+
+const addSelectedContactsToList = async () => {
+  for (const contact of selectedContacts) {
+    await addContactToList(contact);
+  }
+  setSelectedContacts([]);
+  setIsModalOpen(false);
+};
   
   async function signInWithGoogle() {
     try {
