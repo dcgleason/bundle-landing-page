@@ -178,7 +178,7 @@ useEffect(() => {
 
     if (storedCsvData) {
       const parsedData = JSON.parse(storedCsvData);
-      console.log("parsed Data =" + parsedData);
+      console.log("parsed Data =", parsedData);
       setParsedData(parsedData);
       setDataSource(parsedData); // Set the parsed data to the dataSource state
       setContactCount(parsedData.length); // Set the contact count to the length of the dataSource
