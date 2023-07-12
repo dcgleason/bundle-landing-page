@@ -158,6 +158,14 @@ export default function Example() {
 
   };
 
+  // In your component's useEffect hook
+useEffect(() => {
+  const isAuthenticating = localStorage.getItem('isAuthenticating');
+  if (isAuthenticating === 'true') {
+    setIsAuthenticated(true);
+    localStorage.removeItem('isAuthenticating'); // Remove the flag from local storage once it has been checked
+  }
+}, []);
   
   
   async function signInWithGoogle() {
@@ -171,7 +179,7 @@ export default function Example() {
       const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}&access_type=${accessType}&prompt=${prompt}`;
   
       window.location.href = url;
-      setIsAuthenticated(true); // Set isAuthenticated to true once the user is redirected for authentication
+      localStorage.setItem('isAuthenticating', 'true'); // Set a flag in local storage to indicate that the user is being redirected for authentication
     } catch (error) {
       console.error("error in auth" + error);
     }
