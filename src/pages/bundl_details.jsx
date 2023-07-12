@@ -142,17 +142,17 @@ export default function Example() {
 
   };
 
-
   const prioritizeEmail = (emailAddresses) => {
     if (!emailAddresses || emailAddresses.length === 0) return '';
     const sortedEmails = emailAddresses.sort((a, b) => {
-      if (a.endsWith('.com') && b.endsWith('.edu')) return -1;
-      if (a.endsWith('.edu') && b.endsWith('.com')) return 1;
+      if (a.value.endsWith('.com') && b.value.endsWith('.edu')) return -1;
+      if (a.value.endsWith('.edu') && b.value.endsWith('.com')) return 1;
       return 0;
     });
-    return sortedEmails[0];
+    return sortedEmails[0].value;
   };
 
+  
   const filteredContacts = googleContacts.filter(contact => {
     const hasEmail = contact.emailAddresses && contact.emailAddresses.length > 0;
     const matchesSearchTerm = contact.names && contact.names.some(name => name.displayName.toLowerCase().includes(searchTerm.toLowerCase()));
