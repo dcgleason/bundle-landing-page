@@ -820,7 +820,7 @@ return (
                       <div>Email: {prioritizeEmail(contact.emailAddresses)}</div>
                     </div>
                   ))}
-                  <button onClick={addSelectedContactsToList}>Add to list</button>
+                  <Button className="mt-2 mb-2" onClick={addSelectedContactsToList}>Add to list</Button>
                 </Modal>
               )}
             <Modal
