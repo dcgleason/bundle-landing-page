@@ -67,6 +67,7 @@ export default function Example() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [googleContacts, setGoogleContacts] = useState([]);
     const [selectedContacts, setSelectedContacts] = useState([]);
+    
     const columns = [
         {
           key: "1",
@@ -123,13 +124,7 @@ export default function Example() {
       const handleTableModalCancel = () => {
         setIsTableModalVisible(false);
       };
-      
-
-      useEffect(() => {
-        if (isAuthenticated) {
-          setIsModalOpen(true);
-        }
-      }, [isAuthenticated]);
+      ;
 
 
   const handleContactSelect = (contact, isSelected) => {
@@ -162,15 +157,8 @@ export default function Example() {
     setDataSource(prevDataSource => [...prevDataSource, newContact]);
 
   };
-  const openModal = async () => {
-    const result = await signInWithGoogle();
-    if (result) {
-      console.log('Successfully signed in');
-      setIsModalOpen(true);
-    } else {
-      console.error('Failed to sign in');
-    }
-  };
+
+  
   
   async function signInWithGoogle() {
     try {
@@ -178,43 +166,35 @@ export default function Example() {
       const redirectUri = 'https://www.givebundl.com/api/oauth2callback';
       const scope = 'https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/contacts.readonly profile';
       const responseType = 'code';
-      const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
+      const accessType = 'offline';
+      const prompt = 'consent';
+      const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}&access_type=${accessType}&prompt=${prompt}`;
   
-      console.log("cookies", Cookies);
-      const authCookie = Cookies.get('auth');
-      if (authCookie === undefined) {
-        console.log('Undefined token');
-       // window.location.href = 'https://givebundl.com/bundl_details'; 
-        return false;
-      }
-      const tokens = JSON.parse(authCookie);
-      console.log('testing tokens', tokens)
-  
-      if (!tokens) {
-        window.location.href = url;
-        console.log('No token from within the else if');
-        return false;
-      } else {
-        setIsAuthenticated(true);
-  
-        const response = await fetch('/api/getPeople', {
-          headers: {
-            'Authorization': `Bearer ${JSON.stringify(tokens)}`,
-          },
-        });
-        console.log("people response" + JSON.stringify(response));
-  
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-  
-        const contacts = await response.json();
-        setGoogleContacts(contacts);
-        return true;
-      }
+      window.location.href = url;
+      setIsAuthenticated(true); // Set isAuthenticated to true once the user is redirected for authentication
     } catch (error) {
-      console.error('Failed to sign in from within the catch:', error);
-      return false;
+      console.error("error in auth" + error);
+    }
+  }
+
+  async function fetchGoogleContacts() {
+    try {
+      const tokens = JSON.parse(Cookies.get('auth'));
+      const response = await fetch('/api/getPeople', {
+        headers: {
+          'Authorization': `Bearer ${JSON.stringify(tokens)}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const contacts = await response.json();
+      setGoogleContacts(contacts);
+      setIsModalOpen(true); // Open the modal once the contacts are fetched
+    } catch (error) {
+      console.error('Failed to fetch Google contacts:', error);
     }
   }
 
@@ -781,6 +761,8 @@ return (
                 </div>
               </div>
             </div>
+           
+            
 
                     {isModalOpen && (
                 <Modal title="Select a contact" onCancel={() => setIsModalOpen(false)}>
@@ -832,7 +814,11 @@ return (
         </Col>
         <Col xs={24} sm={12}>
           <Card title="Pull Contacts from Gmail">
-            <Button className="mt-2" onClick={openModal}>Open Google Contacts</Button>
+          {isAuthenticated ? (
+            <Button onClick={fetchGoogleContacts}>Get my Google contacts</Button>
+          ) : (
+            <Button onClick={signInWithGoogle}>Sign in for Google Contacts</Button>
+          )}
           </Card>
         </Col>
       </Row>
