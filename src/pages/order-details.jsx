@@ -67,6 +67,7 @@ export default function Example() {
     const [contactCount, setContactCount] = useState(0); // Initialize to 0 or the initial number of contacts
     const [nextId, setNextId] = useState(0); // Initialize to 0 or the initial next ID
     const [ text, setText] = useState("Join us in creating a 'Bundl' of loving letters & pics for Dan G. It's a quick, fun way to share our support and appreciation. Look out for an email from dan@givebundl.com with instructions. Don't miss out!");
+    const [updateLocalStorageFunction, setUpdateLocalStorageFunction] = useState(() => () => {});
 
     
     const columns = [
@@ -170,7 +171,17 @@ export default function Example() {
     setSearchTerm(event.target.value);
   };
 
-
+  useEffect(() => {
+    // Define a function that updates localStorage
+    const updateLocalStorage = (data) => {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('csvData', JSON.stringify(data));
+      }
+    };
+  
+    // Set the function in state so it can be used outside of this effect
+    setUpdateLocalStorageFunction(() => updateLocalStorage);
+  }, []);
 
 useEffect(() => {
   if (typeof window !== 'undefined') {
@@ -223,10 +234,8 @@ const changeHandler = (event) => {
       console.log('values = '+ values)
       console.log('parsedData = '+ parsedData)
 
-      // Store the parsed data in localStorage
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('csvData', JSON.stringify(results.data));
-      }
+      // Use the function from state to update localStorage
+      updateLocalStorageFunction(results.data);
     },
   });
   setCsvUploaded(true);
