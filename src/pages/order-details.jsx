@@ -170,18 +170,18 @@ export default function Example() {
     setSearchTerm(event.target.value);
   };
 
-// Store to local storage after adding to list
-localStorage.setItem('csvData', JSON.stringify(dataSource));
 
-// Retrieve from local storage on page load
+
 useEffect(() => {
-  const storedCsvData = localStorage.getItem('csvData');
+  if (typeof window !== 'undefined') {
+    const storedCsvData = localStorage.getItem('csvData');
 
-  if (storedCsvData) {
-    const parsedData = JSON.parse(storedCsvData);
-    setParsedData(parsedData);
-    setDataSource(parsedData); // Set the parsed data to the dataSource state
-    setContactCount(parsedData.length); // Set the contact count to the length of the dataSource
+    if (storedCsvData) {
+      const parsedData = JSON.parse(storedCsvData);
+      setParsedData(parsedData);
+      setDataSource(parsedData); // Set the parsed data to the dataSource state
+      setContactCount(parsedData.length); // Set the contact count to the length of the dataSource
+    }
   }
 }, []);
 
