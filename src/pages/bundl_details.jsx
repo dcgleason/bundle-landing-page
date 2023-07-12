@@ -207,6 +207,7 @@ const addSelectedContactsToList = async () => {
   
       const contacts = await response.json();
       setGoogleContacts(contacts);
+      console.log('Google Contacts:', contacts); // Log the contacts
       setIsModalOpen(true); // Open the modal once the contacts are fetched
     } catch (error) {
       console.error('Failed to fetch Google contacts:', error);
