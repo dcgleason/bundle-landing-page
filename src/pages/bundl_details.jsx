@@ -805,24 +805,26 @@ return (
               </div>
             </div>
            
-            
             {isModalOpen && (
-                <Modal title="Select a contact" open={isModalOpen} onCancel={() => setIsModalOpen(false)}>
-                  <input type="text" placeholder="Search contacts..." onChange={handleSearch} />
-                  {filteredContacts.map(contact => (
-                    <div key={contact.resourceName}>
-                      <input
-                        type="checkbox"
-                        checked={selectedContacts.includes(contact)}
-                        onChange={event => handleContactSelect(contact, event.target.checked)}
-                      />
-                      {contact.names && contact.names.length > 0 ? contact.names[0].displayName : 'Unnamed Contact'}
-                      <div>Email: {prioritizeEmail(contact.emailAddresses)}</div>
-                    </div>
-                  ))}
-                  <Button className="mt-2 mb-2" onClick={addSelectedContactsToList}>Add to list</Button>
-                </Modal>
-              )}
+            <Modal title="Select a contact" open={isModalOpen} onCancel={() => setIsModalOpen(false)}>
+              <input type="text" placeholder="Search contacts..." onChange={handleSearch} />
+              {filteredContacts.map(contact => (
+                <div key={contact.resourceName} className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={selectedContacts.includes(contact)}
+                    onChange={event => handleContactSelect(contact, event.target.checked)}
+                    className="mr-2"
+                  />
+                  <span className="text-lg">
+                    {contact.names && contact.names.length > 0 ? contact.names[0].displayName : 'Unnamed Contact'}
+                  </span>
+                  <div>Email: {prioritizeEmail(contact.emailAddresses)}</div>
+                </div>
+              ))}
+              <Button className="mt-2 mb-2" onClick={addSelectedContactsToList}>Add to list</Button>
+            </Modal>
+)}
             <Modal
                 title={`Contributor List (${dataSource.length})`}
                 open={isTableModalVisible}
