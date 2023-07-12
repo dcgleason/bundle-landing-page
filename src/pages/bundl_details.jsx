@@ -778,22 +778,21 @@ return (
             </div>
            
             
-
-                    {isModalOpen && (
-                <Modal title="Select a contact" onCancel={() => setIsModalOpen(false)}>
-                {googleContacts.map(contact => (
-                    <div key={contact.resourceName}>
-                    <input
-                        type="checkbox"
-                        checked={selectedContacts.includes(contact)}
-                        onChange={event => handleContactSelect(contact, event.target.checked)}
-                    />
-                    {contact.names[0].displayName}
-                    </div>
-                ))}
-                <button onClick={addSelectedContactsToList}>Add to list</button>
-        </Modal>
-      )}
+            {isModalOpen && (
+      <Modal title="Select a contact" onCancel={() => setIsModalOpen(false)}>
+        {googleContacts.map(contact => (
+          <div key={contact.resourceName}>
+            <input
+              type="checkbox"
+              checked={selectedContacts.includes(contact)}
+              onChange={event => handleContactSelect(contact, event.target.checked)}
+            />
+            {contact.names && contact.names.length > 0 ? contact.names[0].displayName : 'Unnamed Contact'}
+          </div>
+        ))}
+        <button onClick={addSelectedContactsToList}>Add to list</button>
+      </Modal>
+    )}
             <Modal
                 title={`Contributor List (${dataSource.length})`}
                 open={isTableModalVisible}
