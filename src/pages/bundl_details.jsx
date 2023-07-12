@@ -556,6 +556,8 @@ const addSelectedContactsToList = async () => {
             return pre.filter((student) => student.id !== record.id);
           });
   
+          // Decrement the contact count
+      setContactCount(prevCount => prevCount - 1);
     
           console.log('Student deleted from the server successfully');
         },
