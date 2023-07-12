@@ -69,6 +69,8 @@ export default function Example() {
     const [selectedContacts, setSelectedContacts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [contactCount, setContactCount] = useState(0); // Initialize to 0 or the initial number of contacts
+    const [nextId, setNextId] = useState(0); // Initialize to 0 or the initial next ID
+
     
     const columns = [
         {
@@ -129,19 +131,22 @@ export default function Example() {
       ;
 
 
-
       const addContactToList = async (contact) => {
         const newContact = {
-          id: dataSource.length > 0 ? dataSource[dataSource.length - 1].id + 1 : 0,
+          id: nextId,
           name: contact.names[0].displayName,
           email: prioritizeEmail(contact.emailAddresses), // Use the prioritizeEmail function here
           address: '', // Google Contacts does not provide an address field
         };
-      
+    
         // Add the new contact to the dataSource state
         setDataSource(prevDataSource => [...prevDataSource, newContact]);
-          // Increment the contact count
+    
+        // Increment the contact count
         setContactCount(prevCount => prevCount + 1);
+    
+        // Increment the next ID
+        setNextId(prevId => prevId + 1);
       };
 
 
@@ -344,29 +349,29 @@ const addSelectedContactsToList = async () => {
       setViewPicture(false);
     };
     
-    
-    const addtoList = async () => {
-        let objects = [];
-        console.log('values', values)
-      
-        const firstValue = dataSource.length > 0 ? dataSource[dataSource.length - 1].id : 0;
-        console.log('firstValue', firstValue);
-        for (let i = 0; i < values.length; i ++) {
-          objects.push({
-            id: firstValue + 1 + i,
-            name: values[i][1],
-            email: values[i][2],
-            address: values[i][3],
-          });
-        }
-      
-        // Add the new contacts to the dataSource state
-        setDataSource([...dataSource, ...objects]);
-      
-           // Increment the contact count by the number of new contacts
+   
+  const addtoList = async () => {
+    let objects = [];
+    console.log('values', values)
+
+    for (let i = 0; i < values.length; i ++) {
+      objects.push({
+        id: nextId + i,
+        name: values[i][1],
+        email: values[i][2],
+        address: values[i][3],
+      });
+    }
+
+    // Add the new contacts to the dataSource state
+    setDataSource([...dataSource, ...objects]);
+
+    // Increment the contact count by the number of new contacts
     setContactCount(prevCount => prevCount + objects.length);
 
-      };
+    // Increment the next ID by the number of new contacts
+    setNextId(prevId => prevId + objects.length);
+  };
     
     
       
