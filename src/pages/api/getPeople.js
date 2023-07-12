@@ -15,6 +15,7 @@ export default async function handler(req, res) {
 
     const connections = await people.people.connections.list({
       resourceName: 'people/me',
+      pageSize: 2000,
       personFields: 'names,emailAddresses',
     });
 
