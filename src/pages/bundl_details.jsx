@@ -141,6 +141,8 @@ export default function Example() {
 
   };
 
+
+
   // In your component's useEffect hook
 useEffect(() => {
   const isAuthenticating = localStorage.getItem('isAuthenticating');
@@ -780,7 +782,7 @@ return (
            
             
             {isModalOpen && (
-            <Modal title="Select a contact" onCancel={() => setIsModalOpen(false)}>
+            <Modal title="Select a contact" open={isModalOpen} onCancel={() => setIsModalOpen(false)}>
               {googleContacts.filter(contact => contact.emailAddresses && contact.emailAddresses.length > 0).map(contact => (
                 <div key={contact.resourceName}>
                   <input
