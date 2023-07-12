@@ -129,18 +129,18 @@ export default function Example() {
 
 
 
-  const addContactToList = async (contact) => {
-    const newContact = {
-      id: dataSource.length > 0 ? dataSource[dataSource.length - 1].id + 1 : 0,
-      name: contact.names[0].displayName,
-      email: contact.emailAddresses[0].value,
-      address: '', // Google Contacts does not provide an address field
-    };
-
-    // Add the new contact to the dataSource state
-    setDataSource(prevDataSource => [...prevDataSource, newContact]);
-
-  };
+      const addContactToList = async (contact) => {
+        const newContact = {
+          id: dataSource.length > 0 ? dataSource[dataSource.length - 1].id + 1 : 0,
+          name: contact.names[0].displayName,
+          email: prioritizeEmail(contact.emailAddresses), // Use the prioritizeEmail function here
+          address: '', // Google Contacts does not provide an address field
+        };
+      
+        // Add the new contact to the dataSource state
+        setDataSource(prevDataSource => [...prevDataSource, newContact]);
+      };
+      
 
   const prioritizeEmail = (emailAddresses) => {
     if (!emailAddresses || emailAddresses.length === 0) return '';
