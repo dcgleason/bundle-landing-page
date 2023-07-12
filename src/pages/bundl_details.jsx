@@ -20,6 +20,8 @@ export default function Example() {
     const [newStudent, setNewStudent] = useState(null);
     const [pictureSubmitted, setPictureSubmitted ] = useState(false);
     const [isTableModalVisible, setIsTableModalVisible] = useState(false);
+    const [csvUploaded, setCsvUploaded] = useState(false);
+
 
 
     const [hover, setHover] = useState(false);
@@ -351,7 +353,7 @@ const addSelectedContactsToList = async () => {
       setViewPicture(false);
     };
 
-    
+
     const addtoList = async () => {
       let objects = [];
       console.log('values', values)
@@ -414,8 +416,10 @@ const addSelectedContactsToList = async () => {
           setValues(valuesArray);
           console.log('values = '+ values)
           console.log('parsedData = '+ parsedData)
+
         },
       });
+      setCsvUploaded(true);
     };
   
     const handlePromptOk = async () => {
@@ -845,7 +849,7 @@ return (
                               onChange={changeHandler}
                               className="mx-auto d-block"
                             />
-                            <Button className="mt-2" onClick={addtoList}>Add to Contributor List</Button>
+                             {csvUploaded && <Button className=" bg-green-500 mt-2" onClick={addtoList}>Add to Contributor List</Button>}
                             <Button className="mt-2" onClick={handleDownloadCSV}>Download CSV template</Button>
                           </Card>
                         </Col>
