@@ -68,6 +68,7 @@ export default function Example() {
     const [googleContacts, setGoogleContacts] = useState([]);
     const [selectedContacts, setSelectedContacts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [contactCount, setContactCount] = useState(0); // Initialize to 0 or the initial number of contacts
     
     const columns = [
         {
@@ -139,8 +140,10 @@ export default function Example() {
       
         // Add the new contact to the dataSource state
         setDataSource(prevDataSource => [...prevDataSource, newContact]);
+          // Increment the contact count
+        setContactCount(prevCount => prevCount + 1);
       };
-      
+
 
   const prioritizeEmail = (emailAddresses) => {
     if (!emailAddresses || emailAddresses.length === 0) return '';
@@ -360,6 +363,8 @@ const addSelectedContactsToList = async () => {
         // Add the new contacts to the dataSource state
         setDataSource([...dataSource, ...objects]);
       
+           // Increment the contact count by the number of new contacts
+    setContactCount(prevCount => prevCount + objects.length);
 
       };
     
@@ -863,7 +868,7 @@ return (
         </Col>
       </Row>
       <Row justify="center" className="mt-2">
-        <Button onClick={showTableModal}>View Contributor List</Button>
+          <Button onClick={showTableModal}>View Contributor List ({contactCount})</Button>
       </Row>
       <div className="mt-8">
         <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
