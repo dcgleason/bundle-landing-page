@@ -136,7 +136,7 @@ export default function Example() {
           id: dataSource.length + index + 1, // This will increment the ID for each new contact
           name: contact.names[0].displayName,
           email: prioritizeEmail(contact.emailAddresses), // Use the prioritizeEmail function here
-          address: '', // Google Contacts does not provide an address field
+          sms: '', // Changed "address" to "sms"
         };
       
         // Check if a contact with the same name already exists in the dataSource
@@ -350,6 +350,8 @@ const addSelectedContactsToList = async () => {
       setPictureUrl(null);
       setViewPicture(false);
     };
+
+    
     const addtoList = async () => {
       let objects = [];
       console.log('values', values)
@@ -359,12 +361,17 @@ const addSelectedContactsToList = async () => {
           id: dataSource.length + i + 1, // This will increment the ID for each new contact
           name: values[i][1],
           email: values[i][2],
-          address: values[i][3],
+          sms: values[i][3], // Changed "address" to "sms"
         };
     
         // Check if a contact with the same name already exists in the dataSource
-        if (dataSource.some(existingContact => existingContact.name === newContact.name)) {
+        const existingContactIndex = dataSource.findIndex(existingContact => existingContact.name === newContact.name);
+        if (existingContactIndex !== -1) {
           console.log(`A contact with the name ${newContact.name} already exists.`);
+          // If the new contact has a phone number, update the existing contact's phone number
+          if (newContact.sms) {
+            dataSource[existingContactIndex].sms = newContact.sms;
+          }
           continue;
         }
     
