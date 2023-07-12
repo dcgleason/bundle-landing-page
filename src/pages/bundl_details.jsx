@@ -67,6 +67,7 @@ export default function Example() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [googleContacts, setGoogleContacts] = useState([]);
     const [selectedContacts, setSelectedContacts] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
     
     const columns = [
         {
@@ -141,6 +142,26 @@ export default function Example() {
 
   };
 
+
+  const prioritizeEmail = (emailAddresses) => {
+    if (!emailAddresses || emailAddresses.length === 0) return '';
+    const sortedEmails = emailAddresses.sort((a, b) => {
+      if (a.endsWith('.com') && b.endsWith('.edu')) return -1;
+      if (a.endsWith('.edu') && b.endsWith('.com')) return 1;
+      return 0;
+    });
+    return sortedEmails[0];
+  };
+
+  const filteredContacts = googleContacts.filter(contact => {
+    const hasEmail = contact.emailAddresses && contact.emailAddresses.length > 0;
+    const matchesSearchTerm = contact.names && contact.names.some(name => name.displayName.toLowerCase().includes(searchTerm.toLowerCase()));
+    return hasEmail && matchesSearchTerm;
+  });
+
+  const handleSearch = event => {
+    setSearchTerm(event.target.value);
+  };
 
 
   // In your component's useEffect hook
@@ -782,20 +803,22 @@ return (
            
             
             {isModalOpen && (
-            <Modal title="Select a contact" open={isModalOpen} onCancel={() => setIsModalOpen(false)}>
-              {googleContacts.filter(contact => contact.emailAddresses && contact.emailAddresses.length > 0).map(contact => (
-                <div key={contact.resourceName}>
-                  <input
-                    type="checkbox"
-                    checked={selectedContacts.includes(contact)}
-                    onChange={event => handleContactSelect(contact, event.target.checked)}
-                  />
-                  {contact.names && contact.names.length > 0 ? contact.names[0].displayName : 'Unnamed Contact'}
-                </div>
-              ))}
-              <button onClick={addSelectedContactsToList}>Add to list</button>
-            </Modal>
-          )}
+                <Modal title="Select a contact" open={isModalOpen} onCancel={() => setIsModalOpen(false)}>
+                  <input type="text" placeholder="Search contacts..." onChange={handleSearch} />
+                  {filteredContacts.map(contact => (
+                    <div key={contact.resourceName}>
+                      <input
+                        type="checkbox"
+                        checked={selectedContacts.includes(contact)}
+                        onChange={event => handleContactSelect(contact, event.target.checked)}
+                      />
+                      {contact.names && contact.names.length > 0 ? contact.names[0].displayName : 'Unnamed Contact'}
+                      <div>Email: {prioritizeEmail(contact.emailAddresses)}</div>
+                    </div>
+                  ))}
+                  <button onClick={addSelectedContactsToList}>Add to list</button>
+                </Modal>
+              )}
             <Modal
                 title={`Contributor List (${dataSource.length})`}
                 open={isTableModalVisible}
