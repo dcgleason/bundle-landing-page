@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Modal, List, Typography, Button, Table, Input, Select, Upload, message, notification, Form, Row, Col, Space, Input, Spin, Card} from 'antd';
+import {Modal, List, Typography, Button, Table, Select, Upload, message, notification, Form, Row, Col, Space, Input, Spin, Card} from 'antd';
 import { EditOutlined, DeleteOutlined, InboxOutlined  } from "@ant-design/icons";
 import Papa from 'papaparse';
 import jwt_decode from 'jwt-decode';
