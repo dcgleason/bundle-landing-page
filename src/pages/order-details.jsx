@@ -171,6 +171,29 @@ export default function Example() {
   };
 
 
+  useEffect(() => {
+    const storedCsvData = localStorage.getItem('csvData');
+    const storedTableRows = localStorage.getItem('tableRows');
+    const storedValues = localStorage.getItem('values');
+  
+    if (storedCsvData) {
+      const parsedData = JSON.parse(storedCsvData);
+      setParsedData(parsedData);
+      setDataSource(parsedData); // Set the parsed data to the dataSource state
+    }
+  
+    if (storedTableRows) {
+      setTableRows(JSON.parse(storedTableRows));
+    }
+  
+    if (storedValues) {
+      setValues(JSON.parse(storedValues));
+    }
+  
+    // Set the contact count to the length of the dataSource
+    setContactCount(dataSource.length);
+  }, []);
+
   // In your component's useEffect hook
 useEffect(() => {
   const isAuthenticating = localStorage.getItem('isAuthenticating');
@@ -382,7 +405,6 @@ const addSelectedContactsToList = async () => {
     };
     
       
-  
     const changeHandler = (event) => {
       // Passing file data (event.target.files[0]) to parse using Papa.parse
       console.log('event.target.files[0]', event.target.files[0])
@@ -392,25 +414,30 @@ const addSelectedContactsToList = async () => {
         complete: function (results) {
           const rowsArray = [];
           const valuesArray = [];
-  
+    
           // Iterating data to get column name and their values
           results.data.map((d) => {
             rowsArray.push(Object.keys(d));
             valuesArray.push(Object.values(d));
           });
-  
-  
+    
           // Parsed Data Response in array format
-          setParsedData(results.data);
-  
+          const parsedData = results.data;
+          setParsedData(parsedData);
+          localStorage.setItem('csvData', JSON.stringify(parsedData));
+    
           // Filtered Column Names
-          setTableRows(rowsArray[0]);
-  
+          const tableRows = rowsArray[0];
+          setTableRows(tableRows);
+          localStorage.setItem('tableRows', JSON.stringify(tableRows));
+    
           // Filtered Values
-          setValues(valuesArray);
+          const values = valuesArray;
+          setValues(values);
+          localStorage.setItem('values', JSON.stringify(values));
+    
           console.log('values = '+ values)
           console.log('parsedData = '+ parsedData)
-
         },
       });
       setCsvUploaded(true);
