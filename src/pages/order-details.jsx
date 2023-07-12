@@ -170,29 +170,21 @@ export default function Example() {
     setSearchTerm(event.target.value);
   };
 
+// Store to local storage after adding to list
+localStorage.setItem('csvData', JSON.stringify(dataSource));
 
-  useEffect(() => {
-    const storedCsvData = localStorage.getItem('csvData');
-    const storedTableRows = localStorage.getItem('tableRows');
-    const storedValues = localStorage.getItem('values');
-  
-    if (storedCsvData) {
-      const parsedData = JSON.parse(storedCsvData);
-      setParsedData(parsedData);
-      setDataSource(parsedData); // Set the parsed data to the dataSource state
-    }
-  
-    if (storedTableRows) {
-      setTableRows(JSON.parse(storedTableRows));
-    }
-  
-    if (storedValues) {
-      setValues(JSON.parse(storedValues));
-    }
-  
-    // Set the contact count to the length of the dataSource
-    setContactCount(dataSource.length);
-  }, []);
+// Retrieve from local storage on page load
+useEffect(() => {
+  const storedCsvData = localStorage.getItem('csvData');
+
+  if (storedCsvData) {
+    const parsedData = JSON.parse(storedCsvData);
+    setParsedData(parsedData);
+    setDataSource(parsedData); // Set the parsed data to the dataSource state
+    setContactCount(parsedData.length); // Set the contact count to the length of the dataSource
+  }
+}, []);
+
 
   // In your component's useEffect hook
 useEffect(() => {
@@ -369,11 +361,8 @@ const addSelectedContactsToList = async () => {
       setPictureUrl(null);
       setViewPicture(false);
     };
-
-
     const addtoList = async () => {
       let objects = [];
-      console.log('values', values)
     
       for (let i = 0; i < values.length; i ++) {
         const newContact = {
@@ -398,7 +387,7 @@ const addSelectedContactsToList = async () => {
       }
     
       // Add the new contacts to the dataSource state
-      setDataSource([...dataSource, ...objects]);
+      setDataSource(prevDataSource => [...prevDataSource, ...objects]);
     
       // Increment the contact count by the number of new contacts
       setContactCount(prevCount => prevCount + objects.length);
