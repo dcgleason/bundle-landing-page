@@ -196,6 +196,42 @@ useEffect(() => {
   }
 }, []);
   
+const changeHandler = (event) => {
+  // Passing file data (event.target.files[0]) to parse using Papa.parse
+  console.log('event.target.files[0]', event.target.files[0])
+  Papa.parse(event.target.files[0], {
+    header: true,
+    skipEmptyLines: true,
+    complete: function (results) {
+      const rowsArray = [];
+      const valuesArray = [];
+
+      // Iterating data to get column name and their values
+      results.data.map((d) => {
+        rowsArray.push(Object.keys(d));
+        valuesArray.push(Object.values(d));
+      });
+
+      // Parsed Data Response in array format
+      setParsedData(results.data);
+
+      // Filtered Column Names
+      setTableRows(rowsArray[0]);
+
+      // Filtered Values
+      setValues(valuesArray);
+      console.log('values = '+ values)
+      console.log('parsedData = '+ parsedData)
+
+      // Store the parsed data in localStorage
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('csvData', JSON.stringify(results.data));
+      }
+    },
+  });
+  setCsvUploaded(true);
+};
+
 
 const handleContactSelect = (contact, isSelected) => {
   setSelectedContacts(prevSelectedContacts => {
@@ -395,43 +431,7 @@ const addSelectedContactsToList = async () => {
     };
     
       
-    const changeHandler = (event) => {
-      // Passing file data (event.target.files[0]) to parse using Papa.parse
-      console.log('event.target.files[0]', event.target.files[0])
-      Papa.parse(event.target.files[0], {
-        header: true,
-        skipEmptyLines: true,
-        complete: function (results) {
-          const rowsArray = [];
-          const valuesArray = [];
-    
-          // Iterating data to get column name and their values
-          results.data.map((d) => {
-            rowsArray.push(Object.keys(d));
-            valuesArray.push(Object.values(d));
-          });
-    
-          // Parsed Data Response in array format
-          const parsedData = results.data;
-          setParsedData(parsedData);
-          localStorage.setItem('csvData', JSON.stringify(parsedData));
-    
-          // Filtered Column Names
-          const tableRows = rowsArray[0];
-          setTableRows(tableRows);
-          localStorage.setItem('tableRows', JSON.stringify(tableRows));
-    
-          // Filtered Values
-          const values = valuesArray;
-          setValues(values);
-          localStorage.setItem('values', JSON.stringify(values));
-    
-          console.log('values = '+ values)
-          console.log('parsedData = '+ parsedData)
-        },
-      });
-      setCsvUploaded(true);
-    };
+c
   
     const handlePromptOk = async () => {
       const token = localStorage.getItem('token');
