@@ -188,17 +188,23 @@ const addSelectedContactsToList = async () => {
 
   async function fetchGoogleContacts() {
     try {
-      const tokens = JSON.parse(Cookies.get('auth'));
+      const auth = Cookies.get('auth');
+      if (!auth) {
+        console.error('Auth cookie not found');
+        return;
+      }
+  
+      const tokens = JSON.parse(auth);
       const response = await fetch('/api/getPeople', {
         headers: {
           'Authorization': `Bearer ${JSON.stringify(tokens)}`,
         },
       });
-
+  
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
+  
       const contacts = await response.json();
       setGoogleContacts(contacts);
       setIsModalOpen(true); // Open the modal once the contacts are fetched
