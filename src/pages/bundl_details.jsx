@@ -70,6 +70,7 @@ export default function Example() {
     const [searchTerm, setSearchTerm] = useState('');
     const [contactCount, setContactCount] = useState(0); // Initialize to 0 or the initial number of contacts
     const [nextId, setNextId] = useState(0); // Initialize to 0 or the initial next ID
+    cont [ text, setText] = useState("Join us in creating a 'Bundl' of loving letters & pics for Dan G. It's a quick, fun way to share our support and appreciation. Look out for an email from dan@givebundl.com with instructions. Don't miss out!");
 
     
     const columns = [
@@ -896,6 +897,24 @@ return (
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       value={message}
                       onChange={e => setMessage(e.target.value)}
+                    />
+                  </div>
+                  <p className="mt-3 text-sm leading-6 text-gray-600">Welcome message.</p>
+                </div>
+
+
+                <div className="col-span-full">
+                  <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
+                    Welcome Text Message (SMS).
+                  </label>
+                  <div className="mt-2">
+                    <textarea
+                      id="about"
+                      name="about"
+                      rows={3}
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      value={message}
+                      onChange={e => setText(e.target.value)}
                     />
                   </div>
                   <p className="mt-3 text-sm leading-6 text-gray-600">Welcome message.</p>
