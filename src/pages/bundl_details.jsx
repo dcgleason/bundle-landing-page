@@ -548,22 +548,14 @@ const addSelectedContactsToList = async () => {
     const onDeleteStudent = (record) => {
       console.log('delete record.uuid = '+ record.uuid)
       Modal.confirm({
-        title: "Are you sure, you want to delete this student record?",
+        title: "Are you sure, you want to delete this name from your list?",
         okText: "Yes",
         okType: "danger",
         onOk: async () => {
           setDataSource((pre) => {
             return pre.filter((student) => student.id !== record.id);
           });
-    
-          // Send a DELETE request to your server to delete the student
-          const response = await fetch(`https://yay-api.herokuapp.com/book/${userID}/message/${record.uuid}`, {
-            method: 'DELETE',
-          });
-    
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
+  
     
           console.log('Student deleted from the server successfully');
         },
