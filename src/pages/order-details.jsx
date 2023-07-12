@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Modal, List, Typography, Button, Table, Input, Select, Upload, message, notification, Form, Row, Col, Space, TextArea, Spin, Card} from 'antd';
+import {Modal, List, Typography, Button, Table, Input, Select, Upload, message, notification, Form, Row, Col, Space, Input, Spin, Card} from 'antd';
 import { EditOutlined, DeleteOutlined, InboxOutlined  } from "@ant-design/icons";
 import Papa from 'papaparse';
 import jwt_decode from 'jwt-decode';
@@ -8,12 +8,10 @@ import moment from 'moment';
 
 
 export default function Example() {
-
     const [message, setMessage] = useState("We are creating a book of supportive letters and nice pictures (or 'Bundl') for Dan G. It will only take you a minute to write and submit your letter. It should make for an unforgettable gift that shares our collective love and appreciation. Don't be the last to submit!");
     const [parsedData, setParsedData] = useState([]);
     const [tableRows, setTableRows] = useState([]);
     const [userID, setUserID] = useState(null);
-
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [notes, setNotes] = useState("");
     const [submitted, setSubmitted] = useState("");
@@ -21,11 +19,7 @@ export default function Example() {
     const [pictureSubmitted, setPictureSubmitted ] = useState(false);
     const [isTableModalVisible, setIsTableModalVisible] = useState(false);
     const [csvUploaded, setCsvUploaded] = useState(false);
-
-
-
     const [hover, setHover] = useState(false);
-
     const [emailModalVisible, setEmailModalVisible] = useState(false);
     const [emailBody, setEmailBody] = useState('');
     const [emailSubject, setEmailSubject] = useState("Contribute please - 3 days left!");
@@ -751,7 +745,7 @@ return (
               ]}
             />
             <label>Submission</label> 
-            <TextArea type='textarea' rows={10} maxLength={650} placeholder="Submission" value={submission} onChange={(e) => setSubmission(e.target.value)}/>
+            <Input.TextArea type='textarea' rows={10} maxLength={650} placeholder="Submission" value={submission} onChange={(e) => setSubmission(e.target.value)}/>
             <label>Picture Upload</label>
             <Upload
               name="avatar"
