@@ -66,7 +66,7 @@ export default function Example() {
     const [searchTerm, setSearchTerm] = useState('');
     const [contactCount, setContactCount] = useState(0); // Initialize to 0 or the initial number of contacts
     const [nextId, setNextId] = useState(0); // Initialize to 0 or the initial next ID
-    cont [ text, setText] = useState("Join us in creating a 'Bundl' of loving letters & pics for Dan G. It's a quick, fun way to share our support and appreciation. Look out for an email from dan@givebundl.com with instructions. Don't miss out!");
+    const [ text, setText] = useState("Join us in creating a 'Bundl' of loving letters & pics for Dan G. It's a quick, fun way to share our support and appreciation. Look out for an email from dan@givebundl.com with instructions. Don't miss out!");
 
     
     const columns = [
