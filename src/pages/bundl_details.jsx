@@ -350,28 +350,28 @@ const addSelectedContactsToList = async () => {
     };
     
    
-  const addtoList = async () => {
-    let objects = [];
-    console.log('values', values)
-
-    for (let i = 0; i < values.length; i ++) {
-      objects.push({
-        id: nextId + i,
-        name: values[i][1],
-        email: values[i][2],
-        address: values[i][3],
-      });
-    }
-
-    // Add the new contacts to the dataSource state
-    setDataSource([...dataSource, ...objects]);
-
-    // Increment the contact count by the number of new contacts
-    setContactCount(prevCount => prevCount + objects.length);
-
-    // Increment the next ID by the number of new contacts
-    setNextId(prevId => prevId + objects.length);
-  };
+    const addtoList = async () => {
+      let objects = [];
+      console.log('values', values)
+    
+      for (let i = 0; i < values.length; i ++) {
+        objects.push({
+          id: nextId + i,
+          name: values[i][1],
+          email: values[i][2],
+          address: values[i][3],
+        });
+      }
+    
+      // Add the new contacts to the dataSource state
+      setDataSource([...dataSource, ...objects]);
+    
+      // Increment the contact count by the number of new contacts
+      setContactCount(prevCount => prevCount + objects.length);
+    
+      // Increment the next ID by the number of new contacts
+      setNextId(prevId => prevId + objects.length);
+    };
     
     
       
@@ -617,28 +617,6 @@ const addSelectedContactsToList = async () => {
       // Add the new student to the dataSource state
       setDataSource([...dataSource, newStudent]);
     
-      // Now, send the new student to the server
-      try {
-        const formData = new FormData();
-        formData.append('layout_id', 1); // Or whatever layout_id you want to use
-        formData.append('name', newStudent.name);
-        formData.append('msg', newStudent.submission || 'none');
-        formData.append('imageAddress', newStudent.picture || 'none'); // Assuming newStudent.picture is a File object
-        formData.append('email', newStudent.email || 'none');
-    
-        const response = await fetch(`https://yay-api.herokuapp.com/book/${userID}/message`, {
-          method: 'POST',
-          body: formData, // Send formData instead of JSON
-        });
-    
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-    
-        console.log('Student added to the server successfully');
-      } catch (error) {
-        console.error('Failed to add student to the server:', error);
-      }
     }
     
   
