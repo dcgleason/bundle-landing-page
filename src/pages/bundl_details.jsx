@@ -796,8 +796,9 @@ return (
                   />
                   <span className="text-lg">
                     {contact.names && contact.names.length > 0 ? contact.names[0].displayName : 'Unnamed Contact'}
-                  </span> | 
-                  <div className="text-lg" >Email: {prioritizeEmail(contact.emailAddresses)}</div>
+                  </span>
+                  <span className="mx-2">|</span> 
+                  <div className="text-lg" >{prioritizeEmail(contact.emailAddresses)}</div>
                 </div>
               ))}
               <Button className="mt-2 mb-2" onClick={addSelectedContactsToList}>Add to list</Button>
