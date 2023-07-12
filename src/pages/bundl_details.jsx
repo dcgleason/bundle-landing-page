@@ -73,48 +73,48 @@ export default function Example() {
 
     
     const columns = [
-        {
-          key: "1",
-          title: "ID",
-          dataIndex: "id",
+      {
+        key: "1",
+        title: "ID",
+        render: (_, __, index) => index + 1,
+      },
+      {
+        key: "2",
+        title: "Name",
+        dataIndex: "name",
+      },
+      {
+        key: "3",
+        title: "Email",
+        dataIndex: "email",
+      },
+      {
+        key: "4",
+        title: "SMS",
+        dataIndex: "sms",
+      },
+      {
+        key: "9",
+        title: "Actions",
+        render: (record) => {
+          return (
+            <>
+              <EditOutlined
+                onClick={() => {
+                  onEditStudent(record);
+                }}
+              />
+              <DeleteOutlined
+                onClick={() => {
+                  onDeleteStudent(record);
+                }}
+                style={{ color: "red", marginLeft: 12 }}
+              />
+            </>
+          );
         },
-        {
-          key: "2",
-          title: "Name",
-          dataIndex: "name",
-        },
-        {
-          key: "3",
-          title: "Email",
-          dataIndex: "email",
-        },
-        {
-          key: "4",
-          title: "SMS",
-          dataIndex: "sms",
-        },
-        {
-          key: "9",
-          title: "Actions",
-          render: (record) => {
-            return (
-              <>
-                <EditOutlined
-                  onClick={() => {
-                    onEditStudent(record);
-                  }}
-                />
-                <DeleteOutlined
-                  onClick={() => {
-                    onDeleteStudent(record);
-                  }}
-                  style={{ color: "red", marginLeft: 12 }}
-                />
-              </>
-            );
-          },
-        },
-      ];
+      },
+    ];
       
   
       const showTableModal = () => {
@@ -344,7 +344,7 @@ const addSelectedContactsToList = async () => {
       setViewPicture(false);
     };
 
-    
+
     const addtoList = async () => {
       let objects = [];
       console.log('values', values)
