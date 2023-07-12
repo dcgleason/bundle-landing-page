@@ -138,6 +138,12 @@ export default function Example() {
           address: '', // Google Contacts does not provide an address field
         };
       
+        // Check if a contact with the same name already exists in the dataSource
+        if (dataSource.some(existingContact => existingContact.name === newContact.name)) {
+          console.log(`A contact with the name ${newContact.name} already exists.`);
+          return;
+        }
+      
         // Add the new contact to the dataSource state
         setDataSource(prevDataSource => [...prevDataSource, newContact]);
       
@@ -343,19 +349,25 @@ const addSelectedContactsToList = async () => {
       setPictureUrl(null);
       setViewPicture(false);
     };
-
-
     const addtoList = async () => {
       let objects = [];
       console.log('values', values)
     
       for (let i = 0; i < values.length; i ++) {
-        objects.push({
+        const newContact = {
           id: dataSource.length + i + 1, // This will increment the ID for each new contact
           name: values[i][1],
           email: values[i][2],
           address: values[i][3],
-        });
+        };
+    
+        // Check if a contact with the same name already exists in the dataSource
+        if (dataSource.some(existingContact => existingContact.name === newContact.name)) {
+          console.log(`A contact with the name ${newContact.name} already exists.`);
+          continue;
+        }
+    
+        objects.push(newContact);
       }
     
       // Add the new contacts to the dataSource state
@@ -364,7 +376,6 @@ const addSelectedContactsToList = async () => {
       // Increment the contact count by the number of new contacts
       setContactCount(prevCount => prevCount + objects.length);
     };
-    
     
       
   
