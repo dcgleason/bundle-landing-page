@@ -130,23 +130,19 @@ export default function Example() {
       };
       ;
 
-
-      const addContactToList = async (contact) => {
+      const addContactToList = async (contact, index) => {
         const newContact = {
-          id: nextId,
+          id: dataSource.length + index + 1, // This will increment the ID for each new contact
           name: contact.names[0].displayName,
           email: prioritizeEmail(contact.emailAddresses), // Use the prioritizeEmail function here
           address: '', // Google Contacts does not provide an address field
         };
-    
+      
         // Add the new contact to the dataSource state
         setDataSource(prevDataSource => [...prevDataSource, newContact]);
-    
+      
         // Increment the contact count
         setContactCount(prevCount => prevCount + 1);
-    
-        // Increment the next ID
-        setNextId(prevId => prevId + 1);
       };
 
 
@@ -191,10 +187,9 @@ const handleContactSelect = (contact, isSelected) => {
     }
   });
 };
-
 const addSelectedContactsToList = async () => {
-  for (const contact of selectedContacts) {
-    await addContactToList(contact);
+  for (let i = 0; i < selectedContacts.length; i++) {
+    await addContactToList(selectedContacts[i], i);
   }
   setSelectedContacts([]);
   setIsModalOpen(false);
@@ -348,15 +343,15 @@ const addSelectedContactsToList = async () => {
       setPictureUrl(null);
       setViewPicture(false);
     };
+
     
-   
     const addtoList = async () => {
       let objects = [];
       console.log('values', values)
     
       for (let i = 0; i < values.length; i ++) {
         objects.push({
-          id: nextId + i,
+          id: dataSource.length + i + 1, // This will increment the ID for each new contact
           name: values[i][1],
           email: values[i][2],
           address: values[i][3],
@@ -368,9 +363,6 @@ const addSelectedContactsToList = async () => {
     
       // Increment the contact count by the number of new contacts
       setContactCount(prevCount => prevCount + objects.length);
-    
-      // Increment the next ID by the number of new contacts
-      setNextId(prevId => prevId + objects.length);
     };
     
     
