@@ -899,13 +899,12 @@ return (
                       onChange={e => setMessage(e.target.value)}
                     />
                   </div>
-                  <p className="mt-3 text-sm leading-6 text-gray-600">Welcome message.</p>
                 </div>
 
 
                 <div className="col-span-full">
                   <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
-                    Welcome Text Message (SMS).
+                    Welcome Text Message (SMS) (optional. Applies only if you uploaded phone numbers to your contributoe list )
                   </label>
                   <div className="mt-2">
                     <textarea
