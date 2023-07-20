@@ -1,13 +1,13 @@
-// import React, { useState, useEffect } from "react";
-// import {Modal, List, Typography, Button, Table, Select, Upload, message, notification, Form, Row, Col, Space, Input, Spin, Card} from 'antd';
-// import { EditOutlined, DeleteOutlined, InboxOutlined  } from "@ant-design/icons";
-// import Papa from 'papaparse';
-// import jwt_decode from 'jwt-decode';
-// import Cookies from 'js-cookie';
-// import moment from 'moment';
+import React, { useState, useEffect } from "react";
+import {Modal, List, Typography, Button, Table, Select, Upload, message, notification, Form, Row, Col, Space, Input, Spin, Card} from 'antd';
+import { EditOutlined, DeleteOutlined, InboxOutlined  } from "@ant-design/icons";
+import Papa from 'papaparse';
+import jwt_decode from 'jwt-decode';
+import Cookies from 'js-cookie';
+import moment from 'moment';
 
 
-// export default function Example() {
+export default function Example() {
 //     const [message, setMessage] = useState("We are creating a book of supportive letters and nice pictures (or 'Bundl') for Dan G. It will only take you a minute to write and submit your letter. It should make for an unforgettable gift that shares our collective love and appreciation. Don't be the last to submit!");
 //     const [parsedData, setParsedData] = useState([]);
 //     const [tableRows, setTableRows] = useState([]);
@@ -742,359 +742,360 @@
 //   console.log('Created book:', book);
 // }
 
-// return (
-//         <>
+return (
+        <>
+        <div>Commented out page</div>
 
-//         <Modal
-//             title="Add a new contributor manually"
-//             open={isModalVisible}
-//             onOk={handleOk}
-//             onCancel={handleCancel}
-//            >
-//             <label>Name</label> <Input placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}/>
-//             <label>Email</label> <Input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-//             <label>Submitted</label> 
-//             <Select
-//               defaultValue="Yes"
-//               style={{ width: 120 }}
-//               onChange={(value) => setSubmitted(value)}
-//               allowClear
-//               options={[
-//                 {
-//                   value: 'yes',
-//                   label: 'Yes',
-//                 },
-//                 {
-//                   value: 'no',
-//                   label: 'No',
-//                 }
-//               ]}
-//             />
-//             <label>Submission</label> 
-//             <Input.TextArea type='textarea' rows={10} maxLength={650} placeholder="Submission" value={submission} onChange={(e) => setSubmission(e.target.value)}/>
-//             <label>Picture Upload</label>
-//             <Upload
-//               name="avatar"
-//               listType="picture"
-//               className="avatar-uploader"
-//               showUploadList={false}
-//               action='api/upload' // POST request to this api endpoint for picture
-//               onChange={handleChangeUpload}
-//             >
-//               <div>
-//                 <InboxOutlined />
-//               </div>
-//             </Upload>
-//             <label>Notes</label> 
-//             <Input placeholder="Notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
-//           </Modal>
+        {/* <Modal
+            title="Add a new contributor manually"
+            open={isModalVisible}
+            onOk={handleOk}
+            onCancel={handleCancel}
+           >
+            <label>Name</label> <Input placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}/>
+            <label>Email</label> <Input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <label>Submitted</label> 
+            <Select
+              defaultValue="Yes"
+              style={{ width: 120 }}
+              onChange={(value) => setSubmitted(value)}
+              allowClear
+              options={[
+                {
+                  value: 'yes',
+                  label: 'Yes',
+                },
+                {
+                  value: 'no',
+                  label: 'No',
+                }
+              ]}
+            />
+            <label>Submission</label> 
+            <Input.TextArea type='textarea' rows={10} maxLength={650} placeholder="Submission" value={submission} onChange={(e) => setSubmission(e.target.value)}/>
+            <label>Picture Upload</label>
+            <Upload
+              name="avatar"
+              listType="picture"
+              className="avatar-uploader"
+              showUploadList={false}
+              action='api/upload' // POST request to this api endpoint for picture
+              onChange={handleChangeUpload}
+            >
+              <div>
+                <InboxOutlined />
+              </div>
+            </Upload>
+            <label>Notes</label> 
+            <Input placeholder="Notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
+          </Modal>
     
-//     <form className="space-y-8 divide-y divide-gray-200 lg:px-32 lg:mx-32">
-//           <div className="space-y-12">
-//             <div className="border-b border-gray-900/10 pb-12">
-//               <h2 className="text-base font-semibold leading-7 text-gray-900">Your Bundl Details</h2>
-//               <p className="mt-1 text-sm leading-6 text-gray-600">
-//                 This information will be displayed publicly so be careful what you share.
-//               </p>
+    <form className="space-y-8 divide-y divide-gray-200 lg:px-32 lg:mx-32">
+          <div className="space-y-12">
+            <div className="border-b border-gray-900/10 pb-12">
+              <h2 className="text-base font-semibold leading-7 text-gray-900">Your Bundl Details</h2>
+              <p className="mt-1 text-sm leading-6 text-gray-600">
+                This information will be displayed publicly so be careful what you share.
+              </p>
 
-//               <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-//                 <div className="sm:col-span-4">
-//                   <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
-//                     Your Bundl Recipient&apos;s Name
-//                   </label>
-//                   <div className="mt-2">
-//                     <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-//                       <input
-//                         type="text"
-//                         name="username"
-//                         id="username"
-//                         autoComplete="username"
-//                         value={recipientFullName}
-//                         onChange={(e) => setRecipientFullName(e.target.value)}
-//                         className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-//                         placeholder="janesmith"
-//                       />
-//                     </div>
-//                   </div>
-//                 </div>
+              <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <div className="sm:col-span-4">
+                  <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
+                    Your Bundl Recipient&apos;s Name
+                  </label>
+                  <div className="mt-2">
+                    <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                      <input
+                        type="text"
+                        name="username"
+                        id="username"
+                        autoComplete="username"
+                        value={recipientFullName}
+                        onChange={(e) => setRecipientFullName(e.target.value)}
+                        className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                        placeholder="janesmith"
+                      />
+                    </div>
+                  </div>
+                </div>
 
-//                 {isModalOpen && (
-//                   <Modal title="Select a contact" open={isModalOpen} onCancel={() => setIsModalOpen(false)}>
-//                     <input type="text" placeholder="Search contacts..." onChange={handleSearch} />
-//                     {filteredContacts.map(contact => (
-//                       <div key={contact.resourceName} className="flex items-center">
-//                         <input
-//                           type="checkbox"
-//                           checked={selectedContacts.includes(contact)}
-//                           onChange={event => handleContactSelect(contact, event.target.checked)}
-//                           className="mr-2"
-//                         />
-//                         <span className="text-lg">
-//                           {contact.names && contact.names.length > 0 ? contact.names[0].displayName : 'Unnamed Contact'}
-//                         </span>
-//                         <span className="mx-2">|</span> 
-//                         <div className="text-lg" >{prioritizeEmail(contact.emailAddresses)}</div>
-//                       </div>
-//                     ))}
-//                     <Button className="mt-2 mb-2" onClick={addSelectedContactsToList}>Add to list</Button>
-//                   </Modal>
-//                 )}
+                {isModalOpen && (
+                  <Modal title="Select a contact" open={isModalOpen} onCancel={() => setIsModalOpen(false)}>
+                    <input type="text" placeholder="Search contacts..." onChange={handleSearch} />
+                    {filteredContacts.map(contact => (
+                      <div key={contact.resourceName} className="flex items-center">
+                        <input
+                          type="checkbox"
+                          checked={selectedContacts.includes(contact)}
+                          onChange={event => handleContactSelect(contact, event.target.checked)}
+                          className="mr-2"
+                        />
+                        <span className="text-lg">
+                          {contact.names && contact.names.length > 0 ? contact.names[0].displayName : 'Unnamed Contact'}
+                        </span>
+                        <span className="mx-2">|</span> 
+                        <div className="text-lg" >{prioritizeEmail(contact.emailAddresses)}</div>
+                      </div>
+                    ))}
+                    <Button className="mt-2 mb-2" onClick={addSelectedContactsToList}>Add to list</Button>
+                  </Modal>
+                )}
 
-//                 <Modal
-//                   title={`Contributor List (${dataSource.length})`}
-//                   open={isTableModalVisible}
-//                   onOk={handleTableModalOk}
-//                   onCancel={handleTableModalCancel}
-//                 >
-//                   <Row gutter={[16, 16]} justify="center">
-//                     <Col xs={24}>
-//                       <Table columns={columns} dataSource={dataSource}></Table>
-//                     </Col>
-//                   </Row>
-//                 </Modal>
+                <Modal
+                  title={`Contributor List (${dataSource.length})`}
+                  open={isTableModalVisible}
+                  onOk={handleTableModalOk}
+                  onCancel={handleTableModalCancel}
+                >
+                  <Row gutter={[16, 16]} justify="center">
+                    <Col xs={24}>
+                      <Table columns={columns} dataSource={dataSource}></Table>
+                    </Col>
+                  </Row>
+                </Modal>
 
-//                 <div className="col-span-full">
-//                   <Row gutter={[16, 16]} justify="center">
-//                     <Col xs={24} sm={22} md={20} lg={18} xl={16}>
-//                       <Row gutter={[16, 16]} justify="space-around">
-//                         <Col xs={24} sm={12}>
-//                           <Card title="Upload CSV">
-//                             <p className="text-lg text-gray-500">
-//                               Click to upload your CSV file with your contributors information here:
-//                             </p>
-//                             <input
-//                               type="file"
-//                               name="file"
-//                               accept=".csv"
-//                               onChange={changeHandler}
-//                               className="mx-auto d-block"
-//                             />
-//                              {csvUploaded && <Button className=" bg-green-500 mt-2" onClick={addtoList}>Add to Contributor List</Button>}
-//                             <Button className="mt-2" onClick={handleDownloadCSV}>Download CSV template</Button>
-//                           </Card>
-//                         </Col>
-//                         <Col xs={24} sm={12}>
-//                           <Card title="Pull Contacts from Gmail">
-//                             {isAuthenticated ? (
-//                               <Button onClick={fetchGoogleContacts}>Get my Google contacts</Button>
-//                             ) : (
-//                               <Button onClick={signInWithGoogle}>Sign in for Google Contacts</Button>
-//                             )}
-//                           </Card>
-//                         </Col>
-//                       </Row>
-//                       <Row justify="center" className="mt-2">
-//                         <Button onClick={showTableModal}>View Contributor List ({contactCount})</Button>
-//                       </Row>
-//                       <div className="mt-8">
-//                         <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-//                           <table className="min-w-full divide-y divide-gray-300">
-//                             <thead className="bg-gray-50">
-//                               <tr>
-//                                 {tableRows.map((rows, index) => {
-//                                   return (
-//                                     <th key={index}>{rows}</th>
-//                                   )
-//                                 })}
-//                               </tr>
-//                             </thead>
-//                             <tbody className="divide-y divide-gray-200 bg-white">
-//                               {values.map((value, index) => {
-//                                 return (
-//                                   <tr key={index}>
-//                                     {value.map((val, i) => {
-//                                       return <td key={i} className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{val}</td>
-//                                     })}
-//                                   </tr>
-//                                 );
-//                               })}
-//                             </tbody>
-//                           </table>
-//                         </div>
-//                       </div>
-//                     </Col>
-//                   </Row>
-//                 </div>
+                <div className="col-span-full">
+                  <Row gutter={[16, 16]} justify="center">
+                    <Col xs={24} sm={22} md={20} lg={18} xl={16}>
+                      <Row gutter={[16, 16]} justify="space-around">
+                        <Col xs={24} sm={12}>
+                          <Card title="Upload CSV">
+                            <p className="text-lg text-gray-500">
+                              Click to upload your CSV file with your contributors information here:
+                            </p>
+                            <input
+                              type="file"
+                              name="file"
+                              accept=".csv"
+                              onChange={changeHandler}
+                              className="mx-auto d-block"
+                            />
+                             {csvUploaded && <Button className=" bg-green-500 mt-2" onClick={addtoList}>Add to Contributor List</Button>}
+                            <Button className="mt-2" onClick={handleDownloadCSV}>Download CSV template</Button>
+                          </Card>
+                        </Col>
+                        <Col xs={24} sm={12}>
+                          <Card title="Pull Contacts from Gmail">
+                            {isAuthenticated ? (
+                              <Button onClick={fetchGoogleContacts}>Get my Google contacts</Button>
+                            ) : (
+                              <Button onClick={signInWithGoogle}>Sign in for Google Contacts</Button>
+                            )}
+                          </Card>
+                        </Col>
+                      </Row>
+                      <Row justify="center" className="mt-2">
+                        <Button onClick={showTableModal}>View Contributor List ({contactCount})</Button>
+                      </Row>
+                      <div className="mt-8">
+                        <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+                          <table className="min-w-full divide-y divide-gray-300">
+                            <thead className="bg-gray-50">
+                              <tr>
+                                {tableRows.map((rows, index) => {
+                                  return (
+                                    <th key={index}>{rows}</th>
+                                  )
+                                })}
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-gray-200 bg-white">
+                              {values.map((value, index) => {
+                                return (
+                                  <tr key={index}>
+                                    {value.map((val, i) => {
+                                      return <td key={i} className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{val}</td>
+                                    })}
+                                  </tr>
+                                );
+                              })}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </Col>
+                  </Row>
+                </div>
 
-//                 <div className="col-span-full">
-//                   <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
-//                     Welcome Message.
-//                   </label>
-//                   <div className="mt-2">
-//                     <textarea
-//                       id="about"
-//                       name="about"
-//                       rows={3}
-//                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-//                       value={message}
-//                       onChange={e => setMessage(e.target.value)}
-//                     />
-//                   </div>
-//                 </div>
+                <div className="col-span-full">
+                  <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
+                    Welcome Message.
+                  </label>
+                  <div className="mt-2">
+                    <textarea
+                      id="about"
+                      name="about"
+                      rows={3}
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      value={message}
+                      onChange={e => setMessage(e.target.value)}
+                    />
+                  </div>
+                </div>
 
 
-//                 <div className="col-span-full">
-//                   <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
-//                     Welcome Text Message (SMS) (optional. Applies only if you uploaded phone numbers to your contributoe list )
-//                   </label>
-//                   <div className="mt-2">
-//                     <textarea
-//                       id="about"
-//                       name="about"
-//                       rows={3}
-//                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-//                       value={message}
-//                       onChange={e => setText(e.target.value)}
-//                     />
-//                   </div>
-//                   <p className="mt-3 text-sm leading-6 text-gray-600">Welcome message.</p>
-//                 </div>
-//               </div>
-//             </div>
+                <div className="col-span-full">
+                  <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
+                    Welcome Text Message (SMS) (optional. Applies only if you uploaded phone numbers to your contributoe list )
+                  </label>
+                  <div className="mt-2">
+                    <textarea
+                      id="about"
+                      name="about"
+                      rows={3}
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      value={message}
+                      onChange={e => setText(e.target.value)}
+                    />
+                  </div>
+                  <p className="mt-3 text-sm leading-6 text-gray-600">Welcome message.</p>
+                </div>
+              </div>
+            </div>
 
-//             <div className="border-b border-gray-900/10 pb-12">
-//               <h2 className="text-base font-semibold leading-7 text-gray-900">Where do you want to send the Bundl?</h2>
-//               <p className="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
+            <div className="border-b border-gray-900/10 pb-12">
+              <h2 className="text-base font-semibold leading-7 text-gray-900">Where do you want to send the Bundl?</h2>
+              <p className="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
 
-//               <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-//                 <div className="sm:col-span-3">
-//                   <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
-//                     First name
-//                   </label>
-//                   <div className="mt-2">
-//                   <input
-//                       type="text"
-//                       name="first-name"
-//                       id="first-name"
-//                       autoComplete="given-name"
-//                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-//                     />
-//                   </div>
-//                 </div>
+              <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <div className="sm:col-span-3">
+                  <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
+                    First name
+                  </label>
+                  <div className="mt-2">
+                  <input
+                      type="text"
+                      name="first-name"
+                      id="first-name"
+                      autoComplete="given-name"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
 
-//                 <div className="sm:col-span-3">
-//                   <label htmlFor="last-name" className="block text-sm font-medium leading-6 text-gray-900">
-//                     Last name
-//                   </label>
-//                   <div className="mt-2">
-//                     <input
-//                       type="text"
-//                       name="last-name"
-//                       id="last-name"
-//                       autoComplete="family-name"
-//                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-//                     />
-//                   </div>
-//                 </div>
+                <div className="sm:col-span-3">
+                  <label htmlFor="last-name" className="block text-sm font-medium leading-6 text-gray-900">
+                    Last name
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      name="last-name"
+                      id="last-name"
+                      autoComplete="family-name"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
 
-//                 <div className="sm:col-span-4">
-//                   <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-//                     Email address
-//                   </label>
-//                   <div className="mt-2">
-//                     <input
-//                       id="email"
-//                       name="email"
-//                       type="email"
-//                       autoComplete="email"
-//                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-//                     />
-//                   </div>
-//                 </div>
+                <div className="sm:col-span-4">
+                  <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+                    Email address
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
 
-//                 <div className="sm:col-span-3">
-//                   <label htmlFor="country" className="block text-sm font-medium leading-6 text-gray-900">
-//                     Country
-//                   </label>
-//                   <div className="mt-2">
-//                     <select
-//                       id="country"
-//                       name="country"
-//                       autoComplete="country-name"
-//                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-//                     >
-//                       <option>United States</option>
-//                       <option>Canada</option>
-//                       <option>Mexico</option>
-//                     </select>
-//                   </div>
-//                 </div>
+                <div className="sm:col-span-3">
+                  <label htmlFor="country" className="block text-sm font-medium leading-6 text-gray-900">
+                    Country
+                  </label>
+                  <div className="mt-2">
+                    <select
+                      id="country"
+                      name="country"
+                      autoComplete="country-name"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                    >
+                      <option>United States</option>
+                      <option>Canada</option>
+                      <option>Mexico</option>
+                    </select>
+                  </div>
+                </div>
 
-//                 <div className="col-span-full">
-//                   <label htmlFor="street-address" className="block text-sm font-medium leading-6 text-gray-900">
-//                     Street address
-//                   </label>
-//                   <div className="mt-2">
-//                     <input
-//                       type="text"
-//                       name="street-address"
-//                       id="street-address"
-//                       autoComplete="street-address"
-//                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-//                     />
-//                   </div>
-//                 </div>
+                <div className="col-span-full">
+                  <label htmlFor="street-address" className="block text-sm font-medium leading-6 text-gray-900">
+                    Street address
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      name="street-address"
+                      id="street-address"
+                      autoComplete="street-address"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
 
-//                 <div className="sm:col-span-2 sm:col-start-1">
-//                   <label htmlFor="city" className="block text-sm font-medium leading-6 text-gray-900">
-//                     City
-//                   </label>
-//                   <div className="mt-2">
-//                     <input
-//                       type="text"
-//                       name="city"
-//                       id="city"
-//                       autoComplete="address-level2"
-//                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-//                     />
-//                   </div>
-//                 </div>
+                <div className="sm:col-span-2 sm:col-start-1">
+                  <label htmlFor="city" className="block text-sm font-medium leading-6 text-gray-900">
+                    City
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      name="city"
+                      id="city"
+                      autoComplete="address-level2"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
 
-//                 <div className="sm:col-span-2">
-//                   <label htmlFor="region" className="block text-sm font-medium leading-6 text-gray-900">
-//                     State / Province
-//                   </label>
-//                   <div className="mt-2">
-//                     <input
-//                       type="text"
-//                       name="region"
-//                       id="region"
-//                       autoComplete="address-level1"
-//                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-//                     />
-//                   </div>
-//                 </div>
+                <div className="sm:col-span-2">
+                  <label htmlFor="region" className="block text-sm font-medium leading-6 text-gray-900">
+                    State / Province
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      name="region"
+                      id="region"
+                      autoComplete="address-level1"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
 
-//                 <div className="sm:col-span-2">
-//                   <label htmlFor="postal-code" className="block text-sm font-medium leading-6 text-gray-900">
-//                     ZIP / Postal code
-//                   </label>
-//                   <div className="mt-2">
-//                     <input
-//                       type="text"
-//                       name="postal-code"
-//                       id="postal-code"
-//                       autoComplete="postal-code"
-//                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-//                     />
-//                   </div>
-//                   </div>
-//               </div>
-//             </div>
-//             <div className="mt-6 flex items-center justify-end gap-x-6">
-//               <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
-//                 Cancel
-//               </button>
-//               <button
-//                 type="submit"
-//                 className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-//                 onClick={submitAndSendWelcomeMessage}
-//               >
-//                 Send Welcome Messages (SMS and Email) to Contributor List
-//               </button>
-//             </div>
-//         </div>
-//     </form>
-//         </>
-//       );
-// }
+                <div className="sm:col-span-2">
+                  <label htmlFor="postal-code" className="block text-sm font-medium leading-6 text-gray-900">
+                    ZIP / Postal code
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      name="postal-code"
+                      id="postal-code"
+                      autoComplete="postal-code"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                  </div>
+              </div>
+            </div>
+            <div className="mt-6 flex items-center justify-end gap-x-6">
+              <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={submitAndSendWelcomeMessage}
+              >
+                Send Welcome Messages (SMS and Email) to Contributor List
+              </button>
+            </div>
+        </div>
+    </form> */}
+        </>
+      );
+}
