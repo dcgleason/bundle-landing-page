@@ -74,6 +74,8 @@ const Messages = () => {
   const [alert, setAlert] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [bookData, setBookData] = useState({});
+  const [layoutId, setLayoutId] = useState("1");
+  const [userEmail, setUserEmail] = useState("test@testing.com");
 
   useEffect(() => {
     if (submissionStatus) {
