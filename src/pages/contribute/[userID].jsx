@@ -159,7 +159,6 @@ const Messages = () => {
   
     let responseStatus = null; // Initialize responseStatus variable
   
-    if (file !== null) {
       // Create a FormData object to hold the file and other parameters
       const formData = new FormData();
       formData.append("layout_id", layoutId); // Replace with actual layout id need to be able to calulate this with logic based on if they include a picture and word count
@@ -168,20 +167,26 @@ const Messages = () => {
       formData.append("email", userEmail); // Replace with actual email -- need to add this field to the form
       formData.append("imageAddress", file);
   
-      // Send the POST request to add a message to the book
-      const response = await fetch(`https://yay-api.herokuapp.com/book/${userData._id}/message`, {
-        method: "POST",
-        body: formData,
-      });
+      try {
+        // Send the POST request to add a message to the book
+        const response = await fetch(`https://yay-api.herokuapp.com/book/${userData._id}/message`, {
+          method: "POST",
+          body: formData,
+        });
   
-      if (response.ok) {
-        console.log("Success!");
-      } else {
-        console.log("Error of some kind");
+        responseStatus = response.status; // Assign the status to responseStatus
+  
+        if (response.ok) {
+          console.log("Success!");
+        } else {
+          console.log("Error of some kind");
+          console.log('Status:', responseStatus);
+          console.log('Status text:', response.statusText);
+        }
+      } catch (error) {
+        console.error("An error occurred:", error);
       }
   
-      responseStatus = response.status; // Assign the status to responseStatus
-    }
   
     setSubmissionStatus(responseStatus);
     setIsLoading(false);
