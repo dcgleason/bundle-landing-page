@@ -152,7 +152,7 @@ const Messages = () => {
     });
   };
   
-  
+
   const submit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
@@ -162,10 +162,10 @@ const Messages = () => {
     if (file !== null) {
       // Create a FormData object to hold the file and other parameters
       const formData = new FormData();
-      formData.append("layout_id", layoutId); // Replace with actual layout id
+      formData.append("layout_id", layoutId); // Replace with actual layout id need to be able to calulate this with logic based on if they include a picture and word count
       formData.append("name", contributorName);
       formData.append("msg", questionOne);
-      formData.append("email", userEmail); // Replace with actual email
+      formData.append("email", userEmail); // Replace with actual email -- need to add this field to the form
       formData.append("imageAddress", file);
   
       // Send the POST request to add a message to the book
