@@ -158,52 +158,29 @@ const Messages = () => {
     if (file !== null) {
       // Create a FormData object to hold the file and other parameters
       const formData = new FormData();
+      formData.append("layout_id", layoutId); // Replace with actual layout id
       formData.append("name", contributorName);
-      formData.append("message", questionOne);
-      formData.append("associatedGiftID", giftData._id);
-      formData.append("contributed", true);
+      formData.append("msg", questionOne);
+      formData.append("email", userEmail); // Replace with actual email
       formData.append("imageAddress", file);
   
-  
-      // Send the POST request to create a contribution
-      const response = await fetch("https://yay-api.herokuapp.com/contribution/create", {
+      // Send the POST request to add a message to the book
+      const response = await fetch(`https://yay-api.herokuapp.com/book/${userData._id}/message`, {
         method: "POST",
         body: formData,
       });
   
       if (response.ok) {
-
-                // Fetch the book associated with the user
-          const bookResponse = await fetch(`https://yay-api.herokuapp.com/book/${userData._id}`);
-          const contributorBook = await bookResponse.json();
-
-          //if the book was found, send the contributor a notification email
-          if (bookResponse.ok) {
-  
-        // If the submission was successful, send a notification email
-        const emailResponse = await fetch("https://yay-api.herokuapp.com/email/sendContributorNotification", {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            email: userData.username, // this is the user's email
-            contributor: contributorBook.messages.name, //  this is the contributor's name
-            recipient: userData.recipient, //  this is the gift recipient's name
-          }),
-        });
-  
-        if (!emailResponse.ok) {
-          console.error('Failed to send notification email');
-        }
+        console.log("Success!");
       }
+    } else {
+      console.log("Error of some kind");
     }
   
       setSubmissionStatus(response.status);
       setIsLoading(false);
-    }
   };
-
+  
 
 
 
