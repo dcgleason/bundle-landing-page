@@ -152,9 +152,12 @@ const Messages = () => {
     });
   };
   
+  
   const submit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
+  
+    let responseStatus = null; // Initialize responseStatus variable
   
     if (file !== null) {
       // Create a FormData object to hold the file and other parameters
@@ -173,13 +176,15 @@ const Messages = () => {
   
       if (response.ok) {
         console.log("Success!");
+      } else {
+        console.log("Error of some kind");
       }
-    } else {
-      console.log("Error of some kind");
+  
+      responseStatus = response.status; // Assign the status to responseStatus
     }
   
-      setSubmissionStatus(response.status);
-      setIsLoading(false);
+    setSubmissionStatus(responseStatus);
+    setIsLoading(false);
   };
   
 
