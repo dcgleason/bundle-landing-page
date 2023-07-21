@@ -316,7 +316,7 @@ const Messages = () => {
 
              <div className="h-full sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <label htmlFor="recording" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-              <div className='underline'>Audio :</div> To give {giftData.recipientFirstName} an even more engaging experience, please add a short voice note - something like... &quot;Hey {giftData.recipientFirstName}, this is [YOUR NAME]. Happy birthday! Love you!&quot;  (recommended) 
+              <div className='underline'>Audio :</div> To give {giftData.recipientFirstName} an even more engaging experience, please read your message out loud (recommended). 
               </label>
               
               <div className=" h-full mt-1 sm:mt-0 sm:col-span-2">
