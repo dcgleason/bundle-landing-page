@@ -168,12 +168,14 @@ const Messages = () => {
     formData.append("msg", questionOne);
     formData.append("email", userEmail); // Replace with actual email -- need to add this field to the form
     formData.append("imageAddress", file);
-  
-    // Append the audio Blob to the FormData
+
+    
+    // Fetch the audio Blob from the URL and append it to the FormData
     if (blob) {
-      formData.append("audio", blob, "audio.webm"); // You may need to adjust the file type depending on the format of your audio Blob
+      const response = await fetch(blob);
+      const audioBlob = await response.blob();
+      formData.append("audio", audioBlob, "audio.webm"); // You may need to adjust the file type depending on the format of your audio Blob
     }
-  
     try {
       // Send the POST request to add a message to the book
       const response = await fetch(`https://yay-api.herokuapp.com/book/${userData._id}/message`, {
