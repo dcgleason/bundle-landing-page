@@ -75,7 +75,7 @@ const Messages = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [bookData, setBookData] = useState({});
   const [layoutId, setLayoutId] = useState("1");
-  const [userEmail, setUserEmail] = useState("daniell@testing.com");
+  const [userEmail, setUserEmail] = useState("daniel@testing.com");
 
   useEffect(() => {
     if (submissionStatus) {
