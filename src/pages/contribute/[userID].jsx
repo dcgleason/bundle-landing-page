@@ -75,7 +75,7 @@ const Messages = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [bookData, setBookData] = useState({});
   const [layoutId, setLayoutId] = useState("1");
-  const [userEmail, setUserEmail] = useState("danniiiel@testing.com");
+  const [userEmail, setUserEmail] = useState("daanniiiel@testing.com");
 
   useEffect(() => {
     if (submissionStatus) {
@@ -169,7 +169,7 @@ const Messages = () => {
     formData.append("email", userEmail); // Replace with actual email -- need to add this field to the form
     formData.append("imageAddress", file);
 
-    
+
     // Fetch the audio Blob from the URL and append it to the FormData
     if (blob) {
       const response = await fetch(blob);
