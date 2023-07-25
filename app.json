@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "ec389a97-8f5b-473d-846a-bbbb1bbe211f"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "com.givebundl.tailwindsass"
+    }
+  }
+}

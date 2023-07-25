@@ -21,24 +21,26 @@ const [budget, setBudget] = useState('');
 const [additionalInfo, setAdditionalInfo] = useState('');
 const [isModalOpen, setIsModalOpen] = useState(false);
 const [apiResponse, setApiResponse] = useState('');
+const [isLoading, setIsLoading] = useState(false);  // New state variable
 
 
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-  
-    const formData = {
-      giftRecipient: giftRecipient,
-      relation: relation,
-      age: age,
-      gender: gender,
-      interests: interests,
-      occasion: occasion,
-      budget: budget,
-      additionalInfo: additionalInfo,
-    };
+async function handleSubmit(e) {
+  e.preventDefault();
 
-     
+  const formData = {
+    giftRecipient: giftRecipient,
+    relation: relation,
+    age: age,
+    gender: gender,
+    interests: interests,
+    occasion: occasion,
+    budget: budget,
+    additionalInfo: additionalInfo,
+  };
+
+  setIsLoading(true);  // Set loading to true when the request starts
+
   try {
     const response = await fetch('https://yay-api.herokuapp.com/openai/gift', {
       method: 'POST',
@@ -56,8 +58,10 @@ const [apiResponse, setApiResponse] = useState('');
     setIsModalOpen(true);
   } catch (error) {
     console.error('Error:', error);
+  } finally {
+    setIsLoading(false);  // Set loading to false when the request ends
   }
-  }
+}
 
   return (
     <>
@@ -293,14 +297,15 @@ const [apiResponse, setApiResponse] = useState('');
         
         </div>
         <div className="mt-10">
-          <button
-            type="submit"
-            onClick={handleSubmit}
-            className="block w-full rounded-md bg-[#8B0000] px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-[#f55249] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f55249]"
+            <button
+              type="submit"
+              onClick={handleSubmit}
+              className="block w-full rounded-md bg-[#8B0000] px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-[#f55249] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#f55249]"
+              disabled={isLoading}  // Disable the button while loading
             >
-            Generate an awesome gift idea
-          </button>
-        </div>
+              {isLoading ? 'Generating gift idea...' : 'Generate an awesome gift idea'}  
+            </button>
+          </div>
       </form>
     </div>
     </>
